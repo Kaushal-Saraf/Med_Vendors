@@ -10,7 +10,6 @@ export const connectDb=async()=>{
     }
     catch(error){
         console.log("Failed to connect")
-        console.log(process.env.MONGO_DB_URL)
         console.log(error)
     }
 }
