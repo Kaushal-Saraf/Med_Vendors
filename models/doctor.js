@@ -13,3 +13,5 @@ const DoctorSchema = new Schema({
     },
     //implement left part ,i.e., upload documents
 })
+export const doctor=
+ mongoose.models.doctor|| mongoose.model("doctor",DoctorSchema)

@@ -17,5 +17,6 @@ const PatientSchema = new Schema({
         type:Number,
         required:true
     }
-    //implementation of image is pending
 })
+export const patient=
+ mongoose.models.patient|| mongoose.model("patient",PatientSchema)
