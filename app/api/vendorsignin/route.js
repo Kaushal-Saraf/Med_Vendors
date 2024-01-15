@@ -3,15 +3,12 @@ import { NextResponse } from "next/server";
 const { connectDb } = require("@/helper/db");
 connectDb();
 export async function POST (req){
-    const {mid,name,contact,password,machinedeatails}= await req.json()
-    console.log(mid);
+    const {name,contact,password}= await req.json()
     try{
         const nvendor= new vendor({
-            mid:mid,
             name:name,
             contact:contact,
-            password:password,
-            machinedeatails:machinedeatails
+            password:password
         })
         await nvendor.save()
         return NextResponse.json("new vendor created sucessfully")

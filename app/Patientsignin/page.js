@@ -1,4 +1,5 @@
 "use client"
+import { patientSignIn } from '@/Services/patietnsignin'
 import React, { useState } from 'react'
 
 const page = () => {
@@ -6,16 +7,50 @@ const page = () => {
     aadharnumber:'',
     firstname:'',
     lastname:'',
+    dob: '',
     contact:'',
-    otp:''
+    password:''
   })
-  const handledPatientSignin=(event)=>{
+  const handledPatientSignin=async (event)=>{
     event.preventDefault();
-    console.log(details)
+    if (details.aadharnumber.length !== 12){
+      alert("Please enter correct Aadhar number.")
+      return 
+    }
+    else if(details.firstname.includes(" ") || details.firstname===""){
+      alert("Firstname cannot be empty or cannot have any spaces.")
+      return
+    }
+    else if(details.dob===""){
+      alert("Dob cannot be empty.")
+      return 
+    }
+    else if(details.contact.length!==10){
+      alert("Please enter correct contact number.")
+      return 
+    }
+    else if(details.password.length<8){
+      alert("Password is too sort.")
+      return
+    }
+    try{
+      const result = await patientSignIn(details);
+      setdetails({
+        aadharnumber:'',
+        firstname:'',
+        lastname:'',
+        dob: '',
+        contact:'',
+        password:''
+      })
+    }
+    catch(error){
+      alert('Aadhar number already exists try to login')
+    }
   }
   return (
     <>
-      <form className="w-[450px] h-[500px] bg-white my-8 mx-auto rounded-lg shadow-sm" onSubmit={handledPatientSignin}>
+      <form className="w-[450px] h-[575px] bg-white my-8 mx-auto rounded-lg shadow-sm" onSubmit={handledPatientSignin}>
         <h1 className="text-center bg-blue-300 h-8 text-white py-0.5 font-bold rounded-t-lg shadow-sm">
           Patient Signin Form
         </h1>
@@ -44,7 +79,7 @@ const page = () => {
           </p>
           <input
             type="text"
-            placeholder="11"
+            placeholder="Raju"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id='firstname'
             name='firstname'
@@ -63,7 +98,7 @@ const page = () => {
           </p>
           <input
             type="text"
-            placeholder="Raju Verma"
+            placeholder="Kumar Verma"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id='lastname'
             name='lastname'
@@ -74,6 +109,24 @@ const page = () => {
               })
             }}
             value={details.lastname}
+          ></input>
+        </div>
+        <div className="flex my-12 px-2 w-full">
+          <p className="flex-1 text-center text-blue-400 font-semibold">
+            DOB
+          </p>
+          <input
+            type="date"
+            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
+            id='dob'
+            name='dob'
+            onChange={(event)=>{
+              setdetails({
+                ...details,
+                dob:event.target.value
+              })
+            }}
+            value={details.dob}
           ></input>
         </div>
         <div className="flex my-12 px-2 w-full">
@@ -95,26 +148,27 @@ const page = () => {
             value={details.contact}
           ></input>
         </div>
-
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">OTP</p>
+          <p className="flex-1 text-center text-blue-400 font-semibold">
+            Password
+          </p>
           <input
-            type="text"
-            placeholder="*****"
+            type="password"
+            placeholder="*******"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            id='otp'
-            name='otp'
+            name='password'
+            id='password'
             onChange={(event)=>{
               setdetails({
                 ...details,
-                otp:event.target.value
+                password:event.target.value
               })
             }}
-            value={details.otp}
+            value={details.password}
           ></input>
         </div>
-        <div className="flex w-full justify-center my-[60px]">
-          <button className="text-center bg-blue-400 px-2 py-1 rounded text-white">
+        <div className="flex w-full justify-center my-[40px]">
+          <button type="submit" className="text-center bg-blue-400 px-2 py-1 rounded text-white">
             Signin
           </button>
         </div>

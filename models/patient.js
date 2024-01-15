@@ -13,8 +13,16 @@ const PatientSchema = new Schema({
     lastname:{
         type:String,
     },
+    dob:{
+        type:Date,
+        required:true
+    },
     contact:{
         type:Number,
+        required:true
+    },
+    password:{
+        type:String,
         required:true
     }
 })

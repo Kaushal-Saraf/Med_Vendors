@@ -3,7 +3,6 @@ const { default: mongoose, Schema, mongo } = require("mongoose");
 const VendorSchema= new Schema({
     mid:{
         type:Number,
-        required:true,
         unique:true,
     },
     name:{

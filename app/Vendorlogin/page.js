@@ -4,7 +4,7 @@ import React from 'react'
 const page = () => {
   return (
     <>
-    <form className='w-[450px] h-[450px] bg-white my-8 mx-auto rounded-lg shadow-sm'>
+    <form className='w-[450px] h-[300px] bg-white my-8 mx-auto rounded-lg shadow-sm'>
       <h1 className='text-center bg-blue-300 h-8 text-white py-0.5 font-bold rounded-t-lg shadow-sm'>Vendor Login Form</h1>
       <div className='flex my-12 px-2 w-full'>
       <p className='flex-1 text-center text-blue-400 font-semibold'>Contact</p>
@@ -12,10 +12,6 @@ const page = () => {
       </div>
       <div className='flex my-12 px-2 w-full'>
       <p className='flex-1 text-center text-blue-400 font-semibold'>Password</p>
-      <input type='text' placeholder='*****' className='flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400'></input>
-      </div>
-      <div className='flex my-12 px-2 w-full'>
-      <p className='flex-1 text-center text-blue-400 font-semibold'>OTP</p>
       <input type='text' placeholder='*****' className='flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400'></input>
       </div>
       <div className='flex w-full justify-center my-[60px]'>

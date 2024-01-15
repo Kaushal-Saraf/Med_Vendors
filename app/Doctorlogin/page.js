@@ -11,8 +11,8 @@ const page = () => {
       <input type='text' placeholder='9999999999' className='flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400'></input>
       </div>
       <div className='flex my-12 px-2 w-full'>
-      <p className='flex-1 text-center text-blue-400 font-semibold'>OTP</p>
-      <input type='text' placeholder='*****' className='flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400'></input>
+      <p className='flex-1 text-center text-blue-400 font-semibold'>Password</p>
+      <input type='password' placeholder='*****' className='flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400'></input>
       </div>
       <div className='flex w-full justify-center my-[60px]'>
       <button className='text-center bg-blue-400 px-2 py-1 rounded text-white'>Login</button>
