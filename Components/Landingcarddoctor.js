@@ -21,10 +21,10 @@ const Landingcarddoctor = () => {
       </div>
       <div className=' flex-auto w-32'>
         <div className='my-6'>
-        <Link href="/Doctorsignin" className='bg-blue-300 text-white rounded text-center px-2 py-1'>Signin</Link>
+        <Link href="/Doctor/Doctorsignin" className='bg-blue-300 text-white rounded text-center px-2 py-1'>Signin</Link>
         </div>
         <div className='my-6'>
-        <Link href="/Doctorlogin" className='bg-blue-300 text-white rounded text-center px-2 py-1'>Login</Link>
+        <Link href="/Doctor/Doctorlogin" className='bg-blue-300 text-white rounded text-center px-2 py-1'>Login</Link>
         </div>
       </div>
       </div>

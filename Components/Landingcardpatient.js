@@ -22,10 +22,10 @@ const Landingcardpatient = () => {
       </div>
       <div className=' flex-auto w-32'>
         <div className='my-6'>
-        <Link href="/Patientsignin" className='bg-blue-300 text-white rounded text-center px-2 py-1'>Signin</Link>
+        <Link href="/Patient/Patientsignin" className='bg-blue-300 text-white rounded text-center px-2 py-1'>Signin</Link>
         </div>
         <div className='my-6'>
-        <Link href="/Patientlogin" className='bg-blue-300 text-white rounded text-center px-2 py-1'>Login</Link>
+        <Link href="/Patient/Patientlogin" className='bg-blue-300 text-white rounded text-center px-2 py-1'>Login</Link>
         </div>
       </div>
       </div>

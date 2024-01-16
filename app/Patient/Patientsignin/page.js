@@ -1,5 +1,5 @@
 "use client"
-import { patientSignIn } from '@/Services/patietnsignin'
+import { patientSignIn } from '@/Services/patientservices'
 import React, { useState } from 'react'
 
 const page = () => {
