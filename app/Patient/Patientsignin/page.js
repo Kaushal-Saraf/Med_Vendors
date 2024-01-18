@@ -45,7 +45,7 @@ const page = () => {
       })
     }
     catch(error){
-      alert('Aadhar number already exists try to login')
+      alert('Aadhar number already exists try to login.')
     }
   }
   return (

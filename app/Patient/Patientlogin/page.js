@@ -1,4 +1,5 @@
 'use client'
+import { patientLogIn } from '@/Services/patientservices'
 import React, { useState } from 'react'
 
 const Patientlogin = () => {
@@ -15,6 +16,15 @@ const Patientlogin = () => {
     else if (details.password.length===0){
       alert("Please enter Password")
       return
+    }
+    try {
+      await patientLogIn(details);
+      setdetails({
+        aadharnumber:"",
+        password:""
+      })
+    } catch (error) {
+      alert(error.response.data.error)
     }
   }
   return (

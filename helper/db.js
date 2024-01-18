@@ -1,12 +1,18 @@
 import mongoose, { connection } from "mongoose"
 
+const config ={
+    isConnected:0,
+}
 export const connectDb=async()=>{
+    if(config.isConnected){
+        return 
+    }
     try{
         const {connection} = await mongoose.connect(process.env.MONGO_DB_URL,{
             dbName:"hello"
         })
         console.log("db connected...")
-        console.log("Db conected with ", connection.host)
+        config.isConnected=connection.readyState;
     }
     catch(error){
         console.log("Failed to connect")
