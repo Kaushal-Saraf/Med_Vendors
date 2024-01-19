@@ -8,10 +8,17 @@ const DoctorSchema = new Schema({
         type:String,
     },
     contact:{
-        type:number,
-        required:[true]
+        type:Number,
+        required:[true,"contact required"]
     },
-    //implement left part ,i.e., upload documents
+    password:{
+        type:Number,
+        required:true
+    },
+    supportingdocs:{
+        type:String,
+        required:true
+    }
 })
 export const doctor=
  mongoose.models.doctor|| mongoose.model("doctor",DoctorSchema)

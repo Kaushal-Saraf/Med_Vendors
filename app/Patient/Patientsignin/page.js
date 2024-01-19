@@ -8,6 +8,7 @@ const page = () => {
     firstname:'',
     lastname:'',
     dob: '',
+    gender:'Male',
     contact:'',
     password:''
   })
@@ -41,6 +42,7 @@ const page = () => {
         lastname:'',
         dob: '',
         contact:'',
+        gender:'Male',
         password:''
       })
     }
@@ -50,7 +52,10 @@ const page = () => {
   }
   return (
     <>
-      <form className="w-[450px] h-[575px] bg-white my-8 mx-auto rounded-lg shadow-sm" onSubmit={handledPatientSignin}>
+      <form
+        className="w-[450px] h-[575px] bg-white my-8 mx-auto rounded-lg shadow-sm"
+        onSubmit={handledPatientSignin}
+      >
         <h1 className="text-center bg-blue-300 h-8 text-white py-0.5 font-bold rounded-t-lg shadow-sm">
           Patient Signin Form
         </h1>
@@ -64,11 +69,11 @@ const page = () => {
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id="aadharnumber"
             name="aadharnumber"
-            onChange={(event)=>{
+            onChange={(event) => {
               setdetails({
                 ...details,
-                aadharnumber:event.target.value
-              })
+                aadharnumber: event.target.value,
+              });
             }}
             value={details.aadharnumber}
           />
@@ -81,13 +86,13 @@ const page = () => {
             type="text"
             placeholder="Raju"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            id='firstname'
-            name='firstname'
-            onChange={(event)=>{
+            id="firstname"
+            name="firstname"
+            onChange={(event) => {
               setdetails({
                 ...details,
-                firstname:event.target.value
-              })
+                firstname: event.target.value,
+              });
             }}
             value={details.firstname}
           ></input>
@@ -100,34 +105,52 @@ const page = () => {
             type="text"
             placeholder="Kumar Verma"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            id='lastname'
-            name='lastname'
-            onChange={(event)=>{
+            id="lastname"
+            name="lastname"
+            onChange={(event) => {
               setdetails({
                 ...details,
-                lastname:event.target.value
-              })
+                lastname: event.target.value,
+              });
             }}
             value={details.lastname}
           ></input>
         </div>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
-            DOB
-          </p>
+          <p className="flex-1 text-center text-blue-400 font-semibold">DOB</p>
           <input
             type="date"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            id='dob'
-            name='dob'
-            onChange={(event)=>{
+            id="dob"
+            name="dob"
+            onChange={(event) => {
               setdetails({
                 ...details,
-                dob:event.target.value
+                dob: event.target.value,
               })
             }}
             value={details.dob}
           ></input>
+        </div>
+        <div className="flex my-12 px-2 w-full">
+          <p className="flex-1 text-center text-blue-400 font-semibold">
+            Gender
+          </p>
+          <select
+            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
+            name="gender"
+            id="gender"
+            onChange={(event)=>{
+            setdetails({
+              ...details,
+              gender:event.target.value
+            })
+            }}
+          >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Transgender">Transgender</option>
+          </select>
         </div>
         <div className="flex my-12 px-2 w-full">
           <p className="flex-1 text-center text-blue-400 font-semibold">
@@ -137,13 +160,13 @@ const page = () => {
             type="text"
             placeholder="9999999999"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            name='contact'
-            id='contact'
-            onChange={(event)=>{
+            name="contact"
+            id="contact"
+            onChange={(event) => {
               setdetails({
                 ...details,
-                contact:event.target.value
-              })
+                contact: event.target.value,
+              });
             }}
             value={details.contact}
           ></input>
@@ -156,19 +179,22 @@ const page = () => {
             type="password"
             placeholder="*******"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            name='password'
-            id='password'
-            onChange={(event)=>{
+            name="password"
+            id="password"
+            onChange={(event) => {
               setdetails({
                 ...details,
-                password:event.target.value
-              })
+                password: event.target.value,
+              });
             }}
             value={details.password}
           ></input>
         </div>
         <div className="flex w-full justify-center my-[40px]">
-          <button type="submit" className="text-center bg-blue-400 px-2 py-1 rounded text-white">
+          <button
+            type="submit"
+            className="text-center bg-blue-400 px-2 py-1 rounded text-white"
+          >
             Signin
           </button>
         </div>

@@ -2,7 +2,7 @@ import { connectDb } from "@/helper/db";
 const { patient } = require("@/models/patient");
 const { NextResponse } = require("next/server");
 export async function POST (req){
-    const {aadharnumber,firstname,lastname,dob,contact,password}= await req.json()
+    const {aadharnumber,firstname,lastname,dob,gender,contact,password}= await req.json()
     await connectDb()
     const aadharIsPresent = await patient.find({aadharnumber:aadharnumber})
     if(aadharIsPresent.length===1){
@@ -14,6 +14,7 @@ export async function POST (req){
             firstname:firstname,
             lastname:lastname,
             contact:contact,
+            gender:gender,
             dob:dob,
             password:password,
         })

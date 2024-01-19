@@ -17,6 +17,10 @@ const PatientSchema = new Schema({
         type:Date,
         required:true
     },
+    gender:{
+        type:String,
+        required:true,
+    },
     contact:{
         type:Number,
         required:true

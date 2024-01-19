@@ -12,18 +12,21 @@ const PrescriptionSchema = new Schema({
         type:Number,
     },
     title:{
-        type:string,
+        type:String,
     },
     description:{
-        type:string,
+        type:String,
     },
-    doctor:{
-        type:string,
+    doctorcontact:{
+        type:Number,
     },
     medicines:{
         type:[]
     },
     tests:{
+        type:[]
+    },
+    injections:{
         type:[]
     }
 })
