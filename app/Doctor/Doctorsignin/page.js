@@ -34,7 +34,6 @@ const page = () => {
       alert("Please confirm that you are a doctor.")
       return
     }
-    
   }
   return (
     <div>

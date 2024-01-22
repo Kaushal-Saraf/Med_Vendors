@@ -1,7 +1,7 @@
 "use client"
 import { patientSignIn } from '@/Services/patientservices'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
-
 const page = () => {
   const [details,setdetails] =useState({
     aadharnumber:'',
@@ -12,8 +12,9 @@ const page = () => {
     contact:'',
     password:''
   })
+  const router= useRouter()
   const handledPatientSignin=async (event)=>{
-    event.preventDefault();
+    event.preventDefault()
     if (details.aadharnumber.length !== 12){
       alert("Please enter correct Aadhar number.")
       return 
@@ -45,15 +46,17 @@ const page = () => {
         gender:'Male',
         password:''
       })
+      router.push(`/Patient/Patientlogin`)
     }
     catch(error){
+      console.log(error)
       alert('Aadhar number already exists try to login.')
     }
   }
   return (
     <>
       <form
-        className="w-[450px] h-[575px] bg-white my-8 mx-auto rounded-lg shadow-sm"
+        className="w-[450px] h-[650px] bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handledPatientSignin}
       >
         <h1 className="text-center bg-blue-300 h-8 text-white py-0.5 font-bold rounded-t-lg shadow-sm">
@@ -146,6 +149,7 @@ const page = () => {
               gender:event.target.value
             })
             }}
+            value={details.gender}
           >
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -195,7 +199,7 @@ const page = () => {
             type="submit"
             className="text-center bg-blue-400 px-2 py-1 rounded text-white"
           >
-            Signin
+            Send OTP
           </button>
         </div>
       </form>
