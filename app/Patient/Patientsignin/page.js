@@ -1,7 +1,10 @@
 "use client"
+import recognizeText from '@/Services/dataextract'
 import { patientSignIn } from '@/Services/patientservices'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { ToastContainer,toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const page = () => {
   const [details,setdetails] =useState({
     aadharnumber:'',
@@ -12,32 +15,78 @@ const page = () => {
     contact:'',
     password:''
   })
+  const updateFormData = async ()=>{
+    const {data} = await recognizeText(details.aadhar)
+    setdetails.firstname = data.text
+    
+  }
   const router= useRouter()
-  const handledPatientSignin=async (event)=>{
+  const handledPatientSignin= async (event) =>{
     event.preventDefault()
     if (details.aadharnumber.length !== 12){
-      alert("Please enter correct Aadhar number.")
+      toast.warn('Enter correct aadhar number', {
+        position: "top-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+        });
       return 
     }
     else if(details.firstname.includes(" ") || details.firstname===""){
-      alert("Firstname cannot be empty or cannot have any spaces.")
+      toast.warn('Firstname cannot be empty or cannot have any spaces.', {
+        position: "top-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+        });
       return
     }
     else if(details.dob===""){
-      alert("Dob cannot be empty.")
+      toast.warn('Dob cannot be empty.', {
+        position: "top-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+        });
       return 
     }
     else if(details.contact.length!==10){
-      alert("Please enter correct contact number.")
+      toast.warn('Please enter correct contact number.', {
+        position: "top-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+        });
       return 
     }
     else if(details.password.length<8){
-      alert("Password is too sort.")
+      toast.warn('Password is too sort.', {
+        position: "top-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+        });
       return
     }
     try{
       const result = await patientSignIn(details);
       setdetails({
+        aadhar:'',
         aadharnumber:'',
         firstname:'',
         lastname:'',
@@ -49,12 +98,20 @@ const page = () => {
       router.push(`/Patient/Patientlogin`)
     }
     catch(error){
-      console.log(error)
-      alert('Aadhar number already exists try to login.')
+      toast.error('Aadhar number already exists try to login.', {
+        position: "top-right",
+        autoClose: 2000,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: 0,
+        theme: "light",
+        });
     }
   }
   return (
     <>
+      <ToastContainer/>
       <form
         className="w-[450px] h-[650px] bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handledPatientSignin}
@@ -64,10 +121,28 @@ const page = () => {
         </h1>
         <div className="flex my-12 px-2 w-full">
           <p className="flex-1 text-center text-blue-400 font-semibold">
+            Aadhar Image
+          </p>
+          <input
+            type="file"
+            name="aadhar"
+            accept="image/jpeg, image/jpg, image/png"
+            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
+            id='aadhar'
+            onChange={(event)=>{
+              setdetails({
+                ...details,
+                aadhar:(event.target.files[0])
+              })
+            }}
+          ></input>
+        </div>
+        <div className="flex my-12 px-2 w-full">
+          <p className="flex-1 text-center text-blue-400 font-semibold">
             Aadhar Number
           </p>
           <input
-            type="text"
+            type="number"
             placeholder="11"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id="aadharnumber"
@@ -130,7 +205,7 @@ const page = () => {
               setdetails({
                 ...details,
                 dob: event.target.value,
-              })
+              });
             }}
             value={details.dob}
           ></input>
@@ -143,11 +218,11 @@ const page = () => {
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="gender"
             id="gender"
-            onChange={(event)=>{
-            setdetails({
-              ...details,
-              gender:event.target.value
-            })
+            onChange={(event) => {
+              setdetails({
+                ...details,
+                gender: event.target.value,
+              });
             }}
             value={details.gender}
           >
@@ -161,7 +236,7 @@ const page = () => {
             Contact
           </p>
           <input
-            type="text"
+            type="number"
             placeholder="9999999999"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="contact"

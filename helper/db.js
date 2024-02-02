@@ -9,7 +9,7 @@ export const connectDb=async()=>{
     }
     try{
         const {connection} = await mongoose.connect(process.env.MONGO_DB_URL,{
-            dbName:"hello"
+            dbName:"Med_Vendor"
         })
         console.log("db connected...")
         config.isConnected=connection.readyState;

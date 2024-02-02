@@ -126,7 +126,7 @@ const page = () => {
             name="documents"
             accept='application/pdf'
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            id='file'
+            id='documents'
             onChange={(event)=>{
               setdetails({
                 ...details,
@@ -155,7 +155,7 @@ const page = () => {
         </div>
         <div className="flex w-full justify-center mt-[40px]">
           <button type='submit' className="text-center bg-blue-400 px-2 py-1 rounded text-white">
-            Login
+            Signin
           </button>
         </div>
       </form>
