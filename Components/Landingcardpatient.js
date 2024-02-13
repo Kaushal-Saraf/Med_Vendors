@@ -4,36 +4,34 @@ import React from "react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 const Landingcardpatient = () => {
   return (
-    <div>
-      <div className="w-full h-40 bg-white flex rounded-[10px] my-10 justify-center text-center">
-        <IoPersonCircleOutline className=" h-40 mx-5 text-blue-100 flex-auto w-32" />
-        <div className="flex-auto w-64">
-          <ul className="text-blue-500 font-bold display my-4">
+    <>
+      <div className= "bg-white flex flex-wrap p-4 rounded-[10px] m-6 justify-center text-center w-[350px]">
+        <IoPersonCircleOutline className="h-32 w-32 text-blue-100" />
+        
+          <ul className="text-blue-500 font-bold display m-4">
             <li>Easy to handle prescriptions.</li>
             <li>Privacy of patient's medical history.</li>
             <li>Buying medicine will become easier.</li>
           </ul>
-        </div>
-        <div className=" flex-auto w-32">
-          <div className="my-6">
+        
+        
+          <div className="flex flex-col justify-center align-middle">
             <Link
               href="/Patient/Patientsignin"
-              className="bg-blue-300 text-white rounded text-center px-2 py-1"
+              className="bg-blue-300 text-white rounded text-center px-2 py-1 mb-2"
             >
               Patient Signin
             </Link>
-          </div>
-          <div className="my-6">
+        
             <Link
               href="/Patient/Patientlogin"
               className="bg-blue-300 text-white rounded text-center px-2 py-1"
             >
               Patient Login
             </Link>
-          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Landingcardpatient;
