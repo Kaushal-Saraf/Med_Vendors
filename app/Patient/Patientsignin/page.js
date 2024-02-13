@@ -1,120 +1,132 @@
 "use client"
-import recognizeText from '@/Services/dataextract'
-import { patientSignIn } from '@/Services/patientservices'
+import { patientSignIn, sendOTP } from '@/Services/patientservices'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
-import { ToastContainer,toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import React, {  useState } from 'react'
+import recognizeText from '@/Utilites/dataextract'
+import dateconverter from '@/Utilites/dateconverter'
+import toast from 'react-hot-toast'
+import Toastercomp from '@/Components/Toastercomp'
+import today from '@/Utilites/todayhtml'
 const page = () => {
+  const router= useRouter()
   const [details,setdetails] =useState({
+    image:false,
     aadharnumber:'',
-    firstname:'',
-    lastname:'',
+    name:'',
     dob: '',
     gender:'Male',
     contact:'',
-    password:''
+    password:'',
+    checkbox:false
   })
-  const updateFormData = async ()=>{
-    const {data} = await recognizeText(details.aadhar)
-    setdetails.firstname = data.text
-    
+  const [isDisabled, setIsDisabled] = useState(false);
+  const clearFormData =()=>{
+    setdetails({
+      ...details,
+      image:false,
+      aadharnumber:'',
+      name:'',
+      dob: '' ,
+      gender:'Male',
+      contact:'',
+      password:'',
+      checkbox:false
+    })
   }
-  const router= useRouter()
-  const handledPatientSignin= async (event) =>{
+  const updateFormData = async(aadhar)=>{
+    try{
+      toast.loading("Fetching data.")
+      const {data} = await recognizeText(aadhar)
+      if(data.text==='' || data.text===null){
+        throw new Error
+      }
+      const text = data.text.replace(/(\r\n|\n|\r)/gm, " ");
+      const dobRegex = /DOB: (\d{2}\/\d{2}\/\d{4})/g;
+      const dobMatch = dobRegex.exec(text);
+      const dob = dobMatch ? dateconverter(dobMatch[1]) : '';
+      const genderRegex = /MALE|FEMALE|TRANSGENDER/g;
+      const genderMatch = genderRegex.exec(text);
+      const gender = genderMatch ? genderMatch[0] : "";
+      const aadhaarRegex = /\b\d{4} \d{4} \d{4}\b/g;
+      const aadhaarMatch = aadhaarRegex.exec(text);
+      const aadhaar = aadhaarMatch ? aadhaarMatch[0].replace(/\s/g, "") : '';
+      setdetails({
+        ...details,
+        image:true,
+        aadharnumber:aadhaar,
+        dob:dob,
+        gender:gender,
+      })
+      toast.dismiss()
+      toast.success("Data fetched sucessfully")
+    }
+    catch(error){
+      toast.dismiss()
+      toast.error("Please upload photo again.")
+    }
+  }
+  const handleSendOtp= async (event) =>{
     event.preventDefault()
-    if (details.aadharnumber.length !== 12){
-      toast.warn('Enter correct aadhar number', {
-        position: "top-right",
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-        });
+    if(!details.image){
+      toast.dismiss()
+      toast.error('Upload aadhar image.');
+      return
+    }
+    else if (details.aadharnumber.length !== 12){
+      toast.dismiss()
+      toast.error('Enter correct aadhar number.');
       return 
     }
-    else if(details.firstname.includes(" ") || details.firstname===""){
-      toast.warn('Firstname cannot be empty or cannot have any spaces.', {
-        position: "top-right",
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-        });
+    else if(details.name===""){
+      toast.dismiss()
+      toast.error('Name cannot be empty.');
       return
     }
     else if(details.dob===""){
-      toast.warn('Dob cannot be empty.', {
-        position: "top-right",
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-        });
+      toast.dismiss()
+      toast.error('Dob cannot be empty.');
       return 
     }
     else if(details.contact.length!==10){
-      toast.warn('Please enter correct contact number.', {
-        position: "top-right",
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-        });
+      toast.dismiss()
+      toast.error('Please enter correct contact number.');
       return 
     }
     else if(details.password.length<8){
-      toast.warn('Password is too sort.', {
-        position: "top-right",
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-        });
+      toast.dismiss()
+      toast.error('Password is too sort enter new password.');
       return
     }
+    else if(!details.checkbox){
+      toast.dismiss()
+      toast.error('Please select the checkbox.')
+    }
     try{
-      const result = await patientSignIn(details);
-      setdetails({
-        aadhar:'',
-        aadharnumber:'',
-        firstname:'',
-        lastname:'',
-        dob: '',
-        contact:'',
-        gender:'Male',
-        password:''
-      })
-      router.push(`/Patient/Patientlogin`)
+      toast.dismiss()
+      toast.loading("sending otp...")
+      setIsDisabled(true)
+      const otpres = await sendOTP(details)
+      toast.dismiss()
+      toast.success("otp sent")
+      //const result = await patientSignIn(details);
+      //clearFormData();
     }
     catch(error){
-      toast.error('Aadhar number already exists try to login.', {
-        position: "top-right",
-        autoClose: 2000,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: 0,
-        theme: "light",
-        });
+      toast.dismiss()
+      toast.error('Aadhar number already exists try to login.');
+      setIsDisabled(false)
+      //setTimeout(()=>{router.push(`/Patient/Patientlogin`)},3000)  
     }
   }
   return (
     <>
-      <ToastContainer/>
+    <Toastercomp/>
       <form
-        className="w-[450px] h-[650px] bg-white my-8 mx-auto rounded-lg shadow-sm"
-        onSubmit={handledPatientSignin}
+        disabled = {isDisabled}
+        className="w-[450px] h-[700px] bg-white my-8 mx-auto rounded-lg shadow-sm"
+        onSubmit={handleSendOtp}
+        id="signinform"
+        name="signinform"
       >
         <h1 className="text-center bg-blue-300 h-8 text-white py-0.5 font-bold rounded-t-lg shadow-sm">
           Patient Signin Form
@@ -124,17 +136,41 @@ const page = () => {
             Aadhar Image
           </p>
           <input
+            disabled={isDisabled}
             type="file"
             name="aadhar"
             accept="image/jpeg, image/jpg, image/png"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            id='aadhar'
-            onChange={(event)=>{
+            id="aadhar"
+            onChange={async (event) => {
+              if (event.target.files.length !== 0) {
+                await updateFormData(event.target.files[0]);
+              } else {
+                clearFormData();
+              }
+            }}
+          ></input>
+        </div>
+        <div className="text-blue-400 font-thin text-sm px-2 mt-[-3rem] mb-[-1rem]">
+          <p>supported formats are png, jpg, jpeg</p>
+        </div>
+        <div className="flex my-12 px-2 w-full">
+          <p className="flex-1 text-center text-blue-400 font-semibold">Name</p>
+          <input
+            readOnly={isDisabled}
+            type="text"
+            placeholder="Raju"
+            autoComplete="given-name"
+            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
+            id="name"
+            name="name"
+            onChange={(event) => {
               setdetails({
                 ...details,
-                aadhar:(event.target.files[0])
-              })
+                name: event.target.value,
+              });
             }}
+            value={details.name}
           ></input>
         </div>
         <div className="flex my-12 px-2 w-full">
@@ -142,6 +178,7 @@ const page = () => {
             Aadhar Number
           </p>
           <input
+            readOnly={isDisabled}
             type="number"
             placeholder="11"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
@@ -157,50 +194,16 @@ const page = () => {
           />
         </div>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
-            First Name
-          </p>
-          <input
-            type="text"
-            placeholder="Raju"
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            id="firstname"
-            name="firstname"
-            onChange={(event) => {
-              setdetails({
-                ...details,
-                firstname: event.target.value,
-              });
-            }}
-            value={details.firstname}
-          ></input>
-        </div>
-        <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
-            Last Name
-          </p>
-          <input
-            type="text"
-            placeholder="Kumar Verma"
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            id="lastname"
-            name="lastname"
-            onChange={(event) => {
-              setdetails({
-                ...details,
-                lastname: event.target.value,
-              });
-            }}
-            value={details.lastname}
-          ></input>
-        </div>
-        <div className="flex my-12 px-2 w-full">
           <p className="flex-1 text-center text-blue-400 font-semibold">DOB</p>
           <input
+            readOnly={isDisabled}
             type="date"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id="dob"
             name="dob"
+            autoComplete="bday"
+            min="1900-01-01"
+            max={today()}
             onChange={(event) => {
               setdetails({
                 ...details,
@@ -215,9 +218,11 @@ const page = () => {
             Gender
           </p>
           <select
+            disabled={isDisabled}
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="gender"
             id="gender"
+            autoComplete="sex"
             onChange={(event) => {
               setdetails({
                 ...details,
@@ -236,11 +241,13 @@ const page = () => {
             Contact
           </p>
           <input
+            readOnly={isDisabled}
             type="number"
             placeholder="9999999999"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="contact"
             id="contact"
+            autoComplete="tel-national"
             onChange={(event) => {
               setdetails({
                 ...details,
@@ -255,11 +262,13 @@ const page = () => {
             Password
           </p>
           <input
+            readOnly={isDisabled}
             type="password"
             placeholder="*******"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="password"
             id="password"
+            autoComplete="current-password"
             onChange={(event) => {
               setdetails({
                 ...details,
@@ -269,10 +278,30 @@ const page = () => {
             value={details.password}
           ></input>
         </div>
+        <div className="flex my-8 px-2 w-full justify-center">
+          <input
+            disabled={isDisabled}
+            type="checkbox"
+            className="text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
+            name="consent"
+            id="consent"
+            onChange={(event) => {
+              setdetails({
+                ...details,
+                checkbox: event.target.checked,
+              });
+            }}
+            value={details.checkbox}
+          ></input>
+          <p className="text-center text-blue-400 text-sm">
+            Information provided by me is correct upto my knowledge.
+          </p>
+        </div>
         <div className="flex w-full justify-center my-[40px]">
           <button
             type="submit"
             className="text-center bg-blue-400 px-2 py-1 rounded text-white"
+            disabled={isDisabled}
           >
             Send OTP
           </button>

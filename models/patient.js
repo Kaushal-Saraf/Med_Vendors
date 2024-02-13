@@ -6,12 +6,9 @@ const PatientSchema = new Schema({
         required:true,
         unique: true
     },
-    firstname:{
+    name:{
         type:String,
         required:true,
-    },
-    lastname:{
-        type:String,
     },
     dob:{
         type:Date,
