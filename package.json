@@ -1,5 +1,5 @@
 {
-  "name": "reactji",
+  "name": "med-vendors",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/node": "^20.11.16",
     "axios": "^1.6.5",
     "cloudinary": "^1.41.3",
     "jsonwebtoken": "^9.0.2",

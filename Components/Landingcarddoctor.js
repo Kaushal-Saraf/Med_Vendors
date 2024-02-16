@@ -5,7 +5,7 @@ import { FaUserDoctor } from "react-icons/fa6";
 const Landingcarddoctor = () => {
   return (
     <>
-    <div className="bg-white flex flex-wrap p-4 rounded-[10px] m-6 justify-center text-center w-[350px]">
+    <div className="bg-white flex flex-wrap p-4 rounded-[10px] m-6 justify-center text-center">
       <FaUserDoctor className="h-32 w-32 text-blue-100" />
         <ul className="text-blue-500 font-bold display m-4">
           <li>Paperless priscription.</li>

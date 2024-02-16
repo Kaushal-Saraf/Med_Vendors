@@ -5,7 +5,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 const Landingcardpatient = () => {
   return (
     <>
-      <div className= "bg-white flex flex-wrap p-4 rounded-[10px] m-6 justify-center text-center w-[350px]">
+      <div className= "bg-white flex flex-wrap p-4 rounded-[10px] m-6 justify-center text-center">
         <IoPersonCircleOutline className="h-32 w-32 text-blue-100" />
         
           <ul className="text-blue-500 font-bold display m-4">
