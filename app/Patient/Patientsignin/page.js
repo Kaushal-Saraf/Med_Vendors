@@ -123,7 +123,7 @@ const page = () => {
     <Toastercomp/>
       <form
         disabled = {isDisabled}
-        className="w-[450px] h-[700px] bg-white my-8 mx-auto rounded-lg shadow-sm"
+        className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handleSendOtp}
         id="signinform"
         name="signinform"
@@ -131,16 +131,16 @@ const page = () => {
         <h1 className="text-center bg-blue-300 h-8 text-white py-0.5 font-bold rounded-t-lg shadow-sm">
           Patient Signin Form
         </h1>
-        <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
+        <div className="flex mt-12 px-2 w-full">
+          <label htmlFor='aadhar' className="w-[136.67px] text-center text-blue-400 font-semibold">
             Aadhar Image
-          </p>
+          </label>
           <input
             disabled={isDisabled}
             type="file"
             name="aadhar"
             accept="image/jpeg, image/jpg, image/png"
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
+            className="w-[181.33px] text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id="aadhar"
             onChange={async (event) => {
               if (event.target.files.length !== 0) {
@@ -151,11 +151,11 @@ const page = () => {
             }}
           ></input>
         </div>
-        <div className="text-blue-400 font-thin text-sm px-2 mt-[-3rem] mb-[-1rem]">
-          <p>supported formats are png, jpg, jpeg</p>
+        <div className="text-blue-400 font-thin text-sm text-center">
+          supported formats are png, jpg, jpeg
         </div>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">Name</p>
+          <label htmlFor='name' className="flex-1 text-center text-blue-400 font-semibold">Name</label>
           <input
             readOnly={isDisabled}
             type="text"
@@ -174,9 +174,9 @@ const page = () => {
           ></input>
         </div>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
+          <label htmlFor='aadharnumber' className="flex-1 text-center text-blue-400 font-semibold">
             Aadhar Number
-          </p>
+          </label>
           <input
             readOnly={isDisabled}
             type="number"
@@ -194,11 +194,11 @@ const page = () => {
           />
         </div>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">DOB</p>
+          <label htmlFor='dob' className="w-[136.67px] text-center text-blue-400 font-semibold">DOB</label>
           <input
             readOnly={isDisabled}
             type="date"
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
+            className="w-[181.33px] text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id="dob"
             name="dob"
             autoComplete="bday"
@@ -214,12 +214,12 @@ const page = () => {
           ></input>
         </div>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
+          <label htmlFor='gender' className="w-[136.67px] text-center text-blue-400 font-semibold">
             Gender
-          </p>
+          </label>
           <select
             disabled={isDisabled}
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
+            className="w-[181.33px] text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="gender"
             id="gender"
             autoComplete="sex"
@@ -237,9 +237,9 @@ const page = () => {
           </select>
         </div>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
+          <label htmlFor='contact' className="flex-1 text-center text-blue-400 font-semibold">
             Contact
-          </p>
+          </label>
           <input
             readOnly={isDisabled}
             type="number"
@@ -258,9 +258,9 @@ const page = () => {
           ></input>
         </div>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
+          <label htmlFor= "password" className="flex-1 text-center text-blue-400 font-semibold">
             Password
-          </p>
+          </label>
           <input
             readOnly={isDisabled}
             type="password"
@@ -278,7 +278,7 @@ const page = () => {
             value={details.password}
           ></input>
         </div>
-        <div className="flex my-8 px-2 w-full justify-center">
+        <div className="flex my-12 px-2 w-full justify-center">
           <input
             disabled={isDisabled}
             type="checkbox"
@@ -293,11 +293,11 @@ const page = () => {
             }}
             value={details.checkbox}
           ></input>
-          <p className="text-center text-blue-400 text-sm">
-            Information provided by me is correct upto my knowledge.
-          </p>
+          <label htmlFor='consent' className="text-center text-blue-400 text-sm">
+          The info I gave is accurate to my knowledge.
+          </label>
         </div>
-        <div className="flex w-full justify-center my-[40px]">
+        <div className="flex w-full justify-center">
           <button
             type="submit"
             className="text-center bg-blue-400 px-2 py-1 rounded text-white"

@@ -122,7 +122,7 @@ const page = () => {
             readOnly={details.disabled}
           ></input>
         </div>
-        <div className="flex my-12 px-2 w-full">
+        <div className="flex mt-12 px-2 w-full">
           <label
             htmlFor="documents"
             className="text-center w-[136.67px] text-blue-400 font-semibold"
@@ -145,6 +145,9 @@ const page = () => {
             }}
             disabled={details.disabled}
           ></input>
+        </div>
+        <div className="text-blue-400 font-thin text-sm text-center">
+          supported format is pdf only
         </div>
         <div className="flex my-12 px-2 w-full justify-center">
           <input

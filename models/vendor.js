@@ -17,7 +17,7 @@ const VendorSchema= new Schema({
         requierd:true,
     },
     machinedetails:{
-        type:[],
+        type:Array,
     },
 })
 export const vendor=

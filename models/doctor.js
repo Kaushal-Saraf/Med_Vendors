@@ -1,11 +1,8 @@
 const { default: mongoose, Schema } = require("mongoose");
 const DoctorSchema = new Schema({
-    firstname: {
+    name: {
         type:String,
         required:[true,"Name Required"], 
-    },
-    lastname:{
-        type:String,
     },
     contact:{
         type:Number,

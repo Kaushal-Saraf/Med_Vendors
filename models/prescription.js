@@ -21,13 +21,13 @@ const PrescriptionSchema = new Schema({
         type:Number,
     },
     medicines:{
-        type:[]
+        type:Array,
     },
     tests:{
-        type:[]
+        type:Array,
     },
     injections:{
-        type:[]
+        type:Array,
     }
 })
 export const prescription = 

@@ -1,6 +1,7 @@
 'use client'
 import { patientLogIn } from '@/Services/patientservices'
 import React, { useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 
 const Patientlogin = () => {
   const [details, setdetails] = useState({
@@ -10,11 +11,13 @@ const Patientlogin = () => {
   const handlePatientLogin = async(event)=>{
     event.preventDefault()
     if(details.aadharnumber.length!==12){
-      alert("Please enter correct Aadhar Number")
+      toast.dismiss()
+      toast.error("Please enter valid Aadhar Number")
       return
     }
     else if (details.password.length===0){
-      alert("Please enter Password")
+      toast.dismiss()
+      toast.error("Please enter Password")
       return
     }
     try {
@@ -24,21 +27,22 @@ const Patientlogin = () => {
         password:""
       })
     } catch (error) {
-      alert(error.response.data.error)
+      toast.error(error.response.data.error)
     }
   }
   return (
     <>
-      <form className="w-[450px] h-[300px] bg-white my-8 mx-auto rounded-lg shadow-sm" onSubmit={handlePatientLogin}>
-        <h1 className="text-center bg-blue-300 h-8 text-white py-0.5 font-bold rounded-t-lg shadow-sm">
+    <Toaster  position="top-right"/>
+      <form className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm" onSubmit={handlePatientLogin}>
+        <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
           Patient Login Form
         </h1>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
+          <label htmlFor='aadharnumber' className="flex-1 text-center text-blue-400 font-semibold">
             Aadhar Number
-          </p>
+          </label>
           <input
-            type="text"
+            type="number"
             placeholder="9999999999"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="aadharnumber"
@@ -53,9 +57,9 @@ const Patientlogin = () => {
           ></input>
         </div>
         <div className="flex my-12 px-2 w-full">
-          <p className="flex-1 text-center text-blue-400 font-semibold">
+          <label htmlFor='password' className="flex-1 text-center text-blue-400 font-semibold">
             Password
-          </p>
+          </label>
           <input
             type="password"
             placeholder="*****"
@@ -71,7 +75,7 @@ const Patientlogin = () => {
             value={details.password}
           ></input>
         </div>
-        <div className="flex w-full justify-center my-[60px]">
+        <div className="flex w-full justify-center">
           <button type='submit' className="text-center bg-blue-400 px-2 py-1 rounded text-white">
             Login
           </button>
