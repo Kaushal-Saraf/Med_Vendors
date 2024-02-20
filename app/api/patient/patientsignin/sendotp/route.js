@@ -1,17 +1,26 @@
+import { sendOtp } from "@/Services/sendOtp";
+import { generateotp } from "@/Utilites/generateotp";
 import { connectDb } from "@/helper/db";
 const { patient } = require("@/models/patient");
 const { NextResponse } = require("next/server");
+import jwt from "jsonwebtoken"
 export async function POST (req){
-    const {aadharnumber,name,dob,gender,contact,password}= await req.json()
+    const details = await req.json()
     await connectDb()
-    const aadharIsPresent = await patient.find({aadharnumber:aadharnumber})
+    const aadharIsPresent = await patient.find({aadharnumber:details.aadharnumber})
     if(aadharIsPresent.length===1){
         return NextResponse.json("invalid aadhar number",{status:403})
     }
-    try{
-        return NextResponse.json("new patient created sucessfully")
-    }
-    catch(error){
-        return NextResponse.json("error")
+    else{
+        try{
+            const otp = generateotp()
+            const token = jwt.sign({otp:otp, details:details},process.env.JWT_KEY)
+            await sendOtp(`Your Med_Vendors otp is: ${otp}`, "+91"+details.contact)
+            return NextResponse.json(token)
+        }
+        catch(error){
+            console.log(error)
+            return NextResponse.json(error,{status:500})
+        }    
     }
 }

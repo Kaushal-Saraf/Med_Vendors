@@ -1,5 +1,5 @@
 "use client"
-import { patientSignIn, sendOTP } from '@/Services/patientservices'
+import { sendOTP } from '@/Services/patientservices'
 import { useRouter } from 'next/navigation'
 import React, {  useState } from 'react'
 import recognizeText from '@/Utilites/dataextract'
@@ -105,17 +105,17 @@ const page = () => {
       toast.dismiss()
       toast.loading("sending otp...")
       setIsDisabled(true)
-      const otpres = await sendOTP(details)
+      const token = await sendOTP(details)
+      sessionStorage.setItem("patientOtp",token)
       toast.dismiss()
-      toast.success("otp sent")
-      //const result = await patientSignIn(details);
-      //clearFormData();
+      setIsDisabled(false)
+      clearFormData();
+      router.push('/Patient/Patientsignin/Verifyotp')
     }
     catch(error){
-      toast.dismiss()
-      toast.error('Aadhar number already exists try to login.');
-      setIsDisabled(false)
-      //setTimeout(()=>{router.push(`/Patient/Patientlogin`)},3000)  
+      toast.dismiss();
+      toast.error("Aadhar number already exists try to login.")
+      setIsDisabled(false);
     }
   }
   return (
