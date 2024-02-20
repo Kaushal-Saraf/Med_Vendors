@@ -19,8 +19,7 @@ export async function POST (req){
             return NextResponse.json(token)
         }
         catch(error){
-            console.log(error)
-            return NextResponse.json(error,{status:500})
+            return NextResponse.json(error)
         }    
     }
 }

@@ -3,6 +3,7 @@ const { patient } = require("@/models/patient");
 const { NextResponse } = require("next/server");
 import jwt from "jsonwebtoken"
 export async function POST (req){
+    
     const {otp,token} = await req.json()
     const data = jwt.verify(token,process.env.JWT_KEY)
     console.log(data)
@@ -24,6 +25,6 @@ export async function POST (req){
         return NextResponse.json("new patient created sucessfully")
     }
     catch(error){
-        return NextResponse.json("error")
+        return NextResponse.json("error",{status:403})
     }
 }

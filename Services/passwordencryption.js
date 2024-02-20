@@ -1,9 +1,10 @@
+const bcrypt = require('bcrypt');
 export const passwordencryption = (myPlaintextPassword) => {
-  bcrypt.hash(myPlaintextPassword, process.env.BCRYPT_SALT, function (err, hash) {
+  bcrypt.hash(myPlaintextPassword, 10 , function (err, hash) {
     try {
       if (err) throw err;
       else return hash;
-    } catch (error) {
+    } catch (err) {
       console.log(err);
     }
   });

@@ -8,9 +8,10 @@ const Verifyotp = () => {
   const [otp, setotp] = useState("")
   const handleSubmit = async (e) =>{
     e.preventDefault();
-    if(otp.length===6){
+    if(otp.length!=6){
       toast.dismiss()
       toast.error("Otp must be 6 digits only.")
+      return
     }
     const token = sessionStorage.getItem("patientOtp");
     const details = { otp: otp , token: token };
