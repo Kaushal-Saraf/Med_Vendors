@@ -1,5 +1,6 @@
 'use client'
 import { patientLogIn } from '@/Services/patientservices'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
@@ -32,13 +33,19 @@ const Patientlogin = () => {
   }
   return (
     <>
-    <Toaster  position="top-right"/>
-      <form className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm" onSubmit={handlePatientLogin}>
+      <Toaster position="top-right" />
+      <form
+        className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
+        onSubmit={handlePatientLogin}
+      >
         <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
           Patient Login Form
         </h1>
         <div className="flex my-12 px-2 w-full">
-          <label htmlFor='aadharnumber' className="flex-1 text-center text-blue-400 font-semibold">
+          <label
+            htmlFor="aadharnumber"
+            className="flex-1 text-center text-blue-400 font-semibold"
+          >
             Aadhar Number
           </label>
           <input
@@ -47,17 +54,20 @@ const Patientlogin = () => {
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="aadharnumber"
             id="aadharnumber"
-            onChange={(event)=>{
-            setdetails({
-              ...details,
-              aadharnumber:event.target.value
-            })
-          }}
+            onChange={(event) => {
+              setdetails({
+                ...details,
+                aadharnumber: event.target.value,
+              });
+            }}
             value={details.aadharnumber}
           ></input>
         </div>
         <div className="flex my-12 px-2 w-full">
-          <label htmlFor='password' className="flex-1 text-center text-blue-400 font-semibold">
+          <label
+            htmlFor="password"
+            className="flex-1 text-center text-blue-400 font-semibold"
+          >
             Password
           </label>
           <input
@@ -66,21 +76,32 @@ const Patientlogin = () => {
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id="password"
             name="password"
-            onChange={(event)=>{
+            onChange={(event) => {
               setdetails({
                 ...details,
-                password:event.target.value
-              })
+                password: event.target.value,
+              });
             }}
             value={details.password}
           ></input>
         </div>
         <div className="flex w-full justify-center">
-          <button type='submit' className="text-center bg-blue-400 px-2 py-1 rounded text-white">
+          <button
+            type="submit"
+            className="text-center bg-blue-400 px-2 py-1 rounded text-white"
+          >
             Login
           </button>
         </div>
       </form>
+      <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
+        <Link
+          href="/Patient/Patientsignin"
+          className="font-bold text-blue-400 bg-white px-1 rounded-md"
+        >
+          Dont't have an account Click Here
+        </Link>
+      </div>
     </>
   );
 }

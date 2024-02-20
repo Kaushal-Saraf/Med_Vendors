@@ -1,6 +1,6 @@
 "use client";
+import Link from "next/link";
 import React from "react";
-
 const page = () => {
   return (
     <>
@@ -44,6 +44,14 @@ const page = () => {
           </button>
         </div>
       </form>
+      <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
+        <Link
+          href="/Doctor/Doctorsignin"
+          className="font-bold text-blue-400 bg-white px-1 rounded-md"
+        >
+          Don't have an account Click Here
+        </Link>
+      </div>
     </>
   );
 };

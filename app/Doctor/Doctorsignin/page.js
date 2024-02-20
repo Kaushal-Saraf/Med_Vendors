@@ -1,7 +1,7 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-
 const page = () => {
   const [details, setdetails] = useState({
     name: "",
@@ -11,6 +11,7 @@ const page = () => {
     checkbox: false,
     disabled:false
   });
+  
   const handleDetails = async (event) => {
     event.preventDefault();
     if (details.name === "") {
@@ -181,6 +182,14 @@ const page = () => {
           </button>
         </div>
       </form>
+      <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
+        <Link
+          href="/Doctor/Doctorlogin"
+          className="font-bold text-blue-400 bg-white px-1 rounded-md"
+        >
+          Already have an account Click Here
+        </Link>
+      </div>
     </>
   );
 };

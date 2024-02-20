@@ -7,6 +7,7 @@ import dateconverter from "@/Utilites/dateconverter";
 import toast from "react-hot-toast";
 import Toastercomp from "@/Components/Toastercomp";
 import today from "@/Utilites/todayhtml";
+import Link from "next/link";
 const page = () => {
   const router = useRouter();
   const [details, setdetails] = useState({
@@ -331,6 +332,14 @@ const page = () => {
           </button>
         </div>
       </form>
+      <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
+        <Link
+          href="/Patient/Patientlogin"
+          className="font-bold text-blue-400 bg-white px-1 rounded-md"
+        >
+          Already have an account Click Here
+        </Link>
+      </div>
     </>
   );
 };
