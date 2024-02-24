@@ -35,9 +35,10 @@ const page = () => {
     });
   };
   const updateFormData = async (aadhar) => {
+    setIsDisabled(true);
+    toast.dismiss();
+    toast.loading("Fetching data.");
     try {
-      setIsDisabled(true);
-      toast.loading("Fetching data.");
       const { data } = await recognizeText(aadhar);
       if (data.text === "" || data.text === null) {
         throw new Error();
@@ -99,8 +100,8 @@ const page = () => {
       toast.error("Please select the checkbox.");
       return;
     }
+    setIsDisabled(true);
     try {
-      setIsDisabled(true);
       toast.dismiss();
       toast.loading("sending otp...");
       const token = await sendOTP(details);

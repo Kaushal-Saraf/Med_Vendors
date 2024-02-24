@@ -1,35 +1,35 @@
-"use client"
-import { patientSignIn } from '@/Services/patientservices'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+"use client";
+import { patientSignIn } from "@/Services/patientservices";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 const Verifyotp = () => {
-  const router= useRouter()
-  const [otp, setotp] = useState("")
-  const [contact, setcontact] = useState("")
-  const handleSubmit = async (e) =>{
+  const router = useRouter();
+  const [otp, setotp] = useState("");
+  const [contact, setcontact] = useState("");
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(otp.length!=6){
-      toast.dismiss()
-      toast.error("Otp must be 6 digits only.")
-      return
+    if (otp.length != 6) {
+      toast.dismiss();
+      toast.error("Otp must be 6 digits only.");
+      return;
     }
     const token = sessionStorage.getItem("patientOtp");
-    const details = { otp: otp , token: token };
-    toast.dismiss()
-    toast.loading("Signin...")
+    const details = { otp: otp, token: token };
+    toast.dismiss();
+    toast.loading("Signin...");
     try {
-      await patientSignIn(details)
-      sessionStorage.removeItem("patientOtp");
-      toast.dismiss()
-      router.push("/Patient/Patientlogin")
-    } catch (error) {
+      await patientSignIn(details);
       toast.dismiss();
-      setcontact(error.response.data.contact)
+      sessionStorage.removeItem("patientOtp");
+      router.push("/Patient/Patientlogin");
+    } catch (error) {
+      setcontact(error.response.data.contact);
+      toast.dismiss();
       toast.error("Otp doesn't matchs.");
     }
-  }
+  };
   return (
     <>
       <Toaster position="top-right"></Toaster>
@@ -65,16 +65,17 @@ const Verifyotp = () => {
           </button>
         </div>
       </form>
-      {contact?
-      <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
-        <Link
-          href="/Patient/Patientsignin"
-          className="font-bold text-blue-400 bg-white px-1 rounded-md"
-        >
-        Not your contact number {contact} ?
-        </Link>
-      </div>:null}
+      {contact ? (
+        <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
+          <Link
+            href="/Patient/Patientsignin"
+            className="font-bold text-blue-400 bg-white px-1 rounded-md"
+          >
+            Not your contact number {contact} ?
+          </Link>
+        </div>
+      ) : null}
     </>
   );
-}
-export default Verifyotp
+};
+export default Verifyotp;
