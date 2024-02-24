@@ -5,13 +5,11 @@ import jwt from "jsonwebtoken";
 export async function POST(req) {
   const { otp, token } = await req.json();
   const data = jwt.verify(token, process.env.JWT_KEY);
-  console.log(data);
   const { aadharnumber, name, contact, gender, dob, password } = data.details;
   await connectDb();
-  try {
-    if (data.otp != otp) {
-      throw new error();
-    }
+  if (data.otp != otp) {
+    return NextResponse.json({contact:contact}, { status: 403 });
+  } else {
     const newpatient = new patient({
       aadharnumber: aadharnumber,
       name: name,
@@ -20,9 +18,7 @@ export async function POST(req) {
       dob: dob,
       password: password,
     });
-    await newpatient.save();
-    return NextResponse.json("new patient created sucessfully");
-  } catch (error) {
-    return NextResponse.json("error", { status: 403 });
+    const result = await newpatient.save();
+    return NextResponse.json(result);
   }
 }

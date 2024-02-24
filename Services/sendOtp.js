@@ -1,7 +1,4 @@
-const accountSid = process.env.TWILIO_SID;
-const authToken = process.env.TWILIO_AUTHTOKEN;
-
-const client = require('twilio')(accountSid, authToken);
+const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_AUTHTOKEN);
 
 export const sendOtp = async (body, to) => {
     const response = await client.messages
