@@ -18,7 +18,7 @@ export async function POST(req) {
       dob: dob,
       password: password,
     });
-    const result = await newpatient.save();
-    return NextResponse.json(result);
+    await newpatient.save();
+    return NextResponse.json({message:"Signup sucessful"});
   }
 }

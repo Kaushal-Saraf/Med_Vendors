@@ -13,16 +13,9 @@ export async function POST(req) {
   if (aadharIsPresent.length === 1) {
     return NextResponse.json("invalid aadhar number", { status: 403 });
   } else {
-    try {
       const otp = generateotp();
-      const token = jwt.sign(
-        { otp: otp, details: details },
-        process.env.JWT_KEY
-      );
+      const token = jwt.sign({ otp: otp, details: details }, process.env.JWT_KEY);
       await sendOtp(`Your Med_Vendors otp is: ${otp}`, "+91" + details.contact);
       return NextResponse.json(token);
-    } catch (error) {
-      return NextResponse.json(error);
-    }
   }
 }

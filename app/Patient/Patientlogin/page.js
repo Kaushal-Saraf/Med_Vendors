@@ -1,10 +1,13 @@
 'use client'
 import { patientLogIn } from '@/Services/patientservices'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
 const Patientlogin = () => {
+  const router = useRouter();
+  const [disabled,setdisabled] = useState(false);
   const [details, setdetails] = useState({
     aadharnumber:'',
     password:'' 
@@ -21,14 +24,20 @@ const Patientlogin = () => {
       toast.error("Please enter Password")
       return
     }
+    setdisabled(true);
     try {
-      await patientLogIn(details);
+      const id = await patientLogIn(details);
+      setdisabled(false)
       setdetails({
         aadharnumber:"",
         password:""
       })
+      toast.dismiss()
+      router.push(`/Patient/${id._id}`)
     } catch (error) {
-      toast.error(error.response.data.error)
+      setdisabled(false)
+      toast.dismiss()
+      toast.error(error.response.data)
     }
   }
   return (
@@ -37,6 +46,7 @@ const Patientlogin = () => {
       <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handlePatientLogin}
+        disabled={disabled}
       >
         <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
           Patient Login Form
@@ -61,6 +71,7 @@ const Patientlogin = () => {
               });
             }}
             value={details.aadharnumber}
+            readOnly={disabled}
           ></input>
         </div>
         <div className="flex my-12 px-2 w-full">
@@ -83,12 +94,14 @@ const Patientlogin = () => {
               });
             }}
             value={details.password}
+            readOnly={disabled}
           ></input>
         </div>
         <div className="flex w-full justify-center">
           <button
             type="submit"
             className="text-center bg-blue-400 px-2 py-1 rounded text-white"
+            disabled={disabled}
           >
             Login
           </button>

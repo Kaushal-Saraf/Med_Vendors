@@ -4,28 +4,20 @@ import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 export async function POST(req) {
   const { aadharnumber, password } = await req.json();
-  try {
-    await connectDb();
-    const user = await patient.findOne({ aadharnumber: aadharnumber });
-    if (user === null) throw new Error("User not found!");
-    if (user.password !== password) throw new Error("Password do not match!");
-    const token = jwt.sign(
-      {
-        _id: user._id,
-        aadharnumber: user.aadharnumber,
-      },
-      process.env.JWT_KEY
-    );
-    response.cookies.set(
-      "patientLoginToken",
-      token,
-      { expiresIn: "3d" },
-      { httpOnly: true }
-    );
-    return NextResponse.json({
-      message: "Login successful",
-    });
-  } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 403 });
+  await connectDb();
+  const user = await patient.findOne({ aadharnumber: aadharnumber });
+  if (user === null)
+    return NextResponse.json("User not found!", { status: 401 });
+  else if (user.password !== password)
+    return NextResponse.json("Incorrect  Password!", { status: 401 });
+  else {
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY);
+    // NextResponse.cookies.set(
+    //   "patientLoginToken",
+    //   token,
+    //   { expiresIn: "3d" },
+    //   { httpOnly: true }
+    // );
+    return NextResponse.json({ _id: user._id }, { status: 200 });
   }
 }
