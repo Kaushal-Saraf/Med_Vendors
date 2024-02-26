@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-const page = () => {
+const doctorsignin = () => {
   const [details, setdetails] = useState({
     name: "",
     contact: "",
@@ -194,4 +194,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default doctorsignin;

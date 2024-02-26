@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 
-const page = () => {
+const vendorlogin = () => {
   return (
     <>
  <form className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm">
@@ -42,4 +42,4 @@ const page = () => {
   )
 }
 
-export default page
+export default vendorlogin

@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import Toastercomp from "@/Components/Toastercomp";
 import today from "@/Utilites/todayhtml";
 import Link from "next/link";
-const page = () => {
+const patientsignin = () => {
   const router = useRouter();
   const [details, setdetails] = useState({
     image: false,
@@ -118,7 +118,7 @@ const page = () => {
   };
   return (
     <>
-      <Toastercomp />
+      <Toastercomp/>
       <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handleSendOtp}
@@ -345,4 +345,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default patientsignin;

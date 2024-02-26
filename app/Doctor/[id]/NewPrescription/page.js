@@ -1,6 +1,6 @@
 import React from 'react'
 
-const page = () => {
+const newprescription = () => {
   return (
     <>
       <form onSubmit="handleData()"className='w-[450px] h-[300px] bg-white my-8 mx-auto rounded-lg shadow-sm'>
@@ -21,4 +21,4 @@ const page = () => {
   )
 }
 
-export default page
+export default newprescription
