@@ -10,8 +10,8 @@ import today from "@/Utilites/todayhtml";
 import Link from "next/link";
 const patientsignin = () => {
   const router = useRouter();
+  const [image, setimage] = useState("No File Choosen")
   const [details, setdetails] = useState({
-    image: false,
     aadharnumber: "",
     name: "",
     dob: "",
@@ -22,9 +22,9 @@ const patientsignin = () => {
   });
   const [isDisabled, setIsDisabled] = useState(false);
   const clearFormData = () => {
+    setimage("No File Choosen")
     setdetails({
       ...details,
-      image: false,
       aadharnumber: "",
       name: "",
       dob: "",
@@ -55,7 +55,6 @@ const patientsignin = () => {
       const aadhaar = aadhaarMatch ? aadhaarMatch[0].replace(/\s/g, "") : "";
       setdetails({
         ...details,
-        image: true,
         aadharnumber: aadhaar,
         dob: dob,
         gender: gender,
@@ -71,7 +70,7 @@ const patientsignin = () => {
   };
   const handleSendOtp = async (event) => {
     event.preventDefault();
-    if (!details.image) {
+    if (image==="No File Choosen") {
       toast.dismiss();
       toast.error("Upload aadhar image.");
       return;
@@ -118,7 +117,7 @@ const patientsignin = () => {
   };
   return (
     <>
-      <Toastercomp/>
+      <Toastercomp />
       <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handleSendOtp}
@@ -136,21 +135,27 @@ const patientsignin = () => {
           >
             Aadhar Image
           </label>
-          <input
-            type="file"
-            id="aadhar"
-            name="aadhar"
-            accept="image/jpeg, image/jpg, image/png"
-            className="w-[181.33px] text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            onChange={async (event) => {
-              if (event.target.files.length !== 0) {
-                await updateFormData(event.target.files[0]);
-              } else {
-                clearFormData();
-              }
-            }}
-            disabled={isDisabled}
-          ></input>
+          <div className="w-[181.33px] h-[30px] mx-2 flex bg-blue-50">
+            <input
+              type="file"
+              id="aadhar"
+              name="aadhar"
+              accept="image/jpeg, image/jpg, image/png"
+              className="text-center w-[100px] bg-blue-50 focus:outline-blue-400 text-blue-40"
+              onChange={async (event) => {
+                if (event.target.files.length !== 0) {
+                  setimage(event.target.files[0].name)
+                  await updateFormData(event.target.files[0]);
+                } else {
+                  clearFormData();
+                }
+              }}
+              disabled={isDisabled}
+            ></input>
+            <div className= "h-[30px] w-[81.33px] whitespace-nowrap overflow-scroll text-blue-400">
+              {image}
+            </div>
+          </div>
         </div>
         <div className="text-blue-400 font-thin text-sm text-center">
           supported formats are png, jpg, jpeg

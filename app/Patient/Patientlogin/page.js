@@ -87,6 +87,7 @@ const Patientlogin = () => {
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id="password"
             name="password"
+            autoComplete='given-password'
             onChange={(event) => {
               setdetails({
                 ...details,
