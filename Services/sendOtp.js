@@ -1,12 +1,16 @@
 const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_AUTHTOKEN);
 
 export const sendOtp = async (body, to) => {
-    const response = await client.messages
-      .create({
+    try{
+      const response = await client.messages.create({
         body: body,
         to: to,
-        from: process.env.TWILIO_CONTACT, 
-    })
-    return response
+        from: process.env.TWILIO_CONTACT,
+      });
+      return response;
+    }
+    catch(error){
+      return "Ivalid contact number."
+    }
 }
 

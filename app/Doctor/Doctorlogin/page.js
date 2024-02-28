@@ -20,6 +20,7 @@ const doctorlogin = () => {
             name="contact"
             id="contact"
             placeholder="9999999999"
+            autoComplete="tel-national"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
           ></input>
         </div>
@@ -34,6 +35,7 @@ const doctorlogin = () => {
             type="password"
             name="password"
             id="password"
+            autoComplete="given-password"
             placeholder="*****"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
           ></input>

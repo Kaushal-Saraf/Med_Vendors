@@ -100,9 +100,9 @@ const patientsignin = () => {
       return;
     }
     setIsDisabled(true);
+    toast.dismiss();
+    toast.loading("sending otp...");
     try {
-      toast.dismiss();
-      toast.loading("sending otp...");
       const token = await sendOTP(details);
       sessionStorage.setItem("patientOtp", token);
       toast.dismiss();
@@ -111,7 +111,7 @@ const patientsignin = () => {
       router.push("/Patient/Patientsignin/Verifyotp");
     } catch (error) {
       toast.dismiss();
-      toast.error("Aadhar number already exists try to login.");
+      toast.error(error.response.data);
       setIsDisabled(false);
     }
   };

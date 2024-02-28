@@ -60,7 +60,7 @@ const Patientlogin = () => {
           </label>
           <input
             type="number"
-            placeholder="9999999999"
+            placeholder="999999999999"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="aadharnumber"
             id="aadharnumber"

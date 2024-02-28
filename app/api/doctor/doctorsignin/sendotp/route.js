@@ -1,17 +1,17 @@
 import { sendOtp } from "@/Services/sendOtp";
 import { generateotp } from "@/Utilites/generateotp";
 import { connectDb } from "@/helper/db";
-const { patient } = require("@/models/patient");
+import { doctor } from "@/models/doctor";
 const { NextResponse } = require("next/server");
 import jwt from "jsonwebtoken";
 export async function POST(req) {
   const details = await req.json();
   await connectDb();
-  const aadharIsPresent = await patient.find({
-    aadharnumber: details.aadharnumber,
+  const contactIsPresent = await doctor.find({
+    contact: details.contact,
   });
-  if (aadharIsPresent.length === 1) {
-    return NextResponse.json("Invalid Aadhar Number", { status: 403 });
+  if (contactIsPresent.length === 1) {
+    return NextResponse.json("Contact Number already exists.", {status: 403});
   } else {
       const otp = generateotp();
       const token = jwt.sign({ otp: otp, details: details }, process.env.JWT_KEY);

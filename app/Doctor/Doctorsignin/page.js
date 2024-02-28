@@ -1,8 +1,11 @@
 "use client";
+import { doctorSignIn } from "@/Services/doctorservices";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 const doctorsignin = () => {
+  const router = useRouter();
   const [details, setdetails] = useState({
     name: "",
     contact: "",
@@ -34,12 +37,37 @@ const doctorsignin = () => {
       toast.error("Please confirm that you are a doctor.");
       return;
     }
-    setdetails({
-      ...details,
-      disabled:true
-    })
     toast.dismiss()
     toast.loading("Sending OTP. Please wait...");
+    setdetails({
+      ...details,
+      disabled: true,
+    });
+    try {
+      const token = await doctorSignIn(details);
+      sessionStorage.setItem("doctorOtp", token);
+      toast.dismiss();
+      setdetails({
+        ...details,
+        disabled: false,
+      });
+      setdetails({
+        name: "",
+        contact: "",
+        password: "",
+        supportingdocuments: "No File Choosen",
+        checkbox: false,
+        disabled: false,
+      });
+      router.push("/Doctor/Doctorsignin/Verifyotp");
+    } catch (error) {
+      toast.dismiss();
+      toast.error(error.response.data);
+      setdetails({
+        ...details,
+        disabled: false,
+      });
+    }
   };
   return (
     <>
