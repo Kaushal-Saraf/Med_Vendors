@@ -2,7 +2,7 @@
 import { sendOTP } from "@/Services/patientservices";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import recognizeText from "@/Utilites/dataextract";
+import recognizeText from "@/Services/dataextract";
 import dateconverter from "@/Utilites/dateconverter";
 import toast from "react-hot-toast";
 import Toastercomp from "@/Components/Toastercomp";
