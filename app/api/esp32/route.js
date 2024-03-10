@@ -2,6 +2,6 @@
 // import { connectDb } from "@/helper/db";
 const { NextResponse } = require("next/server");
 export async function POST(req) {
-  const { image } = await req.json();
-  return NextResponse.json({image});
+  console.log(await req.json());
+  return NextResponse.json("hello");
 }
