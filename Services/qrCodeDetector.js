@@ -1,10 +1,18 @@
 import jsQR from 'jsqr';
-export const qrCodeDetector =(base64Image)=>{
-    const rawImageData = Uint8Array.from(atob(base64Image), c => c.charCodeAt(0));
-    const qrCode = jsQR(rawImageData, rawImageData.width, rawImageData.height);
-    if (qrCode) {
-        console.log(qrCode.data);
-    } else {
-        console.log('error');
-    }   
+
+export async function decodeQRCodeFromBase64(base64Image) {
+    return new Promise((resolve, reject) => {
+        const binaryData = atob(base64Image.split(',')[1]);
+        const length = binaryData.length;
+        const bytes = new Uint8Array(length);
+        for (let i = 0; i < length; i++) {
+            bytes[i] = binaryData.charCodeAt(i);
+        }
+        const code = jsQR(bytes, bytes.length);
+        if (code) {
+            resolve(code.data);
+        } else {
+            reject(new Error('No QR code found in the image.'));
+        }
+    });
 }
