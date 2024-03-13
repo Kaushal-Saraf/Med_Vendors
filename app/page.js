@@ -1,4 +1,5 @@
 import Landingcards from '@/Components/Landingcards';
+import "./globals.css";
 const page = () => {
   return (
     <>
