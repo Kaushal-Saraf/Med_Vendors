@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import React from "react";
 import { IoPersonCircleOutline } from "react-icons/io5";
 const Landingcardpatient = () => {
   return (

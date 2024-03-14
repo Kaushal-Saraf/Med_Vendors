@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import React from "react";
 import { FaUserDoctor } from "react-icons/fa6";
 const Landingcarddoctor = () => {
   return (

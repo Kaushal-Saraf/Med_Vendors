@@ -4,8 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import recognizeText from "@/Services/dataextract";
 import dateconverter from "@/Utilites/dateconverter";
-import toast from "react-hot-toast";
-import Toastercomp from "@/Components/Toastercomp";
+import toast, { Toaster } from "react-hot-toast";
 import today from "@/Utilites/todayhtml";
 import Link from "next/link";
 const patientsignin = () => {
@@ -117,7 +116,7 @@ const patientsignin = () => {
   };
   return (
     <>
-      <Toastercomp />
+      <Toaster position="top-right"></Toaster>
       <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handleSendOtp}

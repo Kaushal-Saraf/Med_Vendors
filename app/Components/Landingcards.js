@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Landingcarddoctor from "./Landingcarddoctor";
 import Landingcardpatient from "./Landingcardpatient";
 import Landingcardvendor from "./Landingcardvendor";

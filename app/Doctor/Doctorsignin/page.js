@@ -2,7 +2,7 @@
 import { doctorSignIn } from "@/Services/doctorservices";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 const doctorsignin = () => {
   const router = useRouter();

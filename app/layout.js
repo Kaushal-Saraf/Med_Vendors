@@ -1,5 +1,5 @@
+import Header from './Components/Header'
 import './globals.css'
-import Header from '@/Components/Header'
 
 export const metadata = {
   title: 'Med_Vendors',
