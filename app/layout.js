@@ -8,6 +8,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html>
+      <head>
+          <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+      </head>
       <body className='bg-blue-100'>
         <Header/>
         {children}
