@@ -7,6 +7,6 @@ export async function POST(req){
     return NextResponse.json("No Qr Found");
   }
   else{
-    return NextResponse.json(qrRes)
+    return NextResponse.json(qrRes.data)
   }
 }
