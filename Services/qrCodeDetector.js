@@ -1,22 +1,11 @@
 import jsQR from 'jsqr';
-import fs from 'fs';
-export async function qrCodeDetector(file) {
-    const width = 640;
-    const height = 480;
-    
-
-const readFileInBase64 = async (file) => {
-  const base64String = Buffer.from(fileBuffer).toString('base64');
-  return base64String;
-};
-
-const base64String = await readFileInBase64('my-file.txt');
-    try{
-        const codeResult = jsQR(code.data, code.width, code.height);
-        return codeResult;
-    }
-    catch(e){
-        console.log(e);
-        return "NO QR Found";
-    }
+import jpeg from  'jpeg-js';
+export default async function qrCodeDetector(image){
+  const decodeImage = Buffer.from(image, 'base64');
+  const rawImageData = jpeg.decode(decodeImage);
+  const clampedArray = new Uint8ClampedArray(rawImageData.data.length);
+  for (let i = 0; i < rawImageData.data.length; i++) {
+      clampedArray[i] = rawImageData.data[i];
+  }
+  return jsQR(clampedArray, 640, 480);
 }

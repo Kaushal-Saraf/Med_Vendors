@@ -13,6 +13,7 @@
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.3",
     "formidable": "^3.5.1",
+    "jpeg-js": "^0.4.4",
     "jsonwebtoken": "^9.0.2",
     "jsqr": "^1.4.0",
     "mongoose": "^8.0.4",
