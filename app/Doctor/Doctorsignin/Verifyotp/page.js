@@ -1,5 +1,5 @@
 "use client";
-import { patientSignIn } from "@/Services/patientservices";
+import { doctorSignIn } from "@/Services/doctorservices";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -15,15 +15,15 @@ const Verifyotp = () => {
       toast.error("Otp must be 6 digits only.");
       return;
     }
-    const token = sessionStorage.getItem("patientOtp");
+    const token = sessionStorage.getItem("doctorOtp");
     const details = { otp: otp, token: token };
     toast.dismiss();
     toast.loading("Signin...");
     try {
-      await patientSignIn(details);
+      await doctorSignIn(details);
       toast.dismiss();
-      sessionStorage.removeItem("patientOtp");
-      router.push("/Patient/Patientlogin");
+      sessionStorage.removeItem("doctorOtp");
+      router.push("/Doctor/Doctorlogin");
     } catch (error) {
       setcontact(error.response.data.contact);
       toast.dismiss();

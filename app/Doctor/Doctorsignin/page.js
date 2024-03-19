@@ -1,5 +1,5 @@
 "use client";
-import { doctorSignIn } from "@/Services/doctorservices";
+import { sendOTP } from "@/Services/doctorservices";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -10,7 +10,6 @@ const doctorsignin = () => {
     name: "",
     contact: "",
     password: "",
-    supportingdocuments: "No File Choosen",
     checkbox: false,
     disabled:false
   });
@@ -28,10 +27,6 @@ const doctorsignin = () => {
       toast.dismiss();
       toast.error("Password is too sort.");
       return;
-    } else if (details.supportingdocuments==="No File Choosen") {
-      toast.dismiss();
-      toast.error("Please attach your doctrate degree.");
-      return;
     } else if (!details.checkbox) {
       toast.dismiss();
       toast.error("Please confirm that you are a doctor.");
@@ -44,7 +39,7 @@ const doctorsignin = () => {
       disabled: true,
     });
     try {
-      const token = await doctorSignIn(details);
+      const token = await sendOTP(details);
       sessionStorage.setItem("doctorOtp", token);
       toast.dismiss();
       setdetails({
@@ -55,7 +50,6 @@ const doctorsignin = () => {
         name: "",
         contact: "",
         password: "",
-        supportingdocuments: "No File Choosen",
         checkbox: false,
         disabled: false,
       });
@@ -151,36 +145,6 @@ const doctorsignin = () => {
             value={details.password}
             readOnly={details.disabled}
           ></input>
-        </div>
-        <div className="flex mt-12 px-2 w-full">
-          <label
-            htmlFor="documents"
-            className="text-center w-[136.67px] text-blue-400 font-semibold"
-          >
-            Degree
-          </label>
-          <div className="w-[181.33px] h-[30px] mx-2 flex bg-blue-50">
-            <input
-              type="file"
-              name="documents"
-              accept="application/pdf"
-              className="text-center w-[100px] bg-blue-50 focus:outline-blue-400 text-blue-400"
-              id="documents"
-              onChange={(event) => {
-                setdetails({
-                  ...details,
-                  supportingdocuments: event.target.files.length  ? event.target.files[0].name : "No File Choosen"
-                });
-              }}
-              disabled={details.disabled}
-            ></input>
-            <div className= "h-[30px] w-[81.33px] whitespace-nowrap overflow-scroll">
-              {details.supportingdocuments}
-            </div>
-          </div>
-        </div>
-        <div className="text-blue-400 font-thin text-sm text-center">
-          only pdf format is accepted
         </div>
         <div className="flex my-12 px-2 w-full justify-center">
           <input

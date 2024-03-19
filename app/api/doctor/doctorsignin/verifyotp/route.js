@@ -1,24 +1,21 @@
 import { connectDb } from "@/helper/db";
-const { patient } = require("@/models/patient");
+import { doctor } from "@/models/doctor";
 const { NextResponse } = require("next/server");
 import jwt from "jsonwebtoken";
 export async function POST(req) {
   const { otp, token } = await req.json();
   const data = jwt.verify(token, process.env.JWT_KEY);
-  const { aadharnumber, name, contact, gender, dob, password } = data.details;
+  const { name, contact, password } = data.details;
   await connectDb();
   if (data.otp != otp) {
     return NextResponse.json({contact:contact}, { status: 403 });
   } else {
-    const newpatient = new patient({
-      aadharnumber: aadharnumber,
+    const newdoctor = new doctor({
       name: name,
       contact: contact,
-      gender: gender,
-      dob: dob,
       password: password,
     });
-    await newpatient.save();
+    await newdoctor.save();
     return NextResponse.json({message:"Signup sucessful"});
   }
 }
