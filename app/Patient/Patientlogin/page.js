@@ -16,12 +16,12 @@ const Patientlogin = () => {
     event.preventDefault()
     if(details.aadharnumber.length!==12){
       toast.dismiss()
-      toast.error("Please enter valid Aadhar Number")
+      toast.error("Please enter valid Aadhar Number.")
       return
     }
     else if (details.password.length===0){
       toast.dismiss()
-      toast.error("Please enter Password")
+      toast.error("Please enter Password.")
       return
     }
     setdisabled(true);

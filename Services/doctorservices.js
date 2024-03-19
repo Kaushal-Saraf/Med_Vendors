@@ -8,3 +8,8 @@ export async function doctorSignIn(details){
     const result = await httpAxios.post("/api/doctor/doctorsignin/verifyotp",details).then((Response)=>Response.data)
     return result
 }
+
+export async function doctorLogIn(details){
+    const result = await httpAxios.post("/api/doctor/doctorlogin" ,details).then((Response)=>Response.data)
+    return result
+}

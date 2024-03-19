@@ -27,7 +27,7 @@ const Verifyotp = () => {
     } catch (error) {
       setcontact(error.response.data.contact);
       toast.dismiss();
-      toast.error("Otp doesn't matchs.");
+      toast.error("Otp doesn't match.");
     }
   };
   return (
