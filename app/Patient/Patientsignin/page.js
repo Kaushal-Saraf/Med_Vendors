@@ -295,7 +295,7 @@ const patientsignin = () => {
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             name="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="new-password"
             onChange={(event) => {
               setdetails({
                 ...details,

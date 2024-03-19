@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 const vendorsignin = () => {
   const [details, setdetails] = useState({
     name:"",
@@ -10,10 +11,16 @@ const vendorsignin = () => {
     passwordVerifier:true
   })
   const handleSubmit=(e)=>{
-
+    e.preventDefault();
+    if(details.nameVerifier||details.contactVerifer||details.spasswordVerifier){
+      toast.dismiss();
+      toast.error("Please fill all the fields correctly.");
+      return;
+    }
   }
   return (
     <>
+    <Toaster position="top-right"/>
       <form onSubmit={handleSubmit} className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm">
         <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
           Vendor Signin Form
