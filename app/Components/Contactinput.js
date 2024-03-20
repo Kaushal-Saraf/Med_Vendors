@@ -7,13 +7,13 @@ const Contactinput = ({ details, setdetails, disabled }) => {
       setdetails({
         ...details,
         contact: contact,
-        contactVerifer: true,
+        contactVerifier: true,
       });
     } else {
       setdetails({
         ...details,
         contact: contact,
-        contactVerifer: false,
+        contactVerifier: false,
       });
     }
   };
@@ -38,7 +38,7 @@ const Contactinput = ({ details, setdetails, disabled }) => {
           value={details.contact}
         ></input>
       </div>
-      {details.contactVerifer ? null : (
+      {details.contactVerifier ? null : (
         <div className="text-red-400 text-center mt-[-40px]">
           Contact must contain 10 digits only.
         </div>

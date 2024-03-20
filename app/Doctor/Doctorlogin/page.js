@@ -12,34 +12,37 @@ const doctorlogin = () => {
   const router = useRouter();
   const [details, setdetails] = useState({
     contact: "",
-    contactVerifier: "",
+    contactVerifier: false,
     password: "",
-    passwordVerifier: "",
+    passwordVerifier: false,
     disabled: false,
   });
   const handleDoctorLogin = async (event) => {
     event.preventDefault();
-    if (details.contact.length !== 10) {
+    if(!details.contactVerifier || !details.passwordVerifier){
       toast.dismiss();
-      toast.error("Please enter valid Contact Number.");
-      return;
-    } else if (details.password.length === 0) {
-      toast.dismiss();
-      toast.error("Please enter Password.");
+      toast.error( "Please verify your details");
       return;
     }
-    setdisabled(true);
+    setdetails({
+      ...details,
+      disabled:true
+    });
     try {
       const id = await doctorLogIn(details);
-      setdisabled(false);
       setdetails({
-        contact: "",
-        password: "",
+        ...details,
+        contact:"",
+        password:"",
+        disabled:false
       });
       toast.dismiss();
       router.push(`/Doctor/${id._id}`);
     } catch (error) {
-      setdisabled(false);
+      setdetails({
+        ...details,
+        disabled:false
+      });
       toast.dismiss();
       toast.error(error.response.data);
     }
@@ -55,15 +58,15 @@ const doctorlogin = () => {
         <Formheading heading="Doctor Login form" />
         <Contactinput
           details={details}
-          setDetails={setdetails}
+          setdetails={setdetails}
           disabled={details.disabled}
         />
         <Passwordinput
           details={details}
-          setDetails={setdetails}
+          setdetails={setdetails}
           disabled={details.disabled}
         />
-        <Submitbutton buttonname="Login" disabled={details.sdisabled} />
+        <Submitbutton buttonname="Login" disabled={details.disabled} />
       </form>
       <Belowformlinks
         text="Don't have an account Click Here"
