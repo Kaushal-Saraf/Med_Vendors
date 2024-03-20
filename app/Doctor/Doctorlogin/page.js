@@ -1,5 +1,8 @@
 "use client";
 import { doctorLogIn } from "@/Services/doctorservices";
+import Belowformlinks from "@/app/Components/Belowformlinks";
+import Form from "@/app/Components/Form";
+import Formheading from "@/app/Components/Formheading";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -41,14 +44,12 @@ const doctorlogin = () => {
   return (
     <>
       <Toaster position="top-right" />
-      <form
+      <Form
         onSubmit={handleDoctorLogin}
         disabled={disabled}
-        className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
+        label="Doctor Login form"
+        buttonname="Login"
       >
-        <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
-          Doctor Login Form
-        </h1>
         <div className="flex my-12 px-2 w-full">
           <label
             htmlFor="contact"
@@ -96,24 +97,11 @@ const doctorlogin = () => {
             readOnly={disabled}
           ></input>
         </div>
-        <div className="flex w-full justify-center">
-          <button
-            type="submit"
-            disabled={disabled}
-            className="text-center bg-blue-400 px-2 py-1 rounded text-white"
-          >
-            Login
-          </button>
-        </div>
-      </form>
-      <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
-        <Link
-          href="/Doctor/Doctorsignin"
-          className="font-bold text-blue-400 bg-white px-1 rounded-md"
-        >
-          Don't have an account Click Here
-        </Link>
-      </div>
+      </Form>
+      <Belowformlinks
+        text="Don't have an account Click Here"
+        redirectpage="/Doctor/Doctorsignin"
+      />
     </>
   );
 };

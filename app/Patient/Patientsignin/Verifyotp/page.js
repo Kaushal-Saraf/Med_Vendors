@@ -1,5 +1,6 @@
 "use client";
 import { patientSignIn } from "@/Services/patientservices";
+import Formheading from "@/app/Components/Formheading";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -37,9 +38,7 @@ const Verifyotp = () => {
         onSubmit={handleSubmit}
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
       >
-        <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
-          Otp Verification Form
-        </h1>
+        <Formheading heading = "OTP Verification form"/>
         <div className="flex my-12 px-2 w-full">
           <label
             htmlFor="otp"
@@ -52,7 +51,7 @@ const Verifyotp = () => {
             id="otp"
             name="otp"
             placeholder="******"
-            autoComplete="one-time-password"
+            autoComplete="one-time-code"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             onChange={(e) => {
               setotp(e.target.value);

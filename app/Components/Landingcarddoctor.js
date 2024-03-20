@@ -29,4 +29,5 @@ const Landingcarddoctor = () => {
     </>
   );
 };
+
 export default Landingcarddoctor;

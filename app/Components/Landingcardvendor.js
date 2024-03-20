@@ -29,4 +29,5 @@ const Landingcardvendor = () => {
     </>
   );
 };
+
 export default Landingcardvendor;

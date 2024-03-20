@@ -116,7 +116,7 @@ const patientsignin = () => {
   };
   return (
     <>
-      <Toaster position="top-right"></Toaster>
+      <Toaster position="top-right"/>
       <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handleSendOtp}

@@ -52,7 +52,7 @@ const Verifyotp = () => {
             id="otp"
             name="otp"
             placeholder="******"
-            autoComplete="one-time-password"
+            autoComplete="one-time-code"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             onChange={(e) => {
               setotp(e.target.value);

@@ -29,4 +29,5 @@ const Landingcardpatient = () => {
     </>
   );
 };
+
 export default Landingcardpatient;

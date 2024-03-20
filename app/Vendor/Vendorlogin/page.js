@@ -4,6 +4,7 @@ import React from 'react'
 const vendorlogin = () => {
   return (
     <>
+    <Toaster position="top-right"/>
  <form className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm">
         <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
           Vendor Login Form
