@@ -1,5 +1,11 @@
 "use client";
 import { sendOTP } from "@/Services/doctorservices";
+import Belowformlinks from "@/app/Components/Belowformlinks";
+import Contactinput from "@/app/Components/Contactinput";
+import Formheading from "@/app/Components/Formheading";
+import Nameinput from "@/app/Components/Nameinput";
+import Passwordinput from "@/app/Components/Passwordinput";
+import Submitbutton from "@/app/Components/Submitbutton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,30 +14,16 @@ const doctorsignin = () => {
   const router = useRouter();
   const [details, setdetails] = useState({
     name: "",
+    nameVerifier: "",
     contact: "",
+    contactVerifier:"",
     password: "",
-    checkbox: false,
+    passwordVerifier:"",
     disabled:false
   });
   const handleDetails = async (event) => {
     event.preventDefault();
-    if (details.name === "") {
-      toast.dismiss();
-      toast.error("Name cannot be empty.");
-      return;
-    } else if (details.contact.length !== 10) {
-      toast.dismiss();
-      toast.error("Contact must have 10 digits.");
-      return;
-    } else if (details.password.length < 8) {
-      toast.dismiss();
-      toast.error("Password is too sort.");
-      return;
-    } else if (!details.checkbox) {
-      toast.dismiss();
-      toast.error("Please confirm that you are a doctor.");
-      return;
-    }
+    
     toast.dismiss()
     toast.loading("Sending OTP. Please wait...");
     setdetails({
@@ -71,121 +63,28 @@ const doctorsignin = () => {
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         disabled={details.disabled}
       >
-        <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
-          Doctor Signin Form
-        </h1>
-        <div className="flex my-12 px-2 w-full">
-          <label
-            htmlFor="name"
-            className="flex-1 text-center text-blue-400 font-semibold"
-          >
-            Name
-          </label>
-          <input
-            type="text"
-            placeholder="Deepak Yadav"
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            name="name"
-            id="name"
-            autoComplete="name"
-            onChange={(event) => {
-              setdetails({
-                ...details,
-                name: event.target.value,
-              });
-            }}
-            value={details.name}
-            readOnly={details.disabled}
-          ></input>
-        </div>
-        <div className="flex my-12 px-2 w-full">
-          <label
-            htmlFor="contact"
-            className="flex-1 text-center text-blue-400 font-semibold"
-          >
-            Contact
-          </label>
-          <input
-            type="number"
-            placeholder="9999999999"
-            autoComplete="tel-national"
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            name="contact"
-            id="contact"
-            onChange={(event) => {
-              setdetails({
-                ...details,
-                contact: event.target.value,
-              });
-            }}
-            value={details.contact}
-            readOnly={details.disabled}
-          ></input>
-        </div>
-        <div className="flex my-12 px-2 w-full">
-          <label
-            htmlFor="password"
-            className="flex-1 text-center text-blue-400 font-semibold"
-          >
-            Password
-          </label>
-          <input
-            autoComplete="new-password"
-            type="password"
-            placeholder="*****"
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            name="password"
-            id="password"
-            onChange={(event) => {
-              setdetails({
-                ...details,
-                password: event.target.value,
-              });
-            }}
-            value={details.password}
-            readOnly={details.disabled}
-          ></input>
-        </div>
-        <div className="flex my-12 px-2 w-full justify-center">
-          <input
-            type="checkbox"
-            className="text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            name="consent"
-            id="consent"
-            onChange={(event) => {
-              setdetails({
-                ...details,
-                checkbox: event.target.checked,
-              });
-            }}
-            value={details.checkbox}
-            disabled={details.disabled}
-          ></input>
-          <label
-            htmlFor="consent"
-            className="text-center text-blue-400 text-sm"
-          >
-            I am a cerified doctor.
-          </label>
-        </div>
-        <div className="flex w-full justify-center">
-          <button
-            type="submit"
-            className="text-center bg-blue-400 px-2 py-1 rounded text-white"
-            disabled={details.disabled}
-          >
-            Signin
-          </button>
-        </div>
+      <Formheading  heading="Doctor Signin Form"/>
+      <Nameinput
+          details={details}
+          setdetails={setdetails}
+          disabled={details.disabled}
+        />
+        <Contactinput
+          details={details}
+          setdetails={setdetails}
+          disabled={details.disabled}
+        />
+        <Passwordinput
+          details={details}
+          setdetails={setdetails}
+          disabled={details.disabled}
+        />
+        <Submitbutton buttonname="Signin" disabled={details.disabled} />
       </form>
-      <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
-        <Link
-          href="/Doctor/Doctorlogin"
-          className="font-bold text-blue-400 bg-white px-1 rounded-md"
-        >
-          Already have an account Click Here
-        </Link>
-      </div>
+      <Belowformlinks
+        text="Already have an account Click Here"
+        redirectpage="/Doctor/Doctorlogin"
+      />
     </>
   );
 };
