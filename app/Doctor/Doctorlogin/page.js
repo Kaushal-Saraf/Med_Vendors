@@ -6,44 +6,46 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 const doctorlogin = () => {
   const router = useRouter();
-  const [disabled,setdisabled] = useState(false);
+  const [disabled, setdisabled] = useState(false);
   const [details, setdetails] = useState({
-    contact:'',
-    password:'' 
-  })
-  const handleDoctorLogin = async(event)=>{
-    event.preventDefault()
-    if(details.contact.length!==10){
-      toast.dismiss()
-      toast.error("Please enter valid Contact Number.")
-      return
-    }
-    else if (details.password.length===0){
-      toast.dismiss()
-      toast.error("Please enter Password.")
-      return
+    contact: "",
+    password: "",
+  });
+  const handleDoctorLogin = async (event) => {
+    event.preventDefault();
+    if (details.contact.length !== 10) {
+      toast.dismiss();
+      toast.error("Please enter valid Contact Number.");
+      return;
+    } else if (details.password.length === 0) {
+      toast.dismiss();
+      toast.error("Please enter Password.");
+      return;
     }
     setdisabled(true);
     try {
       const id = await doctorLogIn(details);
-      console.log(id)
-      setdisabled(false)
+      setdisabled(false);
       setdetails({
-        contact:"",
-        password:""
-      })
-      toast.dismiss()
-      router.push(`/Doctor/${id._id}`)
+        contact: "",
+        password: "",
+      });
+      toast.dismiss();
+      router.push(`/Doctor/${id._id}`);
     } catch (error) {
-      setdisabled(false)
-      toast.dismiss()
-      toast.error(error.response.data)
+      setdisabled(false);
+      toast.dismiss();
+      toast.error(error.response.data);
     }
-  }
+  };
   return (
     <>
-    <Toaster position="top-right" />
-      <form onSubmit={handleDoctorLogin} disabled={disabled} className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm">
+      <Toaster position="top-right" />
+      <form
+        onSubmit={handleDoctorLogin}
+        disabled={disabled}
+        className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
+      >
         <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
           Doctor Login Form
         </h1>
@@ -96,9 +98,10 @@ const doctorlogin = () => {
         </div>
         <div className="flex w-full justify-center">
           <button
-          type="submit" 
-          disabled={disabled}
-          className="text-center bg-blue-400 px-2 py-1 rounded text-white">
+            type="submit"
+            disabled={disabled}
+            className="text-center bg-blue-400 px-2 py-1 rounded text-white"
+          >
             Login
           </button>
         </div>

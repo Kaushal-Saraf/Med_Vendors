@@ -11,5 +11,4 @@ const Landingcards = () => {
     </div>
   );
 };
-
 export default Landingcards;

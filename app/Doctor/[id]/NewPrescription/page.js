@@ -18,5 +18,4 @@ const newprescription = () => {
     </>
   )
 }
-
 export default newprescription

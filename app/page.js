@@ -1,5 +1,4 @@
 import Landingcards from "./Components/Landingcards";
-
 const page = () => {
   return (
     <>
@@ -9,6 +8,5 @@ const page = () => {
       <Landingcards />
     </>
   );
-}
-
-export default page
+};
+export default page;

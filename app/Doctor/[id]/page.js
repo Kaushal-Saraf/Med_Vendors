@@ -1,8 +1,30 @@
 'use client'
 import { IoMdAddCircleOutline } from "react-icons/io";
 import Link from "next/link"
+import { useEffect, useState } from "react";
+import { httpAxios } from "@/helper/axioshelper";
 
 const page = ({params}) => {
+  const [data, setdata] = useState({
+    "name": "",
+    "contact":"",
+    "supportingDocs":""
+  }) 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await getDoctorDetails(params.id);
+        settodos(result.todos);
+        if (result.todos.length !== 0) {
+          setavilableTodos(true);
+        }
+      } catch (error) {
+      }
+    };
+    
+    fetchData();
+  }, []);
+  
   return (
     <div>
       <h1 className="text-center font-bold text-blue-500 text-xl my-2">Hello Dr. {params.id}</h1>
@@ -17,5 +39,4 @@ const page = ({params}) => {
     </div>
   )
 }
-
 export default page

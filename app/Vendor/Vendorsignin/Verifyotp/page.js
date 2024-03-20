@@ -7,6 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 const Verifyotp = () => {
   const router = useRouter();
   const [otp, setotp] = useState("");
+  const [otpverifier, setotpverifier] = useState(false)
   const [contact, setcontact] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
