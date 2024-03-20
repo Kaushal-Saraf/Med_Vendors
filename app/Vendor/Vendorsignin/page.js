@@ -12,7 +12,7 @@ const vendorsignin = () => {
     name: "",
     nameVerifier: false,
     contact: "",
-    contactVerifer: false,
+    contactVerifier: false,
     password: "",
     passwordVerifier: false,
     disabled: false,
@@ -21,7 +21,7 @@ const vendorsignin = () => {
     e.preventDefault();
     if (
       details.nameVerifier ||
-      details.contactVerifer ||
+      details.contactVerifier ||
       details.passwordVerifier
     ) {
       toast.dismiss();

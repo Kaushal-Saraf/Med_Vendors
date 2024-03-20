@@ -6,7 +6,6 @@ import Formheading from "@/app/Components/Formheading";
 import Nameinput from "@/app/Components/Nameinput";
 import Passwordinput from "@/app/Components/Passwordinput";
 import Submitbutton from "@/app/Components/Submitbutton";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -23,7 +22,11 @@ const doctorsignin = () => {
   });
   const handleDetails = async (event) => {
     event.preventDefault();
-    
+    if(!details.nameVerifier || !details.contactVerifier || !details.passwordVerifier){
+      toast.dismiss();
+      toast.error( "Please verify your details");
+      return;
+    }
     toast.dismiss()
     toast.loading("Sending OTP. Please wait...");
     setdetails({
@@ -35,14 +38,9 @@ const doctorsignin = () => {
       sessionStorage.setItem("doctorOtp", token);
       toast.dismiss();
       setdetails({
-        ...details,
-        disabled: false,
-      });
-      setdetails({
         name: "",
         contact: "",
         password: "",
-        checkbox: false,
         disabled: false,
       });
       router.push("/Doctor/Doctorsignin/Verifyotp");
