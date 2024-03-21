@@ -1,13 +1,20 @@
 "use client";
 import { patientSignIn } from "@/Services/patientservices";
+import Belowformlinks from "@/app/Components/Belowformlinks";
 import Formheading from "@/app/Components/Formheading";
-import Link from "next/link";
+import Otpinput from "@/app/Components/Otpinput";
+import Submitbutton from "@/app/Components/Submitbutton";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+
 const Verifyotp = () => {
   const router = useRouter();
-  const [otp, setotp] = useState("");
+  const [details, setdetails] = useState({
+    otp:"",
+    otpVerifier:false,
+    disabled:false,
+  });
   const [contact, setcontact] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,42 +45,15 @@ const Verifyotp = () => {
         onSubmit={handleSubmit}
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
       >
-        <Formheading heading = "OTP Verification form"/>
-        <div className="flex my-12 px-2 w-full">
-          <label
-            htmlFor="otp"
-            className="flex-1 text-center text-blue-400 font-semibold"
-          >
-            OTP
-          </label>
-          <input
-            type="number"
-            id="otp"
-            name="otp"
-            placeholder="******"
-            autoComplete="one-time-code"
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            onChange={(e) => {
-              setotp(e.target.value);
-            }}
-            value={otp}
-          ></input>
-        </div>
-        <div className="flex w-full justify-center">
-          <button className="text-center bg-blue-400 px-2 py-1 rounded text-white">
-            Signin
-          </button>
-        </div>
+        <Formheading heading="OTP Verification form" />
+        <Otpinput details={details} setdetails={setdetails} disabled={details.disabled}/>
+        <Submitbutton buttonname="Signin" disabled={details.disabled} />
       </form>
       {contact ? (
-        <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
-          <Link
-            href="/Patient/Patientsignin"
-            className="font-bold text-blue-400 bg-white px-1 rounded-md"
-          >
-            Not your contact number {contact} ?
-          </Link>
-        </div>
+        <Belowformlinks
+          redirectpage="/Patient/Patientsignin"
+          text={`Not your contact number ${contact} ?`}
+        />
       ) : null}
     </>
   );

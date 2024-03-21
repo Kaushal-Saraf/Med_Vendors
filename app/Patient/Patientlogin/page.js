@@ -1,45 +1,45 @@
-'use client'
-import { patientLogIn } from '@/Services/patientservices'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
+"use client";
+import { patientLogIn } from "@/Services/patientservices";
+import Belowformlinks from "@/app/Components/Belowformlinks";
+import Formheading from "@/app/Components/Formheading";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Patientlogin = () => {
   const router = useRouter();
-  const [disabled,setdisabled] = useState(false);
+  const [disabled, setdisabled] = useState(false);
   const [details, setdetails] = useState({
-    aadharnumber:'',
-    password:'' 
-  })
-  const handlePatientLogin = async(event)=>{
-    event.preventDefault()
-    if(details.aadharnumber.length!==12){
-      toast.dismiss()
-      toast.error("Please enter valid Aadhar Number.")
-      return
-    }
-    else if (details.password.length===0){
-      toast.dismiss()
-      toast.error("Please enter Password.")
-      return
+    aadharnumber: "",
+    password: "",
+  });
+  const handlePatientLogin = async (event) => {
+    event.preventDefault();
+    if (details.aadharnumber.length !== 12) {
+      toast.dismiss();
+      toast.error("Please enter valid Aadhar Number.");
+      return;
+    } else if (details.password.length === 0) {
+      toast.dismiss();
+      toast.error("Please enter Password.");
+      return;
     }
     setdisabled(true);
     try {
       const id = await patientLogIn(details);
-      setdisabled(false)
+      setdisabled(false);
       setdetails({
-        aadharnumber:"",
-        password:""
-      })
-      toast.dismiss()
-      router.push(`/Patient/${id._id}`)
+        aadharnumber: "",
+        password: "",
+      });
+      toast.dismiss();
+      router.push(`/Patient/${id._id}`);
     } catch (error) {
-      setdisabled(false)
-      toast.dismiss()
-      toast.error(error.response.data)
+      setdisabled(false);
+      toast.dismiss();
+      toast.error(error.response.data);
     }
-  }
+  };
   return (
     <>
       <Toaster position="top-right" />
@@ -48,10 +48,8 @@ const Patientlogin = () => {
         onSubmit={handlePatientLogin}
         disabled={disabled}
       >
-        <h1 className="text-center bg-blue-300 text-white font-bold rounded-t-lg shadow-sm">
-          Patient Login Form
-        </h1>
-        <div className="flex my-12 px-2 w-full">
+        <Formheading heading="Patient Login Form" />
+        <div className="flex my-10 px-2 w-full">
           <label
             htmlFor="aadharnumber"
             className="flex-1 text-center text-blue-400 font-semibold"
@@ -108,16 +106,12 @@ const Patientlogin = () => {
           </button>
         </div>
       </form>
-      <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
-        <Link
-          href="/Patient/Patientsignin"
-          className="font-bold text-blue-400 bg-white px-1 rounded-md"
-        >
-          Dont't have an account Click Here
-        </Link>
-      </div>
+      <Belowformlinks
+        redirectpage="/Patient/Patientsignin"
+        text="Dont't have an account Click Here"
+      />
     </>
   );
-}
+};
 
-export default Patientlogin
+export default Patientlogin;

@@ -7,6 +7,8 @@ import dateconverter from "@/Utilites/dateconverter";
 import toast, { Toaster } from "react-hot-toast";
 import today from "@/Utilites/todayhtml";
 import Link from "next/link";
+import Formheading from "@/app/Components/Formheading";
+import Belowformlinks from "@/app/Components/Belowformlinks";
 const patientsignin = () => {
   const router = useRouter();
   const [image, setimage] = useState("No File Choosen")
@@ -124,9 +126,7 @@ const patientsignin = () => {
         name="signinform"
         disabled={isDisabled}
       >
-        <h1 className="text-center bg-blue-300 h-8 text-white py-0.5 font-bold rounded-t-lg shadow-sm">
-          Patient Signin Form
-        </h1>
+        <Formheading heading="Patient Signin Form"/>
         <div className="flex mt-12 px-2 w-full">
           <label
             htmlFor="aadhar"
@@ -337,14 +337,7 @@ const patientsignin = () => {
           </button>
         </div>
       </form>
-      <div className="flex justify-center px-2 mt-[-1.5rem] mb-12">
-        <Link
-          href="/Patient/Patientlogin"
-          className="font-bold text-blue-400 bg-white px-1 rounded-md"
-        >
-          Already have an account Click Here
-        </Link>
-      </div>
+      <Belowformlinks redirectpage="/Patient/Patientlogin" text="Already have an account Click Here"/>
     </>
   );
 };

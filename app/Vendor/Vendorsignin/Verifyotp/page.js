@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+
 const Verifyotp = () => {
   const router = useRouter();
   const [otp, setotp] = useState("");
