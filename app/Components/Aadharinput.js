@@ -1,20 +1,20 @@
 "use client";
 
-const Contactinput = ({ details, setdetails, disabled }) => {
+const Aadharinput = ({ details, setdetails, disabled }) => {
 
   const handleChange = (e) => {
-    let contact = e.target.value;
-    if (contact.length === 10) {
+    let aadhar = e.target.value;
+    if (aadhar.length === 12) {
       setdetails({
         ...details,
-        contact: contact,
-        contactVerifier: true,
+        aadhar: aadhar,
+        aadharVerifier: true,
       });
     } else {
       setdetails({
         ...details,
-        contact: contact,
-        contactVerifier: false,
+        aadhar: aadhar,
+        aadharVerifier: false,
       });
     }
   };
@@ -23,30 +23,29 @@ const Contactinput = ({ details, setdetails, disabled }) => {
     <>
       <div className="flex my-10 px-2 w-full">
         <label
-          htmlFor="contact"
+          htmlFor="aadhar"
           className="flex-1 text-center text-blue-400 font-semibold"
         >
-          Contact
+          Aadhar
         </label>
         <input
           type="text"
-          name="contact"
-          id="contact"
-          placeholder="9999999999"
-          autoComplete="tel-national"
+          name="aadhar"
+          id="aadhar"
+          placeholder="999999999999"
           readOnly={disabled}
           className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
           onChange={handleChange}
-          value={details.contact}
+          value={details.aadhar}
         ></input>
       </div>
-      {details.contactVerifier ? null : (
+      {details.aadharVerifier ? null : (
         <div className="text-red-400 text-center mt-[-40px]">
-          Contact must contain 10 digits only.
+          Aadhar must contain 12 digits only.
         </div>
       )}
     </>
   );
 };
 
-export default Contactinput;
+export default Aadharinput;

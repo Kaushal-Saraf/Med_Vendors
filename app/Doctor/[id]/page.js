@@ -1,10 +1,9 @@
 "use client"
-import { IoMdAddCircleOutline } from "react-icons/io";
-import Link from "next/link"
 import { useEffect, useState } from "react";
 import { getDoctorDetails } from "@/Services/doctorservices";
 import Docdocs from "@/app/Components/Docdocs";
 import Nodocdocs from "@/app/Components/Nodocdocs";
+
 const page = ({params}) => {
   const [details, setdetails] = useState({
     "name": "",
@@ -30,4 +29,5 @@ const page = ({params}) => {
     </div>
   )
 }
+
 export default page
