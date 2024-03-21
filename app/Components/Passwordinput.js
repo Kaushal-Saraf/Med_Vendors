@@ -1,4 +1,4 @@
-const Passwordinput = ({ details, setdetails, disabled }) => {
+const Passwordinput = ({ details, setdetails, disabled , autoComplete }) => {
   const handleChange = (e) => {
     let password = e.target.value;
     if (password.length >= 8) {
@@ -30,7 +30,7 @@ const Passwordinput = ({ details, setdetails, disabled }) => {
           name="password"
           placeholder="**********"
           className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-          autoComplete="new-password"
+          autoComplete={autoComplete}
           disabled={disabled}
           onChange={handleChange}
           value={details.password}

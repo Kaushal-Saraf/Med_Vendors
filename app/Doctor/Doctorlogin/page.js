@@ -65,6 +65,7 @@ const doctorlogin = () => {
           details={details}
           setdetails={setdetails}
           disabled={details.disabled}
+          autoComplete="current-password"
         />
         <Submitbutton buttonname="Login" disabled={details.disabled} />
       </form>
