@@ -20,6 +20,7 @@ const doctorsignin = () => {
     passwordVerifier:"",
     disabled:false
   });
+  
   const handleDetails = async (event) => {
     event.preventDefault();
     if(!details.nameVerifier || !details.contactVerifier || !details.passwordVerifier){
@@ -57,8 +58,10 @@ const doctorsignin = () => {
     <>
       <Toaster position="top-right" />
       <form
-        onSubmit={handleDetails}
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
+        onSubmit={handleDetails}
+        id="form"
+        name="form"
         disabled={details.disabled}
       >
       <Formheading  heading="Doctor Signin Form"/>

@@ -16,6 +16,7 @@ const Verifyotp = () => {
     disabled: false,
   });
   const [contact, setcontact] = useState("");
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!details.otpVerifier) {
@@ -52,12 +53,16 @@ const Verifyotp = () => {
       });
     }
   };
+
   return (
     <>
       <Toaster position="top-right"></Toaster>
       <form
-        onSubmit={handleSubmit}
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
+        onSubmit={handleSubmit}
+        id="form"
+        name="form"
+        disabled={details.disabled}
       >
         <Formheading heading="OTP Verification Form" />
         <Otpinput

@@ -5,8 +5,9 @@ import Formheading from "@/app/Components/Formheading";
 import Nameinput from "@/app/Components/Nameinput";
 import Passwordinput from "@/app/Components/Passwordinput";
 import Submitbutton from "@/app/Components/Submitbutton";
-import React, { useState } from "react";
+import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+
 const vendorsignin = () => {
   const [details, setdetails] = useState({
     name: "",
@@ -17,6 +18,7 @@ const vendorsignin = () => {
     passwordVerifier: false,
     disabled: false,
   });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -29,6 +31,7 @@ const vendorsignin = () => {
       return;
     }
   };
+
   return (
     <>
       <Toaster position="top-right" />

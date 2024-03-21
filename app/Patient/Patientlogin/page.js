@@ -19,6 +19,7 @@ const Patientlogin = () => {
     passwordVerifier: false,
     disabled: false,
   });
+
   const handlePatientLogin = async (event) => {
     event.preventDefault();
     if (!details.aadharVerifier || !details.passwordVerifier) {
@@ -50,12 +51,15 @@ const Patientlogin = () => {
       toast.error(error.response.data);
     }
   };
+  
   return (
     <>
       <Toaster position="top-right" />
       <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handlePatientLogin}
+        id="form"
+        name="form"
         disabled={details.disabled}
       >
         <Formheading heading="Patient Login Form" />

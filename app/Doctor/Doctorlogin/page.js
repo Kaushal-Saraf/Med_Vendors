@@ -8,6 +8,7 @@ import Submitbutton from "@/app/Components/Submitbutton";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+
 const doctorlogin = () => {
   const router = useRouter();
   const [details, setdetails] = useState({
@@ -17,6 +18,7 @@ const doctorlogin = () => {
     passwordVerifier: false,
     disabled: false,
   });
+
   const handleDoctorLogin = async (event) => {
     event.preventDefault();
     if(!details.contactVerifier || !details.passwordVerifier){
@@ -51,9 +53,11 @@ const doctorlogin = () => {
     <>
       <Toaster position="top-right" />
       <form
-        onSubmit={handleDoctorLogin}
-        disabled={details.disabled}
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
+        onSubmit={handleDoctorLogin}
+        id="form"
+        name="form"
+        disabled={details.disabled}
       >
         <Formheading heading="Doctor Login form" />
         <Contactinput
