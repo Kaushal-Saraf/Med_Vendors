@@ -25,7 +25,7 @@ const page = ({params}) => {
   
   return (
     <div>
-      {details.supportingDocs? <Docdocs/> : <Nodocdocs/>}
+      {details.supportingDocs? <Docdocs/> : <Nodocdocs details={details} setdetails={setdetails}/>}
     </div>
   )
 }

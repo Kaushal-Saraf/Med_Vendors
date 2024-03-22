@@ -1,5 +1,5 @@
 "use client";
-import { patientSignIn } from "@/Services/patientservices";
+
 import Belowformlinks from "@/app/Components/Belowformlinks";
 import Formheading from "@/app/Components/Formheading";
 import Otpinput from "@/app/Components/Otpinput";
@@ -7,6 +7,7 @@ import Submitbutton from "@/app/Components/Submitbutton";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { patientSignIn } from "@/Services/patientservices";
 
 const Verifyotp = () => {
   const router = useRouter();
@@ -19,24 +20,37 @@ const Verifyotp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (otp.length != 6) {
+    if (details.otp.length != 6) {
       toast.dismiss();
-      toast.error("Otp must be 6 digits only.");
+      toast.error("Otp must be of 6 digits only.");
       return;
     }
+    setdetails({
+      ...details,
+      disabled:true
+    })
     const token = sessionStorage.getItem("patientOtp");
-    const details = { otp: otp, token: token };
+    const otpdetails = { otp: details.otp, token: token };
     toast.dismiss();
     toast.loading("Signin...");
     try {
-      await patientSignIn(details);
+      await patientSignIn(otpdetails);
       toast.dismiss();
       sessionStorage.removeItem("patientOtp");
+      setdetails({
+        otp:"",
+        otpVerifier:false,
+        disabled:false,
+      })
       router.push("/Patient/Patientlogin");
     } catch (error) {
       setcontact(error.response.data.contact);
       toast.dismiss();
       toast.error("Otp doesn't matchs.");
+      setdetails({
+        ...details,
+        disabled:false
+      })
     }
   };
 
