@@ -3,9 +3,9 @@ import { patient } from "@/models/patient";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 export async function POST(req) {
-  const { aadharnumber, password } = await req.json();
+  const { aadhar, password } = await req.json();
   await connectDb();
-  const user = await patient.findOne({ aadharnumber: aadharnumber });
+  const user = await patient.findOne({ aadharnumber: aadhar });
   if (user === null)
     return NextResponse.json("User not found!", { status: 401 });
   else if (user.password !== password)

@@ -5,6 +5,18 @@ const PrescriptionSchema = new Schema({
         type:Number,
         required:true,
     },
+    doctorcontact:{
+        type:Number,
+        required:true,
+    },
+    date:{
+        type:Date,
+        required:true,
+    },
+    age:{
+        type:Number,
+        required:true,
+    },
     height:{
         type:Number,
     },
@@ -13,12 +25,10 @@ const PrescriptionSchema = new Schema({
     },
     title:{
         type:String,
+        required:true,
     },
     description:{
         type:String,
-    },
-    doctorcontact:{
-        type:Number,
     },
     medicines:{
         type:Array,

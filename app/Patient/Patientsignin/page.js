@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import recognizeText from "@/Services/dataextract";
 import dateconverter from "@/Utilites/dateconverter";
-
 import today from "@/Utilites/todayhtml";
-
 import { sendOTP } from "@/Services/patientservices";
+import toast, { Toaster } from "react-hot-toast";
+
 const patientsignin = () => {
   const router = useRouter();
   const [image, setimage] = useState("No File Choosen")

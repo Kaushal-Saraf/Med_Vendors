@@ -2,12 +2,26 @@
 import Submitbutton from "@/app/Components/Submitbutton";
 import Formheading from "@/app/Components/Formheading";
 import toast, { Toaster } from "react-hot-toast";
-import { useState } from "react";
-import { uploadDegree } from "@/Services/doctorservices";
+import { useEffect, useState } from "react";
+import { getDoctorDetails, uploadDegree } from "@/Services/doctorservices";
 import { useRouter } from "next/navigation";
 
 const Uploaddegree = ({ params }) => {
   const router = useRouter();
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getDoctorDetails(params.id);
+      setdetails({
+        ...details,
+        name: result.name,
+        contact: result.contact,
+        supportingDocs: result.supportingdocs,
+      });
+      if (result.supportingdocs === true)
+        router.push(`/Doctor/${params.id}`);
+    };
+    fetchData();
+  }, []);
   const [details, setdetails] = useState({
     file: null,
     disabled: false,
@@ -21,12 +35,20 @@ const Uploaddegree = ({ params }) => {
       toast.error("File must be less than 500 Kb.");
       return;
     }
+    setdetails({...details, disabled:true});
     toast.dismiss();
     toast.loading("Uploading...");
-    await uploadDegree(params.id, details);
+    try{
+      await uploadDegree(params.id, details);
+    }
+    catch(e){
+      console.log(e);
+    }
     toast.dismiss();
+    setdetails({...details, disabled:false});
     router.push(`/Doctor/${params.id}`);
   };
+  
   return (
     <div>
       <Toaster position="top-right" />

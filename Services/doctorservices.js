@@ -37,3 +37,10 @@ export async function uploadDegree(id, formData) {
     .then((Response) => Response.data);
   return result;
 }
+
+export async function findPatient(id, details) {
+    const result = await httpAxios
+      .post(`/api/doctor/${id}/newprescription`,details)
+      .then((Response) => Response.data);
+    return result;
+  }

@@ -21,29 +21,29 @@ const doctorlogin = () => {
 
   const handleDoctorLogin = async (event) => {
     event.preventDefault();
-    if(!details.contactVerifier || !details.passwordVerifier){
+    if (!details.contactVerifier || !details.passwordVerifier) {
       toast.dismiss();
-      toast.error( "Please verify your details");
+      toast.error("Please verify your details");
       return;
     }
     setdetails({
       ...details,
-      disabled:true
+      disabled: true,
     });
     try {
       const id = await doctorLogIn(details);
       setdetails({
         ...details,
-        contact:"",
-        password:"",
-        disabled:false
+        contact: "",
+        password: "",
+        disabled: false,
       });
       toast.dismiss();
       router.push(`/Doctor/${id._id}`);
     } catch (error) {
       setdetails({
         ...details,
-        disabled:false
+        disabled: false,
       });
       toast.dismiss();
       toast.error(error.response.data);
