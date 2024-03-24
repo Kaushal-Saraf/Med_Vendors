@@ -1,50 +1,87 @@
-"use client"
-import Aadharinput from "@/app/Components/Aadharinput"
-import Formheading from "@/app/Components/Formheading"
-import Submitbutton from "@/app/Components/Submitbutton"
-import { useState } from "react"
-import toast from "react-hot-toast"
+"use client";
+import { findPatient } from "@/Services/doctorservices";
+import currentdateandtime from "@/Utilites/currdateandtime";
+import findage from "@/Utilites/findage";
+import Newpresform from "@/app/Components/Newpresform";
+import Updatepresform from "@/app/Components/Updatepresform";
+import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
-const newprescription = () => {
+const newprescription = ({ params }) => {
+  const [patientAvailable, setpatientAvailable] = useState(false);
   const [details, setdetails] = useState({
     aadhar: "",
     aadharVerifier: false,
-    patientAvailable: false,
-    disabled:false
-  })
+    date: "",
+    doctorName: "",
+    doctorContact: "",
+    patientName: "",
+    patientContact: "",
+    age: "",
+    gender: "",
+    height: "",
+    weight: "",
+    bp: "",
+    bg: "",
+    title: "",
+    desc: "",
+    medicines: [],
+    injections: [],
+    tests: [],
+    disabled: false,
+  });
 
-  const handlePatientDetails=(e)=>{
+  const handlePatientDetails = async (e) => {
     e.preventDefault();
-    if(!details.aadharVerifier){
+    if (!details.aadharVerifier) {
       toast.dismiss();
       toast.error("Aadhar number must of 12 digits.");
       return;
     }
     setdetails({
       ...details,
-      disabled:true,
-    })
-    try{
-      findPatient();
+      disabled: true,
+    });
+    toast.dismiss();
+    toast.loading("Preparing form...");
+    try {
+      const result = await findPatient(params.id, details);
+      setdetails({
+        ...details,
+        date: currentdateandtime(),
+        doctorName: result.docName,
+        doctorContact: result.docContact,
+        patientName: result.name,
+        patientContact: result.contact,
+        age: findage(result.dob),
+        gender: result.gender,
+        disabled: false,
+      });
+      setpatientAvailable(true);
+      toast.dismiss();
+      toast.success("Form Prepared Sucessfully.");
+    } catch (e) {
+      setdetails({
+        ...details,
+        disabled: false,
+      });
+      toast.dismiss();
+      toast.error(e.response.data.message);
     }
-    catch(e){
-      console.log(e);
-    }
-  }
+  };
   return (
     <>
-    <form
-        className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
-        onSubmit={handlePatientDetails}
-        id="form"
-        name="form"
-        disabled={details.disabled}
-    >
-      <Formheading heading={"Enter Patient Aadhar Number"} />
-      <Aadharinput details={details} setdetails={setdetails}  disabled={details.disabled}/>
-      <Submitbutton buttonname="Find Patient" disabled={details.disabled}/>
-    </form>
+      <Toaster position="top-right" />
+      {patientAvailable ? (
+        <Updatepresform details={details} setdetials={setdetails} setpatientAvailable={setpatientAvailable} />
+      ) : (
+        <Newpresform
+          formhandler={handlePatientDetails}
+          details={details}
+          setdetails={setdetails}
+        />
+      )}
     </>
-  )
-}
-export default newprescription
+  );
+};
+export default newprescription;

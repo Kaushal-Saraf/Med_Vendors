@@ -9,7 +9,7 @@ export async function POST(req, {params}){
     const reqpatient = await patient.findOne({aadharnumber:aadhar});
     const doc = await doctor.findOne({_id: params.id});
     if(reqpatient===null){
-        return NextResponse.json({message:"Patient not found"});
+        return NextResponse.json({message:"Patient not found!"},{status:401});
     }else{
         const res = {
             docName: doc.name,
