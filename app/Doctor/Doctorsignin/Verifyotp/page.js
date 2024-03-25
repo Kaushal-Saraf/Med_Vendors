@@ -67,10 +67,9 @@ const Verifyotp = () => {
         <Formheading heading="OTP Verification Form" />
         <Otpinput
           details={details}
-          setdetails={setdetails}
-          disabled={details.disabled}
+          setdetails={setdetails} 
         />
-        <Submitbutton buttonname="Signin" disabled={details.disabled} />
+        <Submitbutton buttonname="Signin" disabled={details.disabled}/>
       </form>
       {contact ? (
         <Belowformlinks

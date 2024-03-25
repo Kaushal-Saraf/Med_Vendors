@@ -15,21 +15,21 @@ const vendorlogin = () => {
     passowrdVerifier: false,
     disabled: false,
   });
-  
+
   return (
     <>
       <Toaster position="top-right" />
-      <form className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm">
+      <form
+        className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
+        name="form"
+        id="form"
+        disabled={details.disabled}
+      >
         <Formheading heading="Vendor Login Form" />
-        <Contactinput
-          details={details}
-          setdetails={setdetails}
-          disabled={details.disabled}
-        />
+        <Contactinput details={details} setdetails={setdetails} />
         <Passwordinput
           details={details}
           setdetails={setdetails}
-          disabled={details.disabled}
           autoComplete="current-password"
         />
         <Submitbutton buttonname="Login" disabled={details.disabled} />

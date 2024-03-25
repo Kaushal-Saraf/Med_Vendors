@@ -1,3 +1,4 @@
+import Addmedicine from "./Addmedicine";
 import Addtest from "./Addtest";
 
 const Updatepresform = ({
@@ -127,6 +128,7 @@ const Updatepresform = ({
             />
           </label>
         </div>
+        <Addmedicine details={details} setdetails={setdetials}/>
         <Addtest details={details} setdetails={setdetials} />
       </div>
     </div>

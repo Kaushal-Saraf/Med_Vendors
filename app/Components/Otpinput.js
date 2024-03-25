@@ -1,4 +1,4 @@
-const Otpinput = ({ details, setdetails, disabled }) => {
+const Otpinput = ({ details, setdetails }) => {
     const handleChange = (e) => {
       let otp = e.target.value;
       if (otp.length === 6) {
@@ -31,7 +31,7 @@ const Otpinput = ({ details, setdetails, disabled }) => {
             placeholder="**********"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             autoComplete="one-time-code"
-            disabled={disabled}
+            disabled={details.disabled}
             onChange={handleChange}
             value={details.otp}
           ></input>

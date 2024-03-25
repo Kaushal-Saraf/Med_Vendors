@@ -1,6 +1,6 @@
 "use client";
 
-const Aadharinput = ({ details, setdetails, disabled }) => {
+const Aadharinput = ({ details, setdetails }) => {
 
   const handleChange = (e) => {
     let aadhar = e.target.value;
@@ -33,7 +33,7 @@ const Aadharinput = ({ details, setdetails, disabled }) => {
           name="aadhar"
           id="aadhar"
           placeholder="999999999999"
-          readOnly={disabled}
+          readOnly={details.disabled}
           className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
           onChange={handleChange}
           value={details.aadhar}

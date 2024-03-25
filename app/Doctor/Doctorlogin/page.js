@@ -63,15 +63,13 @@ const doctorlogin = () => {
         <Contactinput
           details={details}
           setdetails={setdetails}
-          disabled={details.disabled}
         />
         <Passwordinput
           details={details}
           setdetails={setdetails}
-          disabled={details.disabled}
           autoComplete="current-password"
         />
-        <Submitbutton buttonname="Login" disabled={details.disabled} />
+        <Submitbutton buttonname="Login" disabled={details.disabled}/>
       </form>
       <Belowformlinks
         text="Don't have an account Click Here"

@@ -1,6 +1,6 @@
 "use client";
 
-const Nameinput = ({ details, setdetails, disabled }) => {
+const Nameinput = ({ details, setdetails }) => {
   const handleChange = (e) => {
     let name = e.target.value;
     let flag = false;
@@ -26,7 +26,7 @@ const Nameinput = ({ details, setdetails, disabled }) => {
           type="text"
           name="name"
           id="name"
-          readOnly={disabled}
+          readOnly={details.disabled}
           autoComplete="given-name"
           placeholder="Raju Verma"
           className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"

@@ -60,10 +60,12 @@ const Verifyotp = () => {
       <form
         onSubmit={handleSubmit}
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
+        name="form"
+        id="form"
         disabled={details.disabled}
       >
         <Formheading heading="OTP Verification form" />
-        <Otpinput details={details} setdetails={setdetails} disabled={details.disabled}/>
+        <Otpinput details={details} setdetails={setdetails}/>
         <Submitbutton buttonname="Signin" disabled={details.disabled} />
       </form>
       {contact ? (

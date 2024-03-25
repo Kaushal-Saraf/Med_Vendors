@@ -73,7 +73,11 @@ const newprescription = ({ params }) => {
     <>
       <Toaster position="top-right" />
       {patientAvailable ? (
-        <Updatepresform details={details} setdetials={setdetails} setpatientAvailable={setpatientAvailable} />
+        <Updatepresform
+          details={details}
+          setdetials={setdetails}
+          setpatientAvailable={setpatientAvailable}
+        />
       ) : (
         <Newpresform
           formhandler={handlePatientDetails}

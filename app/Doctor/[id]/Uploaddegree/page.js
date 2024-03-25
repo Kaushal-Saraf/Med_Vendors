@@ -88,7 +88,7 @@ const Uploaddegree = ({ params }) => {
             required
           />
         </p>
-        <Submitbutton buttonname="Upload" disabled={details.disabled} />
+        <Submitbutton buttonname="Upload" disabled={details.disabled}/>
       </form>
     </div>
   );

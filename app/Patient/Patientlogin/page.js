@@ -66,15 +66,13 @@ const Patientlogin = () => {
         <Aadharinput
           details={details}
           setdetails={setdetails}
-          disabled={details.disabled}
         />
         <Passwordinput
           details={details}
           setdetails={setdetails}
-          disabled={details.disabled}
           autoComplete="current-password"
         />
-        <Submitbutton buttonname="Login" disabled={details.disabled} />
+        <Submitbutton buttonname="Login" disabled={details.disabled}/>
       </form>
       <Belowformlinks
         redirectpage="/Patient/Patientsignin"
