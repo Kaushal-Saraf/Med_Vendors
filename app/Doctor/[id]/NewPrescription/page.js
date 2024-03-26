@@ -5,7 +5,7 @@ import findage from "@/Utilites/findage";
 import Newpresform from "@/app/Components/Newpresform";
 import Updatepresform from "@/app/Components/Updatepresform";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const newprescription = ({ params }) => {
   const [patientAvailable, setpatientAvailable] = useState(false);
@@ -71,7 +71,6 @@ const newprescription = ({ params }) => {
   };
   return (
     <>
-      <Toaster position="top-right" />
       {patientAvailable ? (
         <Updatepresform
           details={details}

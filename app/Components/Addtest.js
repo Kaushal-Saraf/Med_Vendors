@@ -5,7 +5,14 @@ import toast from "react-hot-toast";
 const Addtest = ({ details, setdetails }) => {
   const [item, setitem] = useState("");
   const addItem = () => {
-    if (item === "") {
+    const checkitem =(item)=>{
+      let flag = false;
+      for (let i = 0; i < item.length; i++) {
+        if (item[i] != " ") flag = true;
+      }
+      return flag;
+    }
+    if (!checkitem(item)){
       toast.dismiss();
       toast.error("Test must have a name.");
       return;
@@ -33,7 +40,7 @@ const Addtest = ({ details, setdetails }) => {
   };
   return (
     <div className="text-center py-2">
-      <div className="font-bold text-center my-2">Tests</div>
+      <div className="font-bold text-center mt-4">Tests</div>
       {details.tests.map((item) => (
         <div className="my-2 px-4 w-full flex justify-between">
           <div
@@ -51,10 +58,7 @@ const Addtest = ({ details, setdetails }) => {
         </div>
       ))}
       <div className="my-2 px-4 w-full flex justify-between">
-        <div
-          className="text-left w-[150px] sm:w-[400px] overflow-scroll whitespace-nowrap mr-2"
-          key={item}
-        >
+        <div className="text-left w-[150px] sm:w-[400px] overflow-scroll whitespace-nowrap mr-2">
           <input
             type="text"
             name="text"
@@ -62,8 +66,7 @@ const Addtest = ({ details, setdetails }) => {
             placeholder="Test Name"
             value={item}
             onChange={(e) => setitem(e.target.value)}
-            className="border-[0.5px] w-full px-2 border-black border-solid"
-            disabled={details.disabled}
+            className="border-[0.5px] w-full px-2 border-black border-solid rounded"
           />
         </div>
         <button

@@ -7,7 +7,7 @@ import Passwordinput from "@/app/Components/Passwordinput";
 import Submitbutton from "@/app/Components/Submitbutton";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const doctorlogin = () => {
   const router = useRouter();
@@ -51,7 +51,6 @@ const doctorlogin = () => {
   };
   return (
     <>
-      <Toaster position="top-right" />
       <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handleDoctorLogin}

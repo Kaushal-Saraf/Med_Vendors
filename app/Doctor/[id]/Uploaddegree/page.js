@@ -1,7 +1,7 @@
 "use client";
 import Submitbutton from "@/app/Components/Submitbutton";
 import Formheading from "@/app/Components/Formheading";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { getDoctorDetails, uploadDegree } from "@/Services/doctorservices";
 import { useRouter } from "next/navigation";
@@ -51,7 +51,6 @@ const Uploaddegree = ({ params }) => {
   
   return (
     <div>
-      <Toaster position="top-right" />
       <h1 className="text-blue-500 my-10 text-bold text-4xl text-center">
         Please upload your doctor's degree to proceed further.
       </h1>

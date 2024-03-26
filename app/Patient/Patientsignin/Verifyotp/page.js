@@ -6,7 +6,7 @@ import Otpinput from "@/app/Components/Otpinput";
 import Submitbutton from "@/app/Components/Submitbutton";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { patientSignIn } from "@/Services/patientservices";
 
 const Verifyotp = () => {
@@ -56,7 +56,6 @@ const Verifyotp = () => {
 
   return (
     <>
-      <Toaster position="top-right"></Toaster>
       <form
         onSubmit={handleSubmit}
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
