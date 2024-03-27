@@ -29,7 +29,7 @@ const Aadharinput = ({ details, setdetails }) => {
           Aadhar
         </label>
         <input
-          type="text"
+          type="number"
           name="aadhar"
           id="aadhar"
           placeholder="999999999999"

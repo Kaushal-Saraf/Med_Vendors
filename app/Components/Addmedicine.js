@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 const Addmedicine = ({ details, setdetails }) => {
   const [item, setitem] = useState({
     name: "",
-    nooftimeinaday: 3,
-    dosage: 1,
+    dailyfrequency: 3,
+    dosage: 100,
     timeperiod: 1,
     direction: "After eating",
   });
@@ -39,15 +39,21 @@ const Addmedicine = ({ details, setdetails }) => {
       toast.error("Number of capsules per time cannot be empty.");
       return;
     }
-    if (item.nooftime === "") {
+    if (item.timeperiod === "") {
+      toast.dismiss();
+      toast.error("Number of days could not be empty.");
+      return;
+    }
+    if (item.dailyfrequency === "") {
       toast.dismiss();
       toast.error("Daily fequency cannot be empty.");
       return;
     }
     setitem({
       name: "",
-      nooftime: 3,
-      dosage: 1,
+      dailyfrequency: 3,
+      dosage: 100,
+      timeperiod: 1,
       direction: "After eating",
     });
     setdetails({
@@ -67,25 +73,31 @@ const Addmedicine = ({ details, setdetails }) => {
       <div className="font-bold text-center mt-4">Medicines</div>
       <div className="text-center flex flex-wrap justify-evenly">
         {details.medicines.map((item) => (
-          <div className="w-[300px] border-solid border-2 border-black rounded my-4" key={item.name}>
+          <div
+            className="w-[300px] border-solid border-2 border-black rounded my-4"
+            key={item.name}
+          >
             <div className="w-full my-4 flex">
-            <p
-              className="w-[250px] mx-auto overflow-scroll"
-            >{item.name}</p>
-          </div>
-          <div className="w-full my-4 flex">
-            <p
-              className="w-[175.65px] mx-2 overflow-scroll"
-            >Daily fequency</p>
-            <p
-              className="w-[250px] overflow-scroll"
-            >{item.nooftime}</p>
-          </div>
-              {item.dosage}
-              {item.nooftime}
+              <p className="w-[250px] mx-auto overflow-scroll">{item.name}</p>
+            </div>
+            <div className="w-[250px] my-4 mx-[25px] flex">
+              <p className="w-[175.65px] text-left">Daily fequency:</p>
+              <p className="overflow-scroll">{item.dailyfrequency}</p>
+            </div>
+            <div className="w-[250px] my-4 mx-[25px] flex">
+              <p className="w-[175.65px] text-left">Dosage (mg):</p>
+              <p className="overflow-scroll">{item.dosage}</p>
+            </div>
+            <div className="w-[250px] my-4 mx-[25px] flex">
+              <p className="w-[175.65px] text-left">Time Period (days):</p>
+              <p className="overflow-scroll">{item.timeperiod}</p>
+            </div>
+            <p className="w-[250px] mx-auto overflow-scroll">
               {item.direction}
+            </p>
+
             <button
-              className="bg-red-400 px-2 rounded-sm"
+              className="bg-red-400 px-2 rounded-sm my-4"
               onClick={() => removeItem(item)}
             >
               Remove
@@ -94,7 +106,7 @@ const Addmedicine = ({ details, setdetails }) => {
         ))}
         <form
           onSubmit={addItem}
-          className="w-[300px] border-solid border-2 border-black rounded"
+          className="w-[300px] my-4 border-solid border-2 border-black rounded"
         >
           <input
             type="text"
@@ -112,21 +124,21 @@ const Addmedicine = ({ details, setdetails }) => {
           />
           <div className="w-full my-4 flex">
             <label
-              htmlFor="nooftime"
+              htmlFor="dailyfrequency"
               className="ml-[25px] w-[175.65px] mr-1 text-left"
             >
               Daily frequency:
             </label>
             <input
               type="number"
-              name="nooftimes"
-              id="nooftime"
+              name="dailyfrequency"
+              id="dailyfrequency"
               min="1"
-              value={item.nooftime}
+              value={item.dailyfrequency}
               onChange={(e) =>
                 setitem({
                   ...item,
-                  nooftime: e.target.value,
+                  dailyfrequency: e.target.value,
                 })
               }
               className="w-[70px] px-1 rounded border-[0.5px] border-black border-solid"
@@ -143,7 +155,6 @@ const Addmedicine = ({ details, setdetails }) => {
               type="number"
               name="Dosage"
               id="Dosage"
-              min="1"
               value={item.dosage}
               onChange={(e) =>
                 setitem({
@@ -195,7 +206,7 @@ const Addmedicine = ({ details, setdetails }) => {
               <option value="Before eating">Before eating</option>
             </select>
           </div>
-          <button className="bg-green-400 px-2 rounded-sm mb-4" type="submit">
+          <button className="bg-green-400 px-2 rounded-sm my-4" type="submit">
             Add Medicine
           </button>
         </form>

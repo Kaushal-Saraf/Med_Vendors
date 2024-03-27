@@ -29,7 +29,7 @@ const Contactinput = ({ details, setdetails }) => {
           Contact
         </label>
         <input
-          type="text"
+          type="number"
           name="contact"
           id="contact"
           placeholder="9999999999"

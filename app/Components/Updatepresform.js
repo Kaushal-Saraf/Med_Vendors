@@ -1,3 +1,4 @@
+import Addinjections from "./Addinjections";
 import Addmedicine from "./Addmedicine";
 import Addtest from "./Addtest";
 
@@ -130,6 +131,7 @@ const Updatepresform = ({
         </div>
         <Addmedicine details={details} setdetails={setdetials}/>
         <Addtest details={details} setdetails={setdetials} />
+        <Addinjections details={details} setdetails={setdetials}/>
       </div>
     </div>
   );
