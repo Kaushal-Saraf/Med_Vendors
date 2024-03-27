@@ -67,11 +67,13 @@ const Addtest = ({ details, setdetails }) => {
             value={item}
             onChange={(e) => setitem(e.target.value)}
             className="border-[0.5px] w-full px-2 border-black border-solid rounded"
+            readOnly={details.disabled}
           />
         </div>
         <button
           className="bg-green-400 px-2 rounded-sm"
           onClick={() => addItem(item)}
+          disabled={details.disabled}
         >
           Add Test
         </button>

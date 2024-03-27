@@ -97,6 +97,7 @@ const Addinjections = ({ details, setdetails }) =>  {
               <button
                 className="bg-red-400 px-2 rounded-sm my-4"
                 onClick={() => removeItem(item)}
+                disabled={details.disabled}
               >
                 Remove
               </button>
@@ -104,12 +105,14 @@ const Addinjections = ({ details, setdetails }) =>  {
           ))}
           <form
             onSubmit={addItem}
+            disabled={details.disabled}
             className="w-[300px] my-4 border-solid border-2 border-black rounded"
           >
             <input
               type="text"
               name="mdname"
               id="mdname"
+              readOnly={details.disabled}
               className="border-[0.5px] border-black px-1 border-solid w-[250px] mx-[25px] mt-4 rounded "
               placeholder="Injection Name"
               value={item.name}
@@ -128,6 +131,7 @@ const Addinjections = ({ details, setdetails }) =>  {
                 Daily frequency:
               </label>
               <input
+                readOnly={details.disabled}
                 type="number"
                 name="dailyfrequency"
                 id="dailyfrequency"
@@ -144,15 +148,16 @@ const Addinjections = ({ details, setdetails }) =>  {
             </div>
             <div className="w-full my-4 flex">
               <label
-                htmlFor="Dosage"
+                htmlFor="dosage"
                 className="ml-[25px] w-[175.65px] mr-1 text-left"
               >
                 Dosage(ml):
               </label>
               <input
                 type="number"
-                name="Dosage"
-                id="Dosage"
+                name="dosage"
+                id="dosage"
+                readOnly={details.disabled}
                 value={item.dosage}
                 onChange={(e) =>
                   setitem({
@@ -175,6 +180,7 @@ const Addinjections = ({ details, setdetails }) =>  {
                 name="timeperiod"
                 id="timeperiod"
                 min="1"
+                readOnly={details.disabled}
                 value={item.timeperiod}
                 onChange={(e) =>
                   setitem({
@@ -190,6 +196,7 @@ const Addinjections = ({ details, setdetails }) =>  {
                 type="text"
                 name="instruction"
                 id="instruction"
+                readOnly={details.disabled}
                 placeholder="Directions (optional)"
                 value={item.direction}
                 onChange={(e) =>
@@ -202,7 +209,7 @@ const Addinjections = ({ details, setdetails }) =>  {
               >
               </input>
             </div>
-            <button className="bg-green-400 px-2 rounded-sm mb-4" type="submit">
+            <button disabled={details.disabled} className="bg-green-400 px-2 rounded-sm mb-4" type="submit">
               Add Injection
             </button>
           </form>

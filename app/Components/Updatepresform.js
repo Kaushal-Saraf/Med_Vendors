@@ -132,6 +132,19 @@ const Updatepresform = ({
         <Addmedicine details={details} setdetails={setdetials}/>
         <Addtest details={details} setdetails={setdetials} />
         <Addinjections details={details} setdetails={setdetials}/>
+        <div className="my-2 px-4 w-full">
+          <label>
+            Lifestyle advice:
+            <textarea
+              id="advice"
+              name="advice"
+              className="px-1 border-[1px] w-full rounded-sm border-black border-solid"
+              onChange={(e) => setdetials({ ...details, advice: e.target.value })}
+              value={details.advice}
+              disabled={details.disabled}
+            />
+          </label>
+        </div>
       </div>
     </div>
   );

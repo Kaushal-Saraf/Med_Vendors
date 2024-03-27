@@ -98,6 +98,7 @@ const Addmedicine = ({ details, setdetails }) => {
 
             <button
               className="bg-red-400 px-2 rounded-sm my-4"
+              disabled={details.disabled}
               onClick={() => removeItem(item)}
             >
               Remove
@@ -109,6 +110,7 @@ const Addmedicine = ({ details, setdetails }) => {
           className="w-[300px] my-4 border-solid border-2 border-black rounded"
         >
           <input
+            readOnly={details.disabled}
             type="text"
             name="mdname"
             id="mdname"
@@ -130,6 +132,7 @@ const Addmedicine = ({ details, setdetails }) => {
               Daily frequency:
             </label>
             <input
+              readOnly={details.disabled}
               type="number"
               name="dailyfrequency"
               id="dailyfrequency"
@@ -152,6 +155,7 @@ const Addmedicine = ({ details, setdetails }) => {
               Dosage(mg):
             </label>
             <input
+              readOnly={details.disabled}
               type="number"
               name="Dosage"
               id="Dosage"
@@ -173,6 +177,7 @@ const Addmedicine = ({ details, setdetails }) => {
               Time Period (Days):
             </label>
             <input
+              readOnly={details.disabled}
               type="number"
               name="timeperiod"
               id="timeperiod"
@@ -189,6 +194,7 @@ const Addmedicine = ({ details, setdetails }) => {
           </div>
           <div className="w-full my-4 flex justify-center">
             <select
+              disabled={details.disabled}
               type="text"
               name="instruction"
               id="instruction"
@@ -206,7 +212,7 @@ const Addmedicine = ({ details, setdetails }) => {
               <option value="Before eating">Before eating</option>
             </select>
           </div>
-          <button className="bg-green-400 px-2 rounded-sm my-4" type="submit">
+          <button disabled={details.disabled} className="bg-green-400 px-2 rounded-sm my-4" type="submit">
             Add Medicine
           </button>
         </form>
