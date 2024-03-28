@@ -44,3 +44,10 @@ export async function findPatient(id, details) {
       .then((Response) => Response.data);
     return result;
   }
+
+  export async function savePrescription(details){
+    const result = await httpAxios
+      .post(`/api/doctor/[id]/newprescription/addprescription`,details)
+      .then((Response) => Response.data);
+    return result;
+  }

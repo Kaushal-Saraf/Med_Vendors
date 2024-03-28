@@ -42,10 +42,9 @@ const Addtest = ({ details, setdetails }) => {
     <div className="text-center py-2">
       <div className="font-bold text-center mt-4">Tests</div>
       {details.tests.map((item) => (
-        <div className="my-2 px-4 w-full flex justify-between">
+        <div className="my-2 px-4 w-full flex justify-between" key={item}>
           <div
             className="text-left w-[150px] sm:w-[400px] overflow-scroll whitespace-nowrap mr-2"
-            key={item}
           >
             {item}
           </div>

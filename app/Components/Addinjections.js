@@ -91,7 +91,7 @@ const Addinjections = ({ details, setdetails }) =>  {
                 <p className="w-[175.65px] text-left">Time Period (days):</p>
                 <p className="overflow-scroll">{item.timeperiod}</p>
               </div>
-              <p className="w-[250px] mx-auto overflow-scroll">
+              <p className="w-[250px] mx-auto whitespace-nowrap overflow-scroll">
                 {item.direction}
               </p>
               <button

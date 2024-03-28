@@ -5,8 +5,9 @@ import Addtest from "./Addtest";
 const Updatepresform = ({
   details,
   setdetials,
-  formhandler,
-  setpatientAvailable,
+  buttonclick1,
+  buttonclick2,
+  buttonclick3,
 }) => {
   return (
     <div className="px-4">
@@ -27,7 +28,7 @@ const Updatepresform = ({
               <label className="flex">
                 <div className="w-[108.5px]">Height (cm):</div>
                 <input
-                  type="text"
+                  type="number"
                   id="height"
                   name="height"
                   className="mx-1 w-[100px] px-1 border-[1px] rounded-sm border-black border-solid"
@@ -43,7 +44,7 @@ const Updatepresform = ({
               <label className="flex">
                 <div className="w-[108.5px]">Weight (Kg):</div>
                 <input
-                  type="text"
+                  type="number"
                   id="weight"
                   name="weight"
                   className="mx-1 w-[100px] px-1 border-[1px] rounded-sm border-black border-solid"
@@ -145,6 +146,11 @@ const Updatepresform = ({
             />
           </label>
         </div>
+      </div>
+      <div className="flex flex-wrap justify-evenly my-6 text-center ">
+      <button className="bg-white px-2 py-1 mx-2 my-2 rounded" onClick={buttonclick1}>Save and Send</button>
+      <button className="bg-white px-2 py-1 mx-2 my-2 rounded" onClick={buttonclick2}>Reset Form</button>
+      <button className="bg-white px-2 py-1 mx-2 my-2 rounded" onClick={buttonclick3}>Reset Patient</button>
       </div>
     </div>
   );

@@ -5,23 +5,45 @@ const PrescriptionSchema = new Schema({
         type:Number,
         required:true,
     },
+    patientname:{
+        type:String,
+        required:true,
+    },
+    patientcontact:{
+        type:Number,
+        required:true,
+    },
     doctorcontact:{
         type:Number,
         required:true,
     },
+    doctorname:{
+        type:String,
+        required:true
+    },
     date:{
-        type:Date,
+        type:String,
         required:true,
     },
     age:{
-        type:Number,
+        type:String,
         required:true,
+    },
+    gender:{
+        type:String,
+        required:true
     },
     height:{
         type:Number,
     },
     weight:{
         type:Number,
+    },
+    bloodpressure: {
+        type:String,
+    },
+    bloodgroup: {
+        type:String,
     },
     title:{
         type:String,
@@ -38,7 +60,10 @@ const PrescriptionSchema = new Schema({
     },
     injections:{
         type:Array,
-    }
+    },
+    advice:{
+        type:String,
+    },
 })
 export const prescription = 
     mongoose.model.prescription||mongoose.model("prescription",PrescriptionSchema)
