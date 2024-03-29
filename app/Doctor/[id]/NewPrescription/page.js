@@ -4,10 +4,11 @@ import currentdateandtime from "@/Utilites/currdateandtime";
 import findage from "@/Utilites/findage";
 import Newpresform from "@/app/Components/Newpresform";
 import Updatepresform from "@/app/Components/Updatepresform";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-
 const newprescription = ({ params }) => {
+  const router = useRouter();
   const [patientAvailable, setpatientAvailable] = useState(false);
   const [details, setdetails] = useState({
     aadhar: "",
@@ -107,6 +108,7 @@ const newprescription = ({ params }) => {
       disabled: false,
     })
     setpatientAvailable(false);
+    router.push(`/Doctor/${params.id}`)
     toast.dismiss();
     toast.success("Paitent Saved Sucessfully");
   };

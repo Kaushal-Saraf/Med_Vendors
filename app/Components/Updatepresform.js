@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Addinjections from "./Addinjections";
 import Addmedicine from "./Addmedicine";
 import Addtest from "./Addtest";
@@ -10,8 +11,8 @@ const Updatepresform = ({
   buttonclick3,
 }) => {
   return (
-    <div className="px-4">
-      <div className="bg-white">
+    <div className="px-4 py-4">
+      <div className="bg-white py-4 rounded">
         <div className="w-full text-center font-bold my-4 text-2xl">
           Dr.{details.doctorName}
         </div>

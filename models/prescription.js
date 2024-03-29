@@ -66,4 +66,4 @@ const PrescriptionSchema = new Schema({
     },
 })
 export const prescription = 
-    mongoose.model.prescription||mongoose.model("prescription",PrescriptionSchema)
+    mongoose.models.prescription||mongoose.model("prescription",PrescriptionSchema)

@@ -12,6 +12,7 @@ const doctor = ({ params }) => {
     contact: "",
     supportingDocs: false,
   });
+  const [patientdetails, setpatientdetails] = useState([])
   useEffect(() => {
     const fetchData = async () => {
       const result = await getDoctorDetails(params.id);
@@ -21,6 +22,7 @@ const doctor = ({ params }) => {
         contact: result.contact,
         supportingDocs: result.supportingdocs,
       });
+      setpatientdetails(result.prescriptions);
       if (result.supportingdocs === false)
         router.push(`/Doctor/${params.id}/Uploaddegree`);
     };
@@ -43,7 +45,9 @@ const doctor = ({ params }) => {
         </Link>
       </div>
       <hr className="border-blue-500" />
-      <div></div>
+      <div>
+        
+      </div>
     </>
   );
 };
