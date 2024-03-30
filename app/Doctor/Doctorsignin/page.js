@@ -13,22 +13,26 @@ const doctorsignin = () => {
   const router = useRouter();
   const [details, setdetails] = useState({
     name: "",
-    nameVerifier: "",
+    nameVerifier: false,
     contact: "",
-    contactVerifier:"",
+    contactVerifier: false,
     password: "",
-    passwordVerifier:"",
-    disabled:false
+    passwordVerifier: false,
+    disabled: false,
   });
-  
+
   const handleDetails = async (event) => {
     event.preventDefault();
-    if(!details.nameVerifier || !details.contactVerifier || !details.passwordVerifier){
+    if (
+      !details.nameVerifier ||
+      !details.contactVerifier ||
+      !details.passwordVerifier
+    ) {
       toast.dismiss();
-      toast.error( "Please verify your details");
+      toast.error("Please verify your details");
       return;
     }
-    toast.dismiss()
+    toast.dismiss();
     toast.loading("Sending OTP. Please wait...");
     setdetails({
       ...details,
@@ -40,8 +44,11 @@ const doctorsignin = () => {
       toast.dismiss();
       setdetails({
         name: "",
+        nameVerifier: false,
         contact: "",
+        contactVerifier: false,
         password: "",
+        passwordVerifier: false,
         disabled: false,
       });
       router.push("/Doctor/Doctorsignin/Verifyotp");
@@ -63,21 +70,15 @@ const doctorsignin = () => {
         name="form"
         disabled={details.disabled}
       >
-      <Formheading  heading="Doctor Signin Form"/>
-      <Nameinput
-          details={details}
-          setdetails={setdetails}
-        />
-        <Contactinput
-          details={details}
-          setdetails={setdetails}
-        />
+        <Formheading heading="Doctor Signin Form" />
+        <Nameinput details={details} setdetails={setdetails} />
+        <Contactinput details={details} setdetails={setdetails} />
         <Passwordinput
           details={details}
           setdetails={setdetails}
           autoComplete="new-password"
         />
-        <Submitbutton buttonname="Signin" disabled={details.disabled}/>
+        <Submitbutton buttonname="Signin" disabled={details.disabled} />
       </form>
       <Belowformlinks
         text="Already have an account Click Here"

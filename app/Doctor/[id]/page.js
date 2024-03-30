@@ -4,6 +4,7 @@ import { getDoctorDetails } from "@/Services/doctorservices";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import Doctorsprecriptions from "@/app/Components/Doctorsprecriptions";
 
 const doctor = ({ params }) => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const doctor = ({ params }) => {
     contact: "",
     supportingDocs: false,
   });
-  const [patientdetails, setpatientdetails] = useState([])
+  const [patientdetails, setpatientdetails] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const result = await getDoctorDetails(params.id);
@@ -22,7 +23,7 @@ const doctor = ({ params }) => {
         contact: result.contact,
         supportingDocs: result.supportingdocs,
       });
-      setpatientdetails(result.prescriptions);
+      if(result.prescriptions)setpatientdetails(result.prescriptions);
       if (result.supportingdocs === false)
         router.push(`/Doctor/${params.id}/Uploaddegree`);
     };
@@ -35,18 +36,24 @@ const doctor = ({ params }) => {
         Hello Dr. {details.name}
       </h1>
       <div className="flex justify-between">
-        <p className=" text-blue-500 text-md mx-2">Your Patients</p>
+        <p className=" text-blue-500 text-md mx-2">Previous Prescriptions</p>
         <Link
           className="flex text-blue-500 text-md mx-2 hover:text-white"
           href={`/Doctor/${params.id}/NewPrescription`}
         >
           <IoMdAddCircleOutline className="mt-[0.35rem] mx-1" />
-          Add New Patient
+          Add New Prescription
         </Link>
       </div>
       <hr className="border-blue-500" />
       <div>
-        
+        {patientdetails.length ? (
+        <Doctorsprecriptions prescriptions={patientdetails}/>
+        ) : (
+          <div className="text-center text-4xl my-4 text-white font-bold ">
+          No Prescriptions Avaliable.
+        </div>
+        )}
       </div>
     </>
   );

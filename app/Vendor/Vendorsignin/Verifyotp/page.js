@@ -1,5 +1,5 @@
 "use client";
-import { patientSignIn } from "@/Services/patientservices";
+import { vendorSignIn } from "@/Services/vendorservices";
 import Belowformlinks from "@/app/Components/Belowformlinks";
 import Formheading from "@/app/Components/Formheading";
 import Otpinput from "@/app/Components/Otpinput";
@@ -19,24 +19,38 @@ const Verifyotp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (otp.length != 6) {
+    if (!details.otpVerifier) {
       toast.dismiss();
       toast.error("Otp must be 6 digits only.");
       return;
     }
-    const token = sessionStorage.getItem("patientOtp");
-    const details = { otp: otp, token: token };
+    setdetails({
+      ...details,
+      disabled: true,
+    });
+    const token = sessionStorage.getItem("vendorOtp");
+    const otpdetials = { otp: details.otp, token: token };
     toast.dismiss();
     toast.loading("Signin...");
     try {
-      await patientSignIn(details);
+      await vendorSignIn(otpdetials);
       toast.dismiss();
-      sessionStorage.removeItem("patientOtp");
-      router.push("/Patient/Patientlogin");
+      sessionStorage.removeItem("vendorOtp");
+      setdetails({
+        ...details,
+        otp: "",
+        otpVerifier: false,
+        disabled: false,
+      });
+      router.push("/Vendor/Vendorlogin");
     } catch (error) {
       setcontact(error.response.data.contact);
       toast.dismiss();
-      toast.error("Otp doesn't matchs.");
+      toast.error("Otp doesn't match.");
+      setdetails({
+        ...details,
+        disabled: false,
+      });
     }
   };
 

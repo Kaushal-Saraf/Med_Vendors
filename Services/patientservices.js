@@ -12,3 +12,8 @@ export async function sendOTP(details){
     const result= await httpAxios.post("/api/patient/patientsignin/sendotp",details).then((Response)=>Response.data)
     return result
 }
+
+export async function getPatientDetails(id ,details){
+    const result= await httpAxios.get(`/api/patient/${id}`,details).then((Response)=>Response.data)
+    return result
+}

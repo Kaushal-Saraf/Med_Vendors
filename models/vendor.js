@@ -1,16 +1,13 @@
 const { default: mongoose, Schema, mongo } = require("mongoose");
 
 const VendorSchema= new Schema({
-    mid:{
-        type:Number,
-        unique:true,
-    },
     name:{
         type:String,
     },
     contact:{
         type:Number,
-        required:true
+        required:true,
+        unique: true
     },
     password:{
         type:String,
