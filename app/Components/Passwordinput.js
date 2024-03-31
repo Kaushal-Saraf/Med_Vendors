@@ -1,4 +1,4 @@
-const Passwordinput = ({ details, setdetails , autoComplete }) => {
+const Passwordinput = ({ details, setdetails, autoComplete }) => {
   const handleChange = (e) => {
     let password = e.target.value;
     if (password.length >= 8) {

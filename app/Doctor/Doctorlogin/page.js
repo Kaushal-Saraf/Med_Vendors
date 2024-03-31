@@ -35,7 +35,9 @@ const doctorlogin = () => {
       setdetails({
         ...details,
         contact: "",
+        contactVerifier: false,
         password: "",
+        passwordVerifier: false,
         disabled: false,
       });
       toast.dismiss();

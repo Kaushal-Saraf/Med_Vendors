@@ -1,28 +1,62 @@
 "use client";
+import { vendorLogIn } from "@/Services/vendorservices";
 import Belowformlinks from "@/app/Components/Belowformlinks";
 import Contactinput from "@/app/Components/Contactinput";
 import Formheading from "@/app/Components/Formheading";
 import Passwordinput from "@/app/Components/Passwordinput";
 import Submitbutton from "@/app/Components/Submitbutton";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const vendorlogin = () => {
+  const router = useRouter();
   const [details, setdetails] = useState({
     contact: "",
     contactVerifier: false,
-    passowrd: "",
-    passowrdVerifier: false,
+    password: "",
+    passwordVerifier: false,
     disabled: false,
   });
+  const handleVendorLogin = async (event) => {
+    event.preventDefault();
+    if (!details.contactVerifier || !details.passwordVerifier) {
+      toast.dismiss();
+      toast.error("Please verify your details");
+      return;
+    }
+    setdetails({
+      ...details,
+      disabled: true,
+    });
+    try {
+      const id = await vendorLogIn(details);
+      setdetails({
+        ...details,
+        contact: "",
+        contactVerifier: false,
+        passowrd: "",
+        passwordVerifier: false,
+        disabled: false,
+      });
+      toast.dismiss();
+      router.push(`/Vendor/${id._id}`);
+    } catch (error) {
+      console.log(error);
+      setdetails({
+        ...details,
+        disabled: false,
+      });
+      toast.dismiss();
+      toast.error(error.response.data);
+    }
+  };
 
   return (
     <>
-      <Toaster position="top-right" />
       <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
-        name="form"
-        id="form"
+        onSubmit={handleVendorLogin}
         disabled={details.disabled}
       >
         <Formheading heading="Vendor Login Form" />
