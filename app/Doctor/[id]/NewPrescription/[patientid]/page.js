@@ -1,5 +1,5 @@
 "use client";
-import { getPrescriptionDetails } from "@/Services/doctorservices";
+import { getPrescriptionDetails, savePrescription } from "@/Services/doctorservices";
 import currentdateandtime from "@/Utilites/currdateandtime";
 import findage from "@/Utilites/findage";
 import Prescriptionform from "@/app/Components/Prescriptionform";
@@ -61,7 +61,7 @@ const prescriptionform = ({ params }) => {
     });
     toast.dismiss();
     toast.loading("Saving and Sending Prescription.");
-    await savePrescription(details);
+    await savePrescription(params.id, params.patientid, details);
     setdetails({
       aadhar: "",
       date: "",
@@ -83,7 +83,6 @@ const prescriptionform = ({ params }) => {
       advice: "",
       disabled: false,
     });
-    setpatientAvailable(false);
     router.push(`/Doctor/${params.id}`);
     toast.dismiss();
     toast.success("Paitent Saved Sucessfully");
