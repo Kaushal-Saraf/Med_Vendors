@@ -1,11 +1,11 @@
 "use client";
 import { sendOTP } from "@/Services/vendorservices";
-import Belowformlinks from "@/app/Components/Belowformlinks";
-import Contactinput from "@/app/Components/Contactinput";
-import Formheading from "@/app/Components/Formheading";
-import Nameinput from "@/app/Components/Nameinput";
-import Passwordinput from "@/app/Components/Passwordinput";
-import Submitbutton from "@/app/Components/Submitbutton";
+import Belowformlinks from "@/app/Components/Formfields/Belowformlinks";
+import Contactinput from "@/app/Components/Formfields/Contactinput";
+import Formheading from "@/app/Components/Formfields/Formheading";
+import Nameinput from "@/app/Components/Formfields/Nameinput";
+import Passwordinput from "@/app/Components/Formfields/Passwordinput";
+import Submitbutton from "@/app/Components/Formfields/Submitbutton";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";

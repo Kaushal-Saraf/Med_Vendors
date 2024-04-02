@@ -1,6 +1,6 @@
-import Aadharinput from "@/app/Components/Aadharinput"
-import Formheading from "@/app/Components/Formheading"
-import Submitbutton from "@/app/Components/Submitbutton"
+import Aadharinput from "@/app/Components/Formfields/Aadharinput"
+import Formheading from "@/app/Components/Formfields/Formheading"
+import Submitbutton from "@/app/Components/Formfields/Submitbutton"
 
 const Newpresform = ({formhandler, details, setdetails}) => {
   return (

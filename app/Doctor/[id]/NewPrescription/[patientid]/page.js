@@ -1,15 +1,23 @@
-"use client";
-import { findPatient, savePrescription } from "@/Services/doctorservices";
-import currentdateandtime from "@/Utilites/currdateandtime";
-import findage from "@/Utilites/findage";
-import Newpresform from "@/app/Components/Newpresform";
+"use client"
 import Updatepresform from "@/app/Components/Updatepresform";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
-const newprescription = ({ params }) => {
+import { useEffect, useState } from "react";
+
+const newpresform = ({params}) => {
+
   const router = useRouter();
-  const [patientAvailable, setpatientAvailable] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getPrescriptionDetails(params.id);
+      setdetails({
+        ...details,
+        name: result.name,
+        contact: result.contact,
+        supportingDocs: result.supportingdocs,
+      });
+    };
+    fetchData();
+  }, []);
   const [details, setdetails] = useState({
     aadhar: "",
     aadharVerifier: false,
@@ -33,44 +41,6 @@ const newprescription = ({ params }) => {
     disabled: false,
   });
 
-  const handlePatientDetails = async (e) => {
-    e.preventDefault();
-    if (!details.aadharVerifier) {
-      toast.dismiss();
-      toast.error("Aadhar number must of 12 digits.");
-      return;
-    }
-    setdetails({
-      ...details,
-      disabled: true,
-    });
-    toast.dismiss();
-    toast.loading("Preparing form...");
-    try {
-      const result = await findPatient(params.id, details);
-      setdetails({
-        ...details,
-        date: currentdateandtime(),
-        doctorName: result.docName,
-        doctorContact: result.docContact,
-        patientName: result.name,
-        patientContact: result.contact,
-        age: findage(result.dob),
-        gender: result.gender,
-        disabled: false,
-      });
-      setpatientAvailable(true);
-      toast.dismiss();
-      toast.success("Form Prepared Sucessfully.");
-    } catch (e) {
-      setdetails({
-        ...details,
-        disabled: false,
-      });
-      toast.dismiss();
-      toast.error(e.response.data.message);
-    }
-  };
   const addPrescription = async () => {
     if(details.title===""){
       toast.dismiss();
@@ -157,23 +127,16 @@ const newprescription = ({ params }) => {
     toast.success("Paitent Reset Sucessful!");
   };
   return (
-    <>
-      {patientAvailable ? (
-        <Updatepresform
+    <div>
+      <Updatepresform
           details={details}
           setdetials={setdetails}
           buttonclick1={addPrescription}
           buttonclick2={clearForm}
           buttonclick3={resetPatient}
         />
-      ) : (
-        <Newpresform
-          formhandler={handlePatientDetails}
-          details={details}
-          setdetails={setdetails}
-        />
-      )}
-    </>
-  );
-};
-export default newprescription;
+    </div>
+  )
+}
+
+export default newpresform

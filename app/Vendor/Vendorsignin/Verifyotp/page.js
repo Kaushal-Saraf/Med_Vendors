@@ -1,9 +1,9 @@
 "use client";
 import { vendorSignIn } from "@/Services/vendorservices";
-import Belowformlinks from "@/app/Components/Belowformlinks";
-import Formheading from "@/app/Components/Formheading";
-import Otpinput from "@/app/Components/Otpinput";
-import Submitbutton from "@/app/Components/Submitbutton";
+import Belowformlinks from "@/app/Components/Formfields/Belowformlinks";
+import Formheading from "@/app/Components/Formfields/Formheading";
+import Otpinput from "@/app/Components/Formfields/Otpinput";
+import Submitbutton from "@/app/Components/Formfields/Submitbutton";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";

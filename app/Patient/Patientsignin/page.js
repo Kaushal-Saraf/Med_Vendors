@@ -1,7 +1,7 @@
 "use client";
 
-import Formheading from "@/app/Components/Formheading";
-import Belowformlinks from "@/app/Components/Belowformlinks";
+import Formheading from "@/app/Components/Formfields/Formheading";
+import Belowformlinks from "@/app/Components/Formfields/Belowformlinks";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import recognizeText from "@/Services/dataextract";

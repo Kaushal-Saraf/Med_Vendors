@@ -39,7 +39,7 @@ const doctor = ({ params }) => {
         <p className=" text-blue-500 text-md mx-2">Previous Prescriptions</p>
         <Link
           className="flex text-blue-500 text-md mx-2 hover:text-white"
-          href={`/Doctor/${params.id}/NewPrescription`}
+          href={`/Doctor/${params.id}/NewPrescription/Findpatient`}
         >
           <IoMdAddCircleOutline className="mt-[0.35rem] mx-1" />
           Add New Prescription

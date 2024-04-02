@@ -1,4 +1,4 @@
-import Landingcards from "./Components/Landingcards";
+import Landingcards from "./Components/Homepage/Landingcards";
 const page = () => {
   return (
     <>

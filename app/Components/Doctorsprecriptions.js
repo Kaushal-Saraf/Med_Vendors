@@ -6,8 +6,9 @@ const Doctorsprecriptions = ({ prescriptions }) => {
               className="w-[300px] flex flex-wrap justify-evenly border-solid border-2 border-black rounded my-4"
               key={item._id}
             >
+              {item.title}
               <div className="w-full my-4 flex">
-                <p className="w-[250px] mx-auto overflow-scroll">{item._id}</p>
+                <p className="w-[250px] mx-auto overflow-scroll">{item.description}</p>
               </div>
               <div className="w-[250px] my-4 mx-[25px] flex">
                 <p className="w-[175.65px] text-left">Daily fequency:</p>
@@ -25,9 +26,9 @@ const Doctorsprecriptions = ({ prescriptions }) => {
                 {item.direction}
               </p>
               <button
-                className="bg-red-400 px-2 rounded-sm my-4"
+                className="bg-white px-2 rounded-sm my-4"
               >
-                Remove
+                View Details
               </button>
             </div>
           ))}

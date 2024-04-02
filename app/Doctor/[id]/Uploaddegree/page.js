@@ -1,6 +1,6 @@
 "use client";
-import Submitbutton from "@/app/Components/Submitbutton";
-import Formheading from "@/app/Components/Formheading";
+import Submitbutton from "@/app/Components/Formfields/Submitbutton";
+import Formheading from "@/app/Components/Formfields/Formheading";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { getDoctorDetails, uploadDegree } from "@/Services/doctorservices";
