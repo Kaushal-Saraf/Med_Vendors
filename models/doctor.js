@@ -6,7 +6,7 @@ const DoctorSchema = new Schema({
     },
     contact:{
         type:Number,
-        required:[true,"contact required"],
+        required:[true,"Contact required"],
         unique: true
     },
     password:{

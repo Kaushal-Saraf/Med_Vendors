@@ -3,28 +3,28 @@ const { default: mongoose, Schema } = require("mongoose");
 const PatientSchema = new Schema({
     aadharnumber:{
         type:Number,
-        required:true,
+        required:[true,"Aadhar required"],
         unique: true
     },
     name:{
         type:String,
-        required:true,
+        required:[true,"Name required"],
     },
     dob:{
         type:Date,
-        required:true
+        required:[true,"DOB required"],
     },
     gender:{
         type:String,
-        required:true,
+        required:[true,"Gender required"],
     },
     contact:{
         type:Number,
-        required:true
+        required:[true,"Contact required"],
     },
     password:{
         type:String,
-        required:true
+        required:[true,"Password required"],
     }
 })
 export const patient=
