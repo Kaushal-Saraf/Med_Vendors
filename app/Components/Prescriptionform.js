@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import Addinjections from "./Addinjections";
 import Addmedicine from "./Addmedicine";
 import Addtest from "./Addtest";
 
-const Updatepresform = ({
+const Prescriptionform = ({
   details,
   setdetials,
   buttonclick1,
@@ -157,4 +156,4 @@ const Updatepresform = ({
   );
 };
 
-export default Updatepresform;
+export default Prescriptionform;

@@ -1,6 +1,6 @@
 "use client";
 
-import Newpresform from "@/app/Components/Newpresform";
+import Findpatientform from "@/app/Components/Findpatientform";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { findPatient } from "@/Services/doctorservices";
@@ -42,7 +42,7 @@ const findpatient = ({params}) => {
   };
   return (
     <div>
-      <Newpresform
+      <Findpatientform
         details={details}
         setdetails={setdetails}
         formhandler={handlePatientDetails}

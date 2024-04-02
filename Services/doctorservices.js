@@ -45,6 +45,12 @@ export async function findPatient(id ,details) {
   return result;
 }
 
+export async function getPrescriptionDetails(id , patientid) {
+  const result = await httpAxios
+    .get(`/api/doctor/${id}/newprescription/${patientid}`)
+    .then((Response) => Response.data);
+  return result;
+}
 export async function savePrescription(id, details) {
   const result = await httpAxios
     .post(`/api/doctor/${id}/newprescription/addprescription`, details)

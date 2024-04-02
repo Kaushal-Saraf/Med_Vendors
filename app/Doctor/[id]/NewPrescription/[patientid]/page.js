@@ -1,26 +1,17 @@
-"use client"
-import Updatepresform from "@/app/Components/Updatepresform";
+"use client";
+import { getPrescriptionDetails } from "@/Services/doctorservices";
+import currentdateandtime from "@/Utilites/currdateandtime";
+import findage from "@/Utilites/findage";
+import Prescriptionform from "@/app/Components/Prescriptionform";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-const newpresform = ({params}) => {
-
+const prescriptionform = ({ params }) => {
   const router = useRouter();
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getPrescriptionDetails(params.id);
-      setdetails({
-        ...details,
-        name: result.name,
-        contact: result.contact,
-        supportingDocs: result.supportingdocs,
-      });
-    };
-    fetchData();
-  }, []);
+  
   const [details, setdetails] = useState({
     aadhar: "",
-    aadharVerifier: false,
     date: "",
     doctorName: "",
     doctorContact: "",
@@ -40,24 +31,39 @@ const newpresform = ({params}) => {
     advice: "",
     disabled: false,
   });
-
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getPrescriptionDetails(params.id, params.patientid);
+      setdetails({
+        ...details,
+        aadhar: result.patient.aadharnumber,
+        date: currentdateandtime(),
+        doctorName: result.doctor.name,
+        doctorContact: result.doctor.contact,
+        patientName: result.patient.name,
+        patientContact: result.patient.contact,
+        age: findage(result.patient.dob),
+        gender: result.patient.gender,
+      });
+    };
+    fetchData();
+  }, []);
   const addPrescription = async () => {
-    if(details.title===""){
+    if (details.title === "") {
       toast.dismiss();
-      toast.error( "Please enter Prescription Title" );
-      document.getElementById('title').focus()
+      toast.error("Please enter Prescription Title");
+      document.getElementById("title").focus();
       return;
     }
     setdetails({
       ...details,
-      disabled:true
-    })
-    toast.dismiss()
-    toast.loading("Saving and Sending Prescription.")
+      disabled: true,
+    });
+    toast.dismiss();
+    toast.loading("Saving and Sending Prescription.");
     await savePrescription(details);
     setdetails({
       aadhar: "",
-      aadharVerifier: false,
       date: "",
       doctorName: "",
       doctorContact: "",
@@ -76,9 +82,9 @@ const newpresform = ({params}) => {
       tests: [],
       advice: "",
       disabled: false,
-    })
+    });
     setpatientAvailable(false);
-    router.push(`/Doctor/${params.id}`)
+    router.push(`/Doctor/${params.id}`);
     toast.dismiss();
     toast.success("Paitent Saved Sucessfully");
   };
@@ -102,7 +108,6 @@ const newpresform = ({params}) => {
   const resetPatient = async () => {
     setdetails({
       aadhar: "",
-      aadharVerifier: false,
       date: "",
       doctorName: "",
       doctorContact: "",
@@ -121,22 +126,22 @@ const newpresform = ({params}) => {
       tests: [],
       advice: "",
       disabled: false,
-    })
+    });
     setpatientAvailable(false);
     toast.dismiss();
     toast.success("Paitent Reset Sucessful!");
   };
   return (
     <div>
-      <Updatepresform
-          details={details}
-          setdetials={setdetails}
-          buttonclick1={addPrescription}
-          buttonclick2={clearForm}
-          buttonclick3={resetPatient}
-        />
+      <Prescriptionform
+        details={details}
+        setdetials={setdetails}
+        buttonclick1={addPrescription}
+        buttonclick2={clearForm}
+        buttonclick3={resetPatient}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default newpresform
+export default prescriptionform;

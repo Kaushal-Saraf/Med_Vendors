@@ -2,7 +2,7 @@ import Aadharinput from "@/app/Components/Formfields/Aadharinput"
 import Formheading from "@/app/Components/Formfields/Formheading"
 import Submitbutton from "@/app/Components/Formfields/Submitbutton"
 
-const Newpresform = ({formhandler, details, setdetails}) => {
+const Findpatientform = ({formhandler, details, setdetails}) => {
   return (
     <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
@@ -18,4 +18,4 @@ const Newpresform = ({formhandler, details, setdetails}) => {
   )
 }
 
-export default Newpresform
+export default Findpatientform
