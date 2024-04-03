@@ -8,25 +8,27 @@ cloudinary.config({
 });
 
 export default async function uploadFile(file , filename) {
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-  await new Promise((resolve, reject) => {
-    cloudinary.uploader
-      .upload(
-        {
-          public_id: `${filename}.pdf`,
-          folder: "Med_Vendor/Degrees",
-          tags: ["degree"],
-          upload_preset: "ml_default",
-        },
-        function (error, result) {
-          if (error) {
+  const mime = file.type; 
+  const encoding = 'base64'; 
+  const base64Data = Buffer.from(fileBuffer).toString('base64');
+  const fileUri = 'data:' + mime + ';' + encoding + ',' + base64Data;
+
+  const uploadToCloudinary = () => {
+    return new Promise((resolve, reject) => {
+        var result = cloudinary.uploader.upload(fileUri, {
+          invalidate: true
+        })
+          .then((result) => {
+            console.log(result);
+            resolve(result);
+          })
+          .catch((error) => {
+            console.log(error);
             reject(error);
-            return;
-          }
-          resolve(result);
-        }
-      )
-      .end(buffer);
-  });
+          });
+    });
+  };
+
+  const result = await uploadToCloudinary();
+  return result;
 }
