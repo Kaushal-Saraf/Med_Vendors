@@ -10,7 +10,7 @@ cloudinary.config({
 export default async function uploadFile(file , filename) {
   const mime = file.type; 
   const encoding = 'base64'; 
-  const base64Data = Buffer.from(fileBuffer).toString('base64');
+  const base64Data = Buffer.from(file).toString('base64');
   const fileUri = 'data:' + mime + ';' + encoding + ',' + base64Data;
 
   const uploadToCloudinary = () => {
