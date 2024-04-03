@@ -12,7 +12,7 @@ export default async function uploadFile(file , filename) {
   const buffer = Buffer.from(arrayBuffer);
   await new Promise((resolve, reject) => {
     cloudinary.uploader
-      .upload_stream(
+      .upload(
         {
           public_id: `${filename}.pdf`,
           folder: "Med_Vendor/Degrees",
