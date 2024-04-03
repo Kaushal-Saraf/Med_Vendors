@@ -4,7 +4,7 @@ import { getDoctorDetails } from "@/Services/doctorservices";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import Doctorsprecriptions from "@/app/Components/Doctorsprecriptions";
+import Doctorsprecriptions from "@/app/Components/Doctorsprecriptioncards";
 
 const doctor = ({ params }) => {
   const router = useRouter();

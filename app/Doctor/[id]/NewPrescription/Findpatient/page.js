@@ -1,11 +1,13 @@
 "use client";
 
-import Findpatientform from "@/app/Components/Findpatientform";
+import Belowformlinks from "@/app/Components/Formfields/Belowformlinks";
+import Formheading from "@/app/Components/Formfields/Formheading";
+import Aadharinput from "@/app/Components/Formfields/Aadharinput";
+import Submitbutton from "@/app/Components/Formfields/Submitbutton";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { findPatient } from "@/Services/doctorservices";
 import toast from "react-hot-toast";
-import Belowformlinks from "@/app/Components/Formfields/Belowformlinks";
+import { findPatient } from "@/Services/doctorservices";
 
 const findpatient = ({params}) => {
   const router = useRouter();
@@ -42,11 +44,17 @@ const findpatient = ({params}) => {
   };
   return (
     <div>
-      <Findpatientform
-        details={details}
-        setdetails={setdetails}
-        formhandler={handlePatientDetails}
-      />
+      <form
+        className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
+        onSubmit={handlePatientDetails}
+        id="form"
+        name="form"
+        disabled={details.disabled}
+    >
+      <Formheading heading={"Enter Patient Aadhar Number"} />
+      <Aadharinput details={details} setdetails={setdetails}  disabled={details.disabled}/>
+      <Submitbutton buttonname="Find Patient" disabled={details.disabled}/>
+    </form>
      <Belowformlinks
         text="Back to Doctor's Home Page"
         redirectpage={`/Doctor/${params.id}`}

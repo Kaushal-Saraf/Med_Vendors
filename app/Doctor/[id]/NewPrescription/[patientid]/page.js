@@ -2,7 +2,7 @@
 import { getPrescriptionDetails, savePrescription } from "@/Services/doctorservices";
 import currentdateandtime from "@/Utilites/currdateandtime";
 import findage from "@/Utilites/findage";
-import Prescriptionform from "@/app/Components/Prescriptionform";
+import Prescriptionform from "@/app/Components/Prescriptionform/Prescriptionform";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";

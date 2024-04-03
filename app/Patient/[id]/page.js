@@ -1,8 +1,7 @@
 "use client"
 
 import { getPatientDetails } from "@/Services/patientservices";
-import Doctorsprecriptions from "@/app/Components/Doctorsprecriptions";
-import Patientprescriptions from "@/app/Components/Patientprescriptions";
+import Patientprescriptions from "@/app/Components/Patientprescriptionscards";
 import { useEffect, useState } from "react";
 
 const patientid = ({params}) => {
