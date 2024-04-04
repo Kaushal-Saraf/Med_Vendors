@@ -1,10 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import Medicinecard from "../Components/Showprescirption/Medicinecard";
 import Testcard from "../Components/Showprescirption/Testcard";
 import Injectioncard from "../Components/Showprescirption/Injectioncard";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Viewprescription = () => {
+  const router = useRouter();
   const [details, setdetails] = useState({
     aadhar: "",
     date: "",
@@ -25,6 +28,10 @@ const Viewprescription = () => {
     tests: [],
     advice: "",
   });
+  const [previouspagedetails, setpreviouspagedetails] = useState({
+    pagename:"",
+    pagelink:"",
+  })
   useEffect(() => {
     const fetchData = () => {
       const result = sessionStorage.getItem("prescriptionDetails");
@@ -50,12 +57,24 @@ const Viewprescription = () => {
         tests: data.item.tests,
         advice: data.item.advice,
       });
+      setpreviouspagedetails({
+        pagename:data.backTo,
+        pagelink:data.link,
+      })
     };
     fetchData();
   }, []);
-
+  const handleBackbutton=()=>{
+    sessionStorage.removeItem("prescriptionDetails");
+    router.push(previouspagedetails.pagelink);
+  }
   return (
     <div className="px-4 py-4">
+      <div className="text-center w-full my-2">
+        <button onClick={handleBackbutton} className="rounded bg-white p-2 font-bold text-red-400">
+          Back To {previouspagedetails.pagename}
+        </button>
+      </div>
       <div className="bg-white py-4 rounded">
         <div className="w-full text-center font-bold my-4 text-2xl">
           Dr.{details.doctorName}
@@ -127,10 +146,10 @@ const Viewprescription = () => {
           </div>
         ) : null}
       </div>
-      <div className="flex flex-wrap justify-evenly my-6 text-center ">
-        {/* <button className="bg-white px-2 py-1 mx-2 my-2 rounded" onClick={buttonclick1}>Save and Send</button>
-      <button className="bg-white px-2 py-1 mx-2 my-2 rounded" onClick={buttonclick2}>Reset Form</button>
-      <button className="bg-white px-2 py-1 mx-2 my-2 rounded" onClick={buttonclick3}>Reset Patient</button> */}
+      <div className="text-center w-full my-2">
+        <button onClick={handleBackbutton} className="rounded bg-white p-2 font-bold text-red-400">
+          Back To {previouspagedetails.pagename}
+        </button>
       </div>
     </div>
   );
