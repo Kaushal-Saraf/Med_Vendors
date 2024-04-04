@@ -1,32 +1,20 @@
 const Doctorsprecriptions = ({ prescriptions }) => {
+  const viewPrescription = async()=>{
+
+  }
   return (
     <div className="my-4">
       {prescriptions.map((item) => (
             <div
-              className="w-[300px] flex flex-wrap justify-evenly border-solid border-2 border-black rounded my-4"
+              className=" mx-4 flex flex-wrap justify-evenly align-middle bg-blue-200 text-blue-700 rounded my-4"
               key={item._id}
             >
-              {item.title}
-              <div className="w-full my-4 flex">
-                <p className="w-[250px] mx-auto overflow-scroll">{item.description}</p>
-              </div>
-              <div className="w-[250px] my-4 mx-[25px] flex">
-                <p className="w-[175.65px] text-left">Daily fequency:</p>
-                <p className="overflow-scroll">{item._id}</p>
-              </div>
-              <div className="w-[250px] my-4 mx-[25px] flex">
-                <p className="w-[175.65px] text-left">Dosage (ml):</p>
-                <p className="overflow-scroll">{item._id}</p>
-              </div>
-              <div className="w-[250px] my-4 mx-[25px] flex">
-                <p className="w-[175.65px] text-left">Time Period (days):</p>
-                <p className="overflow-scroll">{item.timeperiod}</p>
-              </div>
-              <p className="w-[250px] mx-auto whitespace-nowrap overflow-scroll">
-                {item.direction}
-              </p>
+              <p className="text-center overflow-scroll my-2">{item.title}</p>
+              <p className="text-center my-2 w-full px-2">{item.description}</p>
+              <p className="my-2">{item.date}</p>
               <button
-                className="bg-white px-2 rounded-sm my-4"
+                className="bg-white px-2 rounded my-2"
+                onClick={viewPrescription}
               >
                 View Details
               </button>
