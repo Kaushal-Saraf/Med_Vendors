@@ -29,6 +29,15 @@ const doctor = ({ params }) => {
     };
     fetchData();
   }, []);
+  const viewPrescription =(item)=>{
+    const sessionData = {
+      "item":item,
+      "backTo":"Doctor Page",
+      "link":`Doctor/${params.id}`
+    }
+    sessionStorage.setItem("prescriptionDetails", JSON.stringify(sessionData));
+    router.push("/ViewPrescription");
+  }
 
   return (
     <>
@@ -48,7 +57,7 @@ const doctor = ({ params }) => {
       <hr className="border-blue-500" />
       <div>
         {patientdetails.length ? (
-        <Doctorsprecriptions prescriptions={patientdetails}/>
+        <Doctorsprecriptions prescriptions={patientdetails} viewPrescription={viewPrescription}/>
         ) : (
           <div className="text-center text-4xl my-4 text-white font-bold ">
           No Prescriptions Avaliable.
