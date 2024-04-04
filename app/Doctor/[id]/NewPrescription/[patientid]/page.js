@@ -2,6 +2,7 @@
 import { getPrescriptionDetails, savePrescription } from "@/Services/doctorservices";
 import currentdateandtime from "@/Utilites/currdateandtime";
 import findage from "@/Utilites/findage";
+import Doctorsprecriptions from "@/app/Components/Doctorsprecriptioncards";
 import Prescriptionform from "@/app/Components/Prescriptionform/Prescriptionform";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -9,7 +10,6 @@ import toast from "react-hot-toast";
 
 const prescriptionform = ({ params }) => {
   const router = useRouter();
-  
   const [details, setdetails] = useState({
     aadhar: "",
     date: "",
@@ -29,6 +29,7 @@ const prescriptionform = ({ params }) => {
     injections: [],
     tests: [],
     advice: "",
+    previousprescriptions:[],
     disabled: false,
   });
   useEffect(() => {
@@ -44,6 +45,7 @@ const prescriptionform = ({ params }) => {
         patientContact: result.patient.contact,
         age: findage(result.patient.dob),
         gender: result.patient.gender,
+        previousprescriptions:  result.prescriptions.reverse(),
       });
     };
     fetchData();
@@ -81,6 +83,7 @@ const prescriptionform = ({ params }) => {
       injections: [],
       tests: [],
       advice: "",
+      previousprescriptions:[],
       disabled: false,
     });
     router.push(`/Doctor/${params.id}`);
@@ -100,6 +103,7 @@ const prescriptionform = ({ params }) => {
       injections: [],
       tests: [],
       advice: "",
+      previousprescriptions:[],
     });
     toast.dismiss();
     toast.success("Form  Cleared Successfully!");
@@ -130,6 +134,16 @@ const prescriptionform = ({ params }) => {
     toast.dismiss();
     toast.success("Paitent Reset Sucessful!");
   };
+  const viewPrescription =(item)=>{
+    const sessionData = {
+      "item":item,
+      "backTo":"Prescription Form",
+      "link":`Doctor/${params.id}/NewPrescription/${params.patientid}`
+    }
+    sessionStorage.setItem("prescriptionDetails", JSON.stringify(sessionData));
+    router.push("/ViewPrescription");
+  }
+
   return (
     <div>
       <Prescriptionform
@@ -139,6 +153,10 @@ const prescriptionform = ({ params }) => {
         buttonclick2={clearForm}
         buttonclick3={resetPatient}
       />
+      <h1 className="text-center text-bold text-white"> Patient Hitory</h1>
+      <hr className="border-2 border-solid border-white"/>
+      {details.previousprescriptions.length?<Doctorsprecriptions prescriptions={details.previousprescriptions} viewPrescription={viewPrescription}/>:(<div className="text-center my-4 text-white">No Prescriptions Avaliable</div>)}
+      
     </div>
   );
 };

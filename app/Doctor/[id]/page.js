@@ -23,7 +23,7 @@ const doctor = ({ params }) => {
         contact: result.contact,
         supportingDocs: result.supportingdocs,
       });
-      if(result.prescriptions)setpatientdetails(result.prescriptions);
+      if(result.prescriptions)setpatientdetails(result.prescriptions.reverse());
       if (result.supportingdocs === false)
         router.push(`/Doctor/${params.id}/Uploaddegree`);
     };
