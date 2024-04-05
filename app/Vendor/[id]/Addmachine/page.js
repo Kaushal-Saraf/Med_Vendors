@@ -96,29 +96,6 @@ const addmachine = () => {
         </div>
         <div className="flex my-12 px-2 w-full">
           <label
-            htmlFor="longitude"
-            className="flex-1 text-center text-blue-400 font-semibold"
-          >
-           Longitude
-          </label>
-          <input
-            readOnly={details.disabled}
-            type="longitude"
-            placeholder="00.000000"
-            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
-            id="longitude"
-            name="longitude"
-            onChange={(event) => {
-              setdetails({
-                ...details,
-                longitude: event.target.value,
-              });
-            }}
-            value={details.longitude}
-          ></input>
-        </div>
-        <div className="flex my-12 px-2 w-full">
-          <label
             htmlFor="latitude"
             className="flex-1 text-center text-blue-400 font-semibold"
           >
@@ -138,6 +115,29 @@ const addmachine = () => {
               });
             }}
             value={details.latitude}
+          ></input>
+        </div>
+        <div className="flex my-12 px-2 w-full">
+          <label
+            htmlFor="longitude"
+            className="flex-1 text-center text-blue-400 font-semibold"
+          >
+           Longitude
+          </label>
+          <input
+            readOnly={details.disabled}
+            type="longitude"
+            placeholder="00.000000"
+            className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
+            id="longitude"
+            name="longitude"
+            onChange={(event) => {
+              setdetails({
+                ...details,
+                longitude: event.target.value,
+              });
+            }}
+            value={details.longitude}
           ></input>
         </div>
         <div className="flex my-6 px-2 w-full">
