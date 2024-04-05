@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   const { umid, address } = await req.json();
   await connectDb();
-  const add = await getLocation(address);
-  console.log(add);
+  getLocation();
   return NextResponse.json({message:"Hello"})
 }

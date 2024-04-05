@@ -25,7 +25,10 @@ const PatientSchema = new Schema({
     password:{
         type:String,
         required:[true,"Password required"],
-    }
+    },
+    qr:{
+        type:[],
+    },
 })
 export const patient=
 mongoose.models.patient|| mongoose.model("patient",PatientSchema)
