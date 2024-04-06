@@ -45,7 +45,7 @@ const patientid = ({ params }) => {
           href={`/Patient/${params.id}/Qrs`}
         >
           <BsQrCode className="mt-[0.35rem] mx-1" />
-          QR Codes
+          Show QR's
         </Link>
       </div>
       <hr className="border-blue-500" />
