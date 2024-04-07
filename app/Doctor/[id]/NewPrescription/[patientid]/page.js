@@ -103,7 +103,6 @@ const prescriptionform = ({ params }) => {
       injections: [],
       tests: [],
       advice: "",
-      previousprescriptions:[],
     });
     toast.dismiss();
     toast.success("Form  Cleared Successfully!");
@@ -128,11 +127,11 @@ const prescriptionform = ({ params }) => {
       injections: [],
       tests: [],
       advice: "",
+      previousprescriptions:[],
       disabled: false,
     });
-    setpatientAvailable(false);
     toast.dismiss();
-    toast.success("Paitent Reset Sucessful!");
+    router.push(`/Doctor/${params.id}/NewPrescription/Findpatient`)
   };
   const viewPrescription =(item)=>{
     const sessionData = {
