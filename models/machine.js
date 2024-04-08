@@ -1,10 +1,15 @@
 const { default: mongoose, Schema } = require("mongoose");
 
 const machineSchema=new Schema({
+    //add before selling a machine
     umid:{
         type:String,
         unique:true
     },
+    noofslots:{
+        type:Number,
+    },
+    //add after selling of machine
     ownercontact:{
         type:Number,
     },
@@ -12,7 +17,20 @@ const machineSchema=new Schema({
         type:Object,
     },
     medicines:{
-        type:[]
+        type:[{
+            name:{
+                type:String,
+            },
+            dosage:{
+                type:Number,
+            },
+            cpsuleeachpacke:{
+                type:Number,
+            },
+            expiry:{
+                type:Date,
+            },
+        }]
     }
 })
 export const machine=

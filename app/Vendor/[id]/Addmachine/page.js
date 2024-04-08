@@ -1,52 +1,66 @@
-"use client"
-import getlocation from "@/Services/getlocation";
+"use client";
 import Formheading from "@/app/Components/Formfields/Formheading";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import getlocation from "@/Services/getlocation";
+import { addMachine } from "@/Services/vendorservices";
 import toast from "react-hot-toast";
 
-const addmachine = () => {
+const addmachine = ({params}) => {
+  const router = useRouter();
   useEffect(() => {
-    const fetchData = async()=>{
-      try{
+    const fetchData = async () => {
+      try {
         const result = await getlocation();
         setdetails({
           ...details,
-          longitude :result.Longitude,
-          latitude: result.Latitude
-        })
+          longitude: result.Longitude,
+          latitude: result.Latitude,
+        });
+      } catch (e) {
+        console.log("Unable to fetch loction.");
       }
-      catch(e){
-        console.log("Unable to fetch loction.")
-      }
-    }
+    };
     fetchData();
   }, []);
-    const [details, setdetails] = useState({
-        umid:"",
-        address:"",
-        longitude:"",
-        latitude:"",
-        disabled:""
-    })
-    const handleMachines = (e) =>{
-        e.preventDefault();
-        if(details.umid==="" && details.address===""){
-            toast.dismiss();
-            toast.error("Please fill all fields");
-            return
-        }
-        
+  const [details, setdetails] = useState({
+    umid: "",
+    address: "",
+    longitude: "",
+    latitude: "",
+    disabled: false,
+  });
+  const handleMachines = async (e) => {
+    e.preventDefault();
+    if (details.umid === "" && details.address === "") {
+      toast.dismiss();
+      toast.error("Please fill all fields");
+      return;
     }
+    toast.dismiss();
+    toast.loading("Adding  Machine...");
+    setdetails({
+      ...details,
+      disabled:true
+    })
+    await addMachine(params.id, details);
+    toast.dismiss();
+    setdetails({
+      ...details,
+      disabled:false
+    })
+    router.push(`/Vendor/${params.id}`);
+  };
   return (
     <div>
-       <form
+      <form
         className="w-[350px] pb-6 bg-white my-8 mx-auto rounded-lg shadow-sm"
         onSubmit={handleMachines}
         id="form"
         name="form"
         disabled={details.disabled}
       >
-        <Formheading heading="Add Machine Details"/>
+        <Formheading heading="Add Machine Details" />
         <div className="flex my-12 px-2 w-full">
           <label
             htmlFor="umid"
@@ -75,7 +89,7 @@ const addmachine = () => {
             htmlFor="address"
             className="flex-1 text-center text-blue-400 font-semibold"
           >
-           Machine Address
+            Machine Address
           </label>
           <input
             readOnly={details.disabled}
@@ -99,11 +113,11 @@ const addmachine = () => {
             htmlFor="latitude"
             className="flex-1 text-center text-blue-400 font-semibold"
           >
-           Latitude
+            Latitude
           </label>
           <input
             readOnly={details.disabled}
-            type="latitude"
+            type="number"
             placeholder="00.000000"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id="latitude"
@@ -122,11 +136,11 @@ const addmachine = () => {
             htmlFor="longitude"
             className="flex-1 text-center text-blue-400 font-semibold"
           >
-           Longitude
+            Longitude
           </label>
           <input
             readOnly={details.disabled}
-            type="longitude"
+            type="number"
             placeholder="00.000000"
             className="flex-1 text-center mx-2 bg-blue-50 focus:outline-blue-400 text-blue-400"
             id="longitude"
@@ -141,7 +155,10 @@ const addmachine = () => {
           ></input>
         </div>
         <div className="flex my-6 px-2 w-full">
-            <p className="text-yellow-300 text-center">Please check values of longitude and latitude before adding as precise values are required.</p>
+          <p className="text-yellow-300 text-center">
+            Please check values of longitude and latitude before adding as
+            precise values are required.
+          </p>
         </div>
         <div className="flex w-full justify-center">
           <button
@@ -154,7 +171,7 @@ const addmachine = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default addmachine
+export default addmachine;

@@ -19,3 +19,10 @@ export async function vendorLogIn(details) {
     .then((Response) => Response.data);
   return result;
 }
+
+export async function addMachine(id, details) {
+  const result = await httpAxios
+    .post(`/api/vendor/${id}/addmachine`, details)
+    .then((Response) => Response.data);
+  return result;
+}

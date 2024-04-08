@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getDoctorDetails } from "@/Services/doctorservices";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { IoMdAddCircleOutline } from "react-icons/io";
+import { IoMdAddCircleOutline, IoMdLogOut } from "react-icons/io";
 import Doctorsprecriptions from "@/app/Components/Doctorsprecriptioncards";
 
 const doctor = ({ params }) => {
@@ -29,6 +29,10 @@ const doctor = ({ params }) => {
     };
     fetchData();
   }, []);
+  const handleLogout =()=>{
+    //delete token stored in local storage
+    router.push("/");
+  }
   const viewPrescription =(item)=>{
     const sessionData = {
       "item":item,
@@ -41,9 +45,13 @@ const doctor = ({ params }) => {
 
   return (
     <>
-      <h1 className="text-center font-bold text-blue-500 text-xl my-2">
+    <div className="flex justify-between px-2  my-2">
+    <h1 className="text-center font-bold text-blue-500 text-xl">
         Hello Dr. {details.name}
       </h1>
+      <button onClick={handleLogout} className="font-bold text-xl text-white hover:text-red-400 flex ">Logout<IoMdLogOut className="mt-[0.35rem]"/></button>
+    </div>
+      
       <div className="flex justify-between">
         <p className=" text-blue-500 text-md mx-2">Previous Prescriptions</p>
         <Link
