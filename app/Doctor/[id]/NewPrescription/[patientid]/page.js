@@ -152,7 +152,7 @@ const prescriptionform = ({ params }) => {
         buttonclick2={clearForm}
         buttonclick3={resetPatient}
       />
-      <h1 className="text-center text-bold text-white"> Patient Hitory</h1>
+      <h1 className="text-center text-bold text-xl text-white"> Patient Hitory</h1>
       <hr className="border-2 border-solid border-white"/>
       {details.previousprescriptions.length?<Doctorsprecriptions prescriptions={details.previousprescriptions} viewPrescription={viewPrescription}/>:(<div className="text-center my-4 text-white">No Prescriptions Avaliable</div>)}
       
