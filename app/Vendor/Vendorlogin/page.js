@@ -25,6 +25,7 @@ const vendorlogin = () => {
       toast.error("Please verify your details");
       return;
     }
+    toast.loading("Login...")
     setdetails({
       ...details,
       disabled: true,
