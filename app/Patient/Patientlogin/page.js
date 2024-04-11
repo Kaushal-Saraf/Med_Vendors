@@ -27,6 +27,7 @@ const Patientlogin = () => {
       toast.error("Invalid Details");
       return;
     }
+    toast.loading("Login...")
     setdetails({
       ...details,
       disabled:true

@@ -29,49 +29,56 @@ const Viewprescription = () => {
     advice: "",
   });
   const [previouspagedetails, setpreviouspagedetails] = useState({
-    pagename:"",
-    pagelink:"",
-  })
+    pagename: "",
+    pagelink: "",
+  });
   useEffect(() => {
     const fetchData = () => {
       const result = sessionStorage.getItem("prescriptionDetails");
-      const data = JSON.parse(result);
-      setdetails({
-        ...details,
-        aadhar: data.item.aadharnumber,
-        date: data.item.date,
-        doctorName: data.item.doctorname,
-        doctorContact: data.item.doctorcontact,
-        patientName: data.item.patientname,
-        patientContact: data.item.patientcontact,
-        age: data.item.age,
-        gender: data.item.gender,
-        height: data.item.height,
-        weight: data.item.weight,
-        bp: data.item.bloodpressure,
-        bg: data.item.bloodgroup,
-        title: data.item.title,
-        desc: data.item.description,
-        medicines: data.item.medicines,
-        injections: data.item.injections,
-        tests: data.item.tests,
-        advice: data.item.advice,
-      });
-      setpreviouspagedetails({
-        pagename:data.backTo,
-        pagelink:data.link,
-      })
+      if (result) {
+        const data = JSON.parse(result);
+        setdetails({
+          ...details,
+          aadhar: data.item.aadharnumber,
+          date: data.item.date,
+          doctorName: data.item.doctorname,
+          doctorContact: data.item.doctorcontact,
+          patientName: data.item.patientname,
+          patientContact: data.item.patientcontact,
+          age: data.item.age,
+          gender: data.item.gender,
+          height: data.item.height,
+          weight: data.item.weight,
+          bp: data.item.bloodpressure,
+          bg: data.item.bloodgroup,
+          title: data.item.title,
+          desc: data.item.description,
+          medicines: data.item.medicines,
+          injections: data.item.injections,
+          tests: data.item.tests,
+          advice: data.item.advice,
+        });
+        setpreviouspagedetails({
+          pagename: data.backTo,
+          pagelink: data.link,
+        });
+      } else {
+        router.push("/");
+      }
     };
     fetchData();
   }, []);
-  const handleBackbutton=()=>{
+  const handleBackbutton = () => {
     sessionStorage.removeItem("prescriptionDetails");
     router.push(previouspagedetails.pagelink);
-  }
+  };
   return (
     <div className="px-4 py-4">
       <div className="text-center w-full my-2">
-        <button onClick={handleBackbutton} className="rounded bg-white p-2 font-bold text-red-400">
+        <button
+          onClick={handleBackbutton}
+          className="rounded bg-white p-2 font-bold text-red-400"
+        >
           Back To {previouspagedetails.pagename}
         </button>
       </div>
@@ -147,7 +154,10 @@ const Viewprescription = () => {
         ) : null}
       </div>
       <div className="text-center w-full my-2">
-        <button onClick={handleBackbutton} className="rounded bg-white p-2 font-bold text-red-400">
+        <button
+          onClick={handleBackbutton}
+          className="rounded bg-white p-2 font-bold text-red-400"
+        >
           Back To {previouspagedetails.pagename}
         </button>
       </div>
