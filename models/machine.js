@@ -24,12 +24,15 @@ const machineSchema=new Schema({
             dosage:{
                 type:Number,
             },
-            cpsuleeachpacke:{
+            cpsuleeachpack:{
                 type:Number,
             },
             expiry:{
                 type:Date,
             },
+            price:{
+                type:Number,
+            }
         }]
     }
 })

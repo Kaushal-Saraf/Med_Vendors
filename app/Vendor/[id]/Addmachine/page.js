@@ -6,7 +6,7 @@ import getlocation from "@/Services/getlocation";
 import { addMachine } from "@/Services/vendorservices";
 import toast from "react-hot-toast";
 
-const addmachine = ({params}) => {
+const addmachine = ({ params }) => {
   const router = useRouter();
   useEffect(() => {
     const fetchData = async () => {
@@ -41,14 +41,14 @@ const addmachine = ({params}) => {
     toast.loading("Adding  Machine...");
     setdetails({
       ...details,
-      disabled:true
-    })
+      disabled: true,
+    });
     await addMachine(params.id, details);
     toast.dismiss();
     setdetails({
       ...details,
-      disabled:false
-    })
+      disabled: false,
+    });
     router.push(`/Vendor/${params.id}`);
   };
   return (

@@ -5,12 +5,16 @@ import { NextResponse } from "next/server";
 export async function POST(req, { params }) {
   await connectDb();
   const { umid, address, longitude, latitude } = await req.json();
-  const machinedata = await machine.find();
-  if (machinedata.length) {
+  const machinedata = await machine.findOne({ umid: umid });
+  if (machinedata) {
     const vendordata = await vendor.findOne({ _id: params.id });
+    return NextResponse.json(
+      { message: "Machine added sucessfully" }
+    );
+  } else {
+    return NextResponse.json(
+      { message: "No Machine Data Found" },
+      { status: 403 }
+    );
   }
-  else{
-    return NextResponse.json({message: "No Machine Data Found"},{status:403});
-  }
-  
 }
