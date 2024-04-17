@@ -8,6 +8,14 @@ export async function POST(req, { params }) {
   const machinedata = await machine.findOne({ umid: umid });
   if (machinedata) {
     const vendordata = await vendor.findOne({ _id: params.id });
+    const machinedetails = vendordata.machinedetails;
+    machinedetails.push(umid);
+    console.log(machinedetails);
+    // vendor.updateOne= {
+    //   $set: {
+    //     machinedetails: machinedetails,
+    //   },
+    // };
     return NextResponse.json(
       { message: "Machine added sucessfully" }
     );

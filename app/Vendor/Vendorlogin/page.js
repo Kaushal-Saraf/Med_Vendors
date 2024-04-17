@@ -25,7 +25,8 @@ const vendorlogin = () => {
       toast.error("Please verify your details");
       return;
     }
-    toast.loading("Login...")
+    toast.dismiss();
+    toast.loading("Login...");
     setdetails({
       ...details,
       disabled: true,
@@ -36,14 +37,13 @@ const vendorlogin = () => {
         ...details,
         contact: "",
         contactVerifier: false,
-        passowrd: "",
+        password: "",
         passwordVerifier: false,
         disabled: false,
       });
       toast.dismiss();
       router.push(`/Vendor/${id._id}`);
     } catch (error) {
-      console.log(error);
       setdetails({
         ...details,
         disabled: false,

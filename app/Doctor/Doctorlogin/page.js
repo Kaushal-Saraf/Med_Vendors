@@ -26,6 +26,7 @@ const doctorlogin = () => {
       toast.error("Please verify your details");
       return;
     }
+    toast.dismiss();
     toast.loading("Login...")
     setdetails({
       ...details,

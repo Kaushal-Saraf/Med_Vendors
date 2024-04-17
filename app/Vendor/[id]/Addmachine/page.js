@@ -43,13 +43,22 @@ const addmachine = ({ params }) => {
       ...details,
       disabled: true,
     });
-    await addMachine(params.id, details);
-    toast.dismiss();
-    setdetails({
-      ...details,
-      disabled: false,
-    });
-    router.push(`/Vendor/${params.id}`);
+    try {
+      await addMachine(params.id, details);
+      toast.dismiss();
+      setdetails({
+        ...details,
+        disabled: false,
+      });
+      router.push(`/Vendor/${params.id}`);
+    } catch (e) {
+      toast.dismiss();
+      toast.error(e.response.data.message);
+      setdetails({
+        ...details,
+        disabled: false,
+      });
+    }
   };
   return (
     <div>
