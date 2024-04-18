@@ -7,18 +7,30 @@ export async function POST(req, { params }) {
   const { umid, address, longitude, latitude } = await req.json();
   const machinedata = await machine.findOne({ umid: umid });
   if (machinedata) {
-    const vendordata = await vendor.findOne({ _id: params.id });
-    const machinedetails = vendordata.machinedetails;
-    machinedetails.push(umid);
-    console.log(machinedetails);
-    // vendor.updateOne= {
-    //   $set: {
-    //     machinedetails: machinedetails,
-    //   },
-    // };
-    return NextResponse.json(
-      { message: "Machine added sucessfully" }
+    if (machinedata.ownerid) {
+      return NextResponse.json(
+        { message: "Machine owner already exists" },
+        { status: 403 }
+      );
+    }
+    await vendor.updateOne(
+      { _id: params.id },
+      { $push: { machinedetails: umid } }
     );
+    await machine.updateOne(
+      { umid: umid },
+      {
+        $set: {
+          address: {
+            address: address,
+            longitude: longitude,
+            latitude: latitude,
+          },
+          ownerid: params.id,
+        },
+      }
+    );
+    return NextResponse.json({ message: "Machine added sucessfully" });
   } else {
     return NextResponse.json(
       { message: "No Machine Data Found" },

@@ -6,7 +6,7 @@ const Landingcarddoctor = () => {
     <>
       <div className="bg-white flex flex-wrap p-4 rounded-[10px] m-6 justify-center text-center">
         <FaUserDoctor className="h-32 w-32 text-blue-100" />
-        <ul className="text-blue-500 font-bold display m-4">
+        <ul className="text-blue-500 font-bold m-4">
           <li>Paperless priscription.</li>
           <li>Easy to maintain Patient history.</li>
           <li>Easily Understandable priscriptions.</li>

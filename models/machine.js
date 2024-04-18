@@ -10,11 +10,21 @@ const machineSchema=new Schema({
         type:Number,
     },
     //add after selling of machine
-    ownercontact:{
-        type:Number,
+    ownerid:{
+        type:String,
     },
     address:{
-        type:Object,
+        type:{
+            address:{
+                type:String,
+            },
+            longitude:{
+                type:Number,
+            },
+            latitude:{
+                type:Number,
+            }
+        },
     },
     medicines:{
         type:[{

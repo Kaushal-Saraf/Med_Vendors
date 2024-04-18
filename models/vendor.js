@@ -1,4 +1,4 @@
-const { default: mongoose, Schema, mongo } = require("mongoose");
+const { default: mongoose, Schema } = require("mongoose");
 
 const VendorSchema= new Schema({
     name:{
@@ -14,7 +14,7 @@ const VendorSchema= new Schema({
         requierd:true,
     },
     machinedetails:{
-        type:Array,
+        type:[],
     },
 })
 export const vendor=
