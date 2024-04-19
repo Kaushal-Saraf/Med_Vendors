@@ -43,7 +43,7 @@ const doctorlogin = () => {
         disabled: false,
       });
       toast.dismiss();
-      router.push(`/Doctor/${id._id}`);
+      router.replace(`/Doctor/${id._id}`);
     } catch (error) {
       setdetails({
         ...details,

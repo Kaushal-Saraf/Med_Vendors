@@ -29,6 +29,10 @@ const Verifyotp = () => {
       disabled: true,
     });
     const token = sessionStorage.getItem("vendorOtp");
+    if(!token){
+      router.push("/Vendor/Vendorlogin");
+      return;
+    }
     const otpdetials = { otp: details.otp, token: token };
     toast.dismiss();
     toast.loading("Signin...");

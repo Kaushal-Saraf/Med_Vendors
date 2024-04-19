@@ -30,6 +30,10 @@ const Verifyotp = () => {
       disabled:true
     })
     const token = sessionStorage.getItem("patientOtp");
+    if(!token){
+      router.push("/Patient/Patientlogin");
+      return;
+    }
     const otpdetails = { otp: details.otp, token: token };
     toast.dismiss();
     toast.loading("Signin...");

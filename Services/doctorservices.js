@@ -38,14 +38,14 @@ export async function uploadDegree(id, formData) {
   return result;
 }
 
-export async function findPatient(id ,details) {
+export async function findPatient(id, details) {
   const result = await httpAxios
     .post(`/api/doctor/${id}/newprescription/findpatient`, details)
     .then((Response) => Response.data);
   return result;
 }
 
-export async function getPrescriptionDetails(id , patientid) {
+export async function getPrescriptionDetails(id, patientid) {
   const result = await httpAxios
     .get(`/api/doctor/${id}/newprescription/${patientid}`)
     .then((Response) => Response.data);
@@ -53,7 +53,10 @@ export async function getPrescriptionDetails(id , patientid) {
 }
 export async function savePrescription(id, patientid, details) {
   const result = await httpAxios
-    .post(`/api/doctor/${id}/newprescription/${patientid}/addprescription`, details)
+    .post(
+      `/api/doctor/${id}/newprescription/${patientid}/addprescription`,
+      details
+    )
     .then((Response) => Response.data);
   return result;
 }

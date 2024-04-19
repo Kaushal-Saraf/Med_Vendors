@@ -42,7 +42,7 @@ const vendorlogin = () => {
         disabled: false,
       });
       toast.dismiss();
-      router.push(`/Vendor/${id._id}`);
+      router.replace(`/Vendor/${id._id}`);
     } catch (error) {
       setdetails({
         ...details,

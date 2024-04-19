@@ -27,7 +27,7 @@ const Patientlogin = () => {
       toast.error("Invalid Details");
       return;
     }
-    tost.dismiss();
+    toast.dismiss();
     toast.loading("Login...")
     setdetails({
       ...details,
@@ -43,7 +43,7 @@ const Patientlogin = () => {
         disabled: false,
       });
       toast.dismiss();
-      router.push(`/Patient/${id._id}`);
+      router.replace(`/Patient/${id._id}`);
     } catch (error) {
       setdetails({
         ...details,

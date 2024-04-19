@@ -26,3 +26,10 @@ export async function addMachine(id, details) {
     .then((Response) => Response.data);
   return result;
 }
+
+export async function getVendorDetails(id) {
+  const result = await httpAxios
+    .get(`/api/vendor/${id}`)
+    .then((Response) => Response.data);
+  return result;
+}
