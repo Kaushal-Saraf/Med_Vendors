@@ -2,11 +2,20 @@
 import { getVendorDetails } from "@/Services/vendorservices";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdAddCircleOutline, IoMdLogOut } from "react-icons/io";
 
 const vendorid = ({ params }) => {
   const router = useRouter();
+  const [machines, setMachines]= useState({})
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getVendorDetails(params.id);
+      console.log("resul")
+      setMachines(result);
+    };
+    fetchData();
+  }, []);
   const handleLogout = () => {
     //delete token stored in local storage
     router.push("/");
@@ -36,6 +45,11 @@ const vendorid = ({ params }) => {
         </Link>
       </div>
       <hr className="border-blue-500" />
+      <div className="flex justify-evenly my-2">
+      {machines.machines!==undefined && machines.machines.map(m=>
+         (<Link href={`/Machines/${m}`} className="bg-white text-blue-400 px-2 py-1 m-4" key={m}>{`${m}`}</Link>)
+      )}
+      </div>
     </div>
   );
 };
