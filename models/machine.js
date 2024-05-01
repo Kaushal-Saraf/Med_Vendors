@@ -8,6 +8,7 @@ const machineSchema=new Schema({
     },
     noofslots:{
         type:Number,
+        unique:true,
     },
     //add after selling of machine
     ownerid:{
@@ -26,8 +27,11 @@ const machineSchema=new Schema({
             }
         },
     },
-    medicines:{
+    medicinedetails:{
         type:[{
+            slot:{
+                type:Number,
+            },
             name:{
                 type:String,
             },
@@ -37,13 +41,22 @@ const machineSchema=new Schema({
             cpsuleeachpack:{
                 type:Number,
             },
-            expiry:{
-                type:Date,
-            },
-            price:{
-                type:Number,
+            medicines:{
+                    type:[{
+                        
+                        expiry:{
+                            type:Date,
+                        },
+                        price:{
+                            type:Number,
+                        },
+                        status:{
+                            type:String,
+                        }
+                    }]
+                }
             }
-        }]
+        ]
     }
 })
 export const machine=
