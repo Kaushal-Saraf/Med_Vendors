@@ -48,18 +48,14 @@ const machineSchema = new Schema({
         price: {
           type: Number,
         },
-        noofpack: {
-          type:{
-            sold: {
-              type: Number,
-            },
-            soldandnotcollected: {
-                type: Number,
-            },
-            notsold: {
-              type: Number,
-            },
-          }
+        sold: {
+          type: Number,
+        },
+        soldandnotcollected: {
+          type: Number,
+        },
+        notsold: {
+          type: Number,
         },
       },
     ],
