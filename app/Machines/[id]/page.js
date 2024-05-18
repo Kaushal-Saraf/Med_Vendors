@@ -26,7 +26,6 @@ const machineid = ({ params }) => {
 
   const addMedicineHandler = async (e) => {
     e.preventDefault();
-    if(newmedicinedetails.slot.includes())
     setmedicinedetails(p=> {
       return [...p, newmedicinedetails]
     });

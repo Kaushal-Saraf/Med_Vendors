@@ -1,3 +1,5 @@
+import { data } from "autoprefixer";
+
 const { default: mongoose, Schema } = require("mongoose");
 
 const qrSchema=new Schema({
@@ -5,6 +7,16 @@ const qrSchema=new Schema({
         type:String,
         unique: true
     },
+    umid:{
+        type:String,
+    },
+    medicinedata:{
+        type:[],
+    },
+    used:{
+        type:Boolean,
+        default:false
+    }
 })
 export const qr=
  mongoose.models.qr|| mongoose.model("qr",qrSchema)
