@@ -28,37 +28,38 @@ const machineSchema = new Schema({
     },
   },
   medicinedetails: {
-    type: [
-      {
-        slot: {
-          type: Number,
-        },
-        name: {
-          type: String,
-        },
-        dosage: {
-          type: Number,
-        },
-        cpsuleeachpack: {
-          type: Number,
-        },
-        expiry: {
-          type: Date,
-        },
-        price: {
-          type: Number,
-        },
-        sold: {
-          type: Number,
-        },
-        soldandnotcollected: {
-          type: Number,
-        },
-        notsold: {
-          type: Number,
-        },
-      },
-    ],
+    type: []
+    // type: [
+    //   {
+    //     slot: {
+    //       type: Number,
+    //     },
+    //     name: {
+    //       type: String,
+    //     },
+    //     dosage: {
+    //       type: Number,
+    //     },
+    //     cpsuleeachpack: {
+    //       type: Number,
+    //     },
+    //     expiry: {
+    //       type: Date,
+    //     },
+    //     price: {
+    //       type: Number,
+    //     },
+    //     sold: {
+    //       type: Number,
+    //     },
+    //     soldandnotcollected: {
+    //       type: Number,
+    //     },
+    //     notsold: {
+    //       type: Number,
+    //     },
+    //   },
+    // ],
   },
 });
 export const machine =
