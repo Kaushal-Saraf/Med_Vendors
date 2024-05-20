@@ -28,20 +28,16 @@ export async function PATCH(req, { params }) {
       { umid: params.id },
       { $push: { medicinedetails: newmedicine } }
     );
-    const machinedetails = await machine.findOne({ umid: params.id });
-    return NextResponse.json({
-      message: "Medicine updated sucessfully.",
-      medicinedetails: machinedetails.medicinedetails,
-    });
   } else {
     await machine.updateOne(
       { umid: params.id },
       { $push: { medicinedetails: newmedicine } }
     );
-    const machinedetails = await machine.findOne({ umid: params.id });
-    return NextResponse.json({
-      message: "Medicine added sucessfully.",
-      medicinedetails: machinedetails.medicinedetails,
-    });
   }
+  const newmachinedetails = await machine.findOne({ umid: params.id });
+  newmachinedetails.medicinedetails.sort((a, b) => a.slot - b.slot);
+  return NextResponse.json({
+    message: "Medicine added sucessfully.",
+    medicinedetails: newmachinedetails.medicinedetails,
+  });
 }

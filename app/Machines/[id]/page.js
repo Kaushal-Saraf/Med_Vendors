@@ -32,7 +32,6 @@ const machineid = ({ params }) => {
     toast.dismiss();
     toast.loading("Updating medicines.");
     const result = await addMedicine(params.id, newmedicinedetails);
-    console.log(result);
     setmedicinedetails(result.medicinedetails);
     toast.dismiss();
     toast.success(result.message);
@@ -153,7 +152,7 @@ const machineid = ({ params }) => {
         medicinedetails.length? null:<div className=" text-blue-400 font-bold px-2">No Medicine Available in machine</div>
       }
       {medicinedetails.map((medicine) => (
-        <div key={medicine.slot}>
+        <div key={medicine.slot} className="flex justify-evenly bg-white m-2">
           <h1>Slot {medicine.slot}</h1>
           <p>{medicine.name}</p>
         </div>
