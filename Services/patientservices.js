@@ -42,7 +42,7 @@ export async function buyMedicine(id,machineid,details) {
 
 export async function getPatientQr(id, details) {
   const result = await httpAxios
-    .get(`/api/patient/${id}/qr`, details)
+    .get(`/api/patient/${id}/qrfc`, details)
     .then((Response) => Response.data);
   return result;
 }
