@@ -8,7 +8,7 @@ const qrs = ({ params }) => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await getPatientQr(params.id);
-      setqr(result.qr);
+      setqr(result.qrg);
     };
     fetchData();
   }, []);

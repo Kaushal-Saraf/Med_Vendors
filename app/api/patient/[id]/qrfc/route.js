@@ -6,5 +6,5 @@ export async function GET( req , {params} ){
   await connectDb();
   const {aadharnumber} = await patient.findOne({ _id: params.id });
   const qrs = await qr.find({ aadhar:aadharnumber });
-  return NextResponse.json( {qr : qrs} , {status:200});
+  return NextResponse.json( {qrg : qrs} , {status:200});
 }
