@@ -4,15 +4,23 @@ import { connectDb } from "@/helper/db";
 import { qr } from "@/models/qr";
 export async function POST(req){
   await connectDb();
-  const { image } = await req.json();
+  const { image , umid } = await req.json();
   const qrRes = await qrCodeDetector(image)
   if(qrRes===null){
-    return NextResponse.json("No Qr Found");
+    return NextResponse.json({1 : "No Qr Found"});
   }
   else{
     const result = await qr.findOne({uid: qrRes})
     if(result===null){
-      return NextResponse.json("Wrong Qr Found");
+      return NextResponse.json({2 : "Wrong Qr Found"});
     }
+    if(qr.used === true){
+      return NextResponse.json({3 : "Qr already used"})
+    }
+    if(qr.umid != umid){
+      return NextResponse.json({4 : "Wrong Machine"})
+    }
+    await qr.updateOne({uid:qrRes},{used:true});
+    return NextResponse.json({})
   }
 }
