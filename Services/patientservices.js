@@ -25,3 +25,24 @@ export async function getPatientDetails(id, details) {
     .then((Response) => Response.data);
   return result;
 }
+
+export async function getMachineDetails(id, details) {
+  const result = await httpAxios
+    .get(`/api/buymedicine/${id}`, details)
+    .then((Response) => Response.data);
+  return result;
+}
+
+export async function buyMedicine(id,machineid,details) {
+  const result = await httpAxios
+    .post(`/api/buymedicine/${id}/${machineid}`, details)
+    .then((Response) => Response.data);
+  return result;
+}
+
+export async function getPatientQr(id, details) {
+  const result = await httpAxios
+    .get(`/api/patient/${id}/qr`, details)
+    .then((Response) => Response.data);
+  return result;
+}

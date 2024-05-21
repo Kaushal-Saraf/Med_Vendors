@@ -152,9 +152,12 @@ const machineid = ({ params }) => {
         medicinedetails.length? null:<div className=" text-blue-400 font-bold px-2">No Medicine Available in machine</div>
       }
       {medicinedetails.map((medicine) => (
-        <div key={medicine.slot} className="flex justify-evenly bg-white m-2">
-          <h1>Slot {medicine.slot}</h1>
-          <p>{medicine.name}</p>
+        <div key={medicine.slot} className="flex justify-evenly flex-wrap bg-white m-2">
+          <h1 className="whitespace-nowrap mx-2">Slot {medicine.slot}</h1>
+          <p className="whitespace-nowrap mx-2">Medicine name: {medicine.name}</p>
+          <p className="whitespace-nowrap mx-2">Medicine expiry: {medicine.expiry}</p>
+          <p className="whitespace-nowrap mx-2">Stock: {medicine.notsold}</p>
+          <p className="whitespace-nowrap mx-2">Sold and not collected: {medicine.soldandnotcollected}</p>
         </div>
       ))}
     </div>

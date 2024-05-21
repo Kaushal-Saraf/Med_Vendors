@@ -37,6 +37,9 @@ const patientid = ({ params }) => {
     sessionStorage.setItem("prescriptionDetails", JSON.stringify(sessionData));
     router.push("/ViewPrescription");
   }
+  const buyMedicine =(item)=>{
+    router.push(`/Buymedicine/${item._id}`)
+  }
 
   return (
     <>
@@ -59,7 +62,7 @@ const patientid = ({ params }) => {
       <hr className="border-blue-500" />
       <div>
         {details.prescriptions.length ? (
-          <Patientprescriptions prescriptions={details.prescriptions} viewPrescription={viewPrescription}/>
+          <Patientprescriptions prescriptions={details.prescriptions} viewPrescription={viewPrescription} buyMedicine={buyMedicine}/>
         ) : (
           <div className="text-center text-4xl my-4 text-white font-bold ">
             No Prescriptions Avaliable.

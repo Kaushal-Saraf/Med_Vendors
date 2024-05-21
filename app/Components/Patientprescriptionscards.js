@@ -1,4 +1,4 @@
-const Patientprescriptions = ({ prescriptions, viewPrescription }) => {
+const Patientprescriptions = ({ prescriptions, viewPrescription, buyMedicine }) => {
   return (
     <div className="my-4">
       {prescriptions.map((item) => (
@@ -24,12 +24,12 @@ const Patientprescriptions = ({ prescriptions, viewPrescription }) => {
             >
               View Details
             </button>
-            <button
+            {item.status? null:<button
               className="bg-white mx-2 px-2 rounded my-2"
-              onClick={() => viewPrescription(item)}
+              onClick={() => buyMedicine(item)}
             >
               Buy Medicines
-            </button>
+            </button>}
           </div>
         </div>
       ))}
