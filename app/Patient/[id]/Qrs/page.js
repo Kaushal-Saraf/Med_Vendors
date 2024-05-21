@@ -1,6 +1,7 @@
 "use client";
 import { getPatientQr } from "@/Services/patientservices";
 import { useEffect, useState } from "react";
+import QRCode from "react-qr-code";
 
 const qrs = ({ params }) => {
   const [qr, setqr] = useState([]);
@@ -16,6 +17,7 @@ const qrs = ({ params }) => {
       {qr ? (
         qr.map((qr) => (
           <div key={qr.uid}>
+            <QRCode value={qr.uid}/>
             <p>Corresponding Machine id : qr.umid</p>
           </div>
         ))
