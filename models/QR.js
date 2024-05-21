@@ -1,4 +1,4 @@
-const { default: mongoose, Schema } = require("mongoose");
+const { Schema, default: mongoose } = require("mongoose");
 
 const qrSchema=new Schema({
     uid:{

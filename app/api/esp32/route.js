@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import qrCodeDetector from "@/Services/qrCodeDetector";
 import { connectDb } from "@/helper/db";
+import { qr } from "@/models/qr";
 export async function POST(req){
   await connectDb();
   const { image } = await req.json();
@@ -9,6 +10,9 @@ export async function POST(req){
     return NextResponse.json("No Qr Found");
   }
   else{
-    return NextResponse.json(qrRes.data);
+    const result = await qr.findOne({uid: qrRes})
+    if(result===null){
+      return NextResponse.json("Wrong Qr Found");
+    }
   }
 }
