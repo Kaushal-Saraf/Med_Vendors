@@ -15,12 +15,16 @@ const qrs = ({ params }) => {
   return (
     <div>
       {qr ? (
-        qr.map((qr) => (
-          <div key={qr.uid}>
-            <QRCode value={qr.uid}/>
-            <p>Corresponding Machine id : qr.umid</p>
-          </div>
-        ))
+        qr.map((qr) =>
+          qr.status ? (
+            <></>
+          ) : (
+            <div className="m-4" key={qr.uid}>
+              <QRCode value={qr.uid} />
+              <p>Corresponding Machine id : qr.umid</p>
+            </div>
+          )
+        )
       ) : (
         <h1>NO QR available</h1>
       )}
