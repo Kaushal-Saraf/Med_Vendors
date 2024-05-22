@@ -6,12 +6,12 @@ import { machine } from "@/models/machine";
 export async function POST(req){
   await connectDb();
   const { image , machinename } = await req.json();
-  const qrRes = await qrCodeDetector(image)
+  const qrRes = await qrCodeDetector(image);
   if(qrRes===null){
     return NextResponse.json({1 : "No Qr Found"});
   }
   else{
-    const result = await qr.findOne({uid: qrRes})
+    const result = await qr.findOne({uid: qrRes.data})
     if(result===null){
       return NextResponse.json({2 : "Wrong Qr Found"});
     }
