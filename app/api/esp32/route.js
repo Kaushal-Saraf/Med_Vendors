@@ -5,7 +5,7 @@ import { qr } from "@/models/qr";
 import { machine } from "@/models/machine";
 export async function POST(req){
   await connectDb();
-  const { image , umid } = await req.json();
+  const { image , machinename } = await req.json();
   const qrRes = await qrCodeDetector(image)
   if(qrRes===null){
     return NextResponse.json({1 : "No Qr Found"});
