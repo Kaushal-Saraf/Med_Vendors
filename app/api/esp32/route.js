@@ -22,7 +22,6 @@ export async function POST(req){
       return NextResponse.json({4 : "Wrong Machine"})
     }
     await qr.updateOne({uid:qrRes},{used:true});
-    await machine.findOne({umid: qr.umid});
     return NextResponse.json(qr.medicinedata)
   }
 }
