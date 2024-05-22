@@ -18,7 +18,7 @@ export async function POST(req){
     if(qr.used === true){
       return NextResponse.json({3 : "Qr already used"})
     }
-    if(qr.umid != umid){
+    if(qr.umid != machinename){
       return NextResponse.json({4 : "Wrong Machine"})
     }
     await qr.updateOne({uid:qrRes},{used:true});
