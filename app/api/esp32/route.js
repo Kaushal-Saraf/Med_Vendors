@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import qrCodeDetector from "@/Services/qrCodeDetector";
 import { connectDb } from "@/helper/db";
 import { qr } from "@/models/qr";
+import { machine } from "@/models/machine";
 export async function POST(req){
   await connectDb();
   const { image , umid } = await req.json();
@@ -21,6 +22,7 @@ export async function POST(req){
       return NextResponse.json({4 : "Wrong Machine"})
     }
     await qr.updateOne({uid:qrRes},{used:true});
-    return NextResponse.json({})
+    await machine.findOne({umid: qr.umid});
+    return NextResponse.json(qr.medicinedata)
   }
 }
