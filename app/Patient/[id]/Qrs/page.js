@@ -21,7 +21,7 @@ const qrs = ({ params }) => {
           ) : (
             <div className="m-4" key={qr.uid}>
               <QRCode value={qr.uid} />
-              <p>Corresponding Machine id : qr.umid</p>
+              <p>Corresponding Machine id : {qr.umid}</p>
             </div>
           )
         )

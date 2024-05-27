@@ -7,7 +7,6 @@ const qrSchema=new Schema({
     },
     aadhar:{
         type:Number,
-        unique:true
     },
     umid:{
         type:String,

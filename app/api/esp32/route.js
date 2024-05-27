@@ -15,13 +15,15 @@ export async function POST(req){
     if(result===null){
       return NextResponse.json({2 : "Wrong Qr Found"});
     }
-    if(qr.used === true){
+    if(result.used === true){
       return NextResponse.json({3 : "Qr already used"})
     }
-    if(qr.umid != machinename){
+    if(result.umid != machinename){
       return NextResponse.json({4 : "Wrong Machine"})
     }
     await qr.updateOne({uid:qrRes},{used:true});
+    //update sold status
+    await machine.updateOne({})
     return NextResponse.json(qr.medicinedata)
   }
 }

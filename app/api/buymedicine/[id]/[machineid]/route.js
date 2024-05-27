@@ -8,28 +8,20 @@ export async function POST(req, { params }) {
   await connectDb();
   const machinedata = await machine.findOne({ umid: params.machineid });
   const prescriptionDetails = await prescription.findOne({ _id: params.id });
-  const requiredmedicine = prescriptionDetails.medicines.map((medicine) => {
-    return {
-      medicinename: medicine.name + medicine.dosage,
-      noofcpasules: medicine.timeperiod * medicine.dailyfrequency,
-    };
-  });
-  const medicineinmachine = machinedata.medicinedetails.map((medicine) => {
-    return {
-      medicinename: medicine.name + medicine.dosage,
-      noofcpasules: Number(medicine.cpsuleeachpack) * Number(medicine.notsold),
-    };
-  });
-  if(prescriptionDetails.status){
-      return NextResponse.json({message: "Medicines alreday bought"},{status:403});
+  if (prescriptionDetails.status) {
+    return NextResponse.json(
+      { message: "Medicines alreday bought" },
+      { status: 403 }
+    );
   }
-  const compare = requiredmedicine.every((med1) =>
-    medicineinmachine.some(
+  const compare = prescriptionDetails.medicines.every((med1) =>
+    machinedata.medicinedetails.some(
       (med2) =>
-        med2.medicinename === med1.medicinename &&
-        med2.noofcpasules >= med1.noofcpasules
+        (med2.name === med1.name) &&
+        (Number(med2.dosage) === med1.dosage) &&
+        (Number(med2.cpsuleeachpack) * Number(med2.notsold) >= med1.timeperiod * med1.dailyfrequency)
     )
-  );
+  )
   if (!compare) {
     return NextResponse.json(
       { message: "Medicne not available in the machine" },
