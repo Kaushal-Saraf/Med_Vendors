@@ -10,7 +10,6 @@ export async function POST(req) {
   if (qrRes === null) {
     return NextResponse.json({ 1: "No Qr Found" });
   } else {
-    console.log(qrRes.data);
     const result = await qr.findOne({ uid: qrRes.data });
     if (result === null) {
       return NextResponse.json({ 2: "Wrong Qr Found" });
@@ -34,7 +33,7 @@ export async function POST(req) {
     //   { umid: params.machineid },
     //   { medicinedetails: machinedata.medicinedetails }
     // );
-    await qr.updateOne({ uid: qrRes }, { used: true });
+    await qr.updateOne({ uid: qrRes.data }, { used: true });
     return NextResponse.json(result.medicinedata);
   }
 }
