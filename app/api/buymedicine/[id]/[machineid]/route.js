@@ -17,11 +17,12 @@ export async function POST(req, { params }) {
   const compare = prescriptionDetails.medicines.every((med1) =>
     machinedata.medicinedetails.some(
       (med2) =>
-        (med2.name === med1.name) &&
-        (Number(med2.dosage) === med1.dosage) &&
-        (Number(med2.cpsuleeachpack) * Number(med2.notsold) >= med1.timeperiod * med1.dailyfrequency)
+        med2.name === med1.name &&
+        Number(med2.dosage) === med1.dosage &&
+        Number(med2.cpsuleeachpack) * Number(med2.notsold) >=
+          med1.timeperiod * med1.dailyfrequency
     )
-  )
+  );
   if (!compare) {
     return NextResponse.json(
       { message: "Medicne not available in the machine" },
@@ -48,6 +49,7 @@ export async function POST(req, { params }) {
   });
   reqarray.sort((a, b) => a - b);
   const qrarray = reqarray.map((value) => [value, 1]).flat();
+
   const d = new Date();
   const newqr = {
     uid: String(prescriptionDetails.aadharnumber) + String(d.getTime()),
@@ -56,11 +58,15 @@ export async function POST(req, { params }) {
     medicinedata: qrarray,
     used: false,
   };
+
   await prescription.updateOne({ _id: params.id }, { status: true });
+
   await qr.create(newqr);
+
   await machine.updateOne(
     { umid: params.machineid },
     { medicinedetails: machinedata.medicinedetails }
   );
+
   return NextResponse.json({ message: "Medicne bought sucessfully" });
 }
