@@ -16,7 +16,7 @@ const qrs = ({ params }) => {
     <div>
       {qr ? (
         qr.map((qr) =>
-          qr.status ? (
+          qr.used ? (
             <></>
           ) : (
             <div className="m-4" key={qr.uid}>
