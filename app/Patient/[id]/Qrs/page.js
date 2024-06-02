@@ -19,9 +19,11 @@ const qrs = ({ params }) => {
           qr.used ? (
             <></>
           ) : (
-            <div className="m-4" key={qr.uid}>
-              <QRCode value={qr.uid} />
-              <p>Corresponding Machine id : {qr.umid}</p>
+            <div className="flex justify-center my-80" key={qr.uid}>
+              <div>
+                <QRCode value={qr.uid} />
+                <p>Corresponding Machine id : {qr.umid}</p>
+              </div>
             </div>
           )
         )

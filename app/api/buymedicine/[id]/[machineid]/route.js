@@ -1,5 +1,6 @@
 import { connectDb } from "@/helper/db";
 import { machine } from "@/models/machine";
+import { patient } from "@/models/patient";
 import { prescription } from "@/models/prescription";
 import { qr } from "@/models/qr";
 import { NextResponse } from "next/server";
@@ -67,6 +68,6 @@ export async function POST(req, { params }) {
     { umid: params.machineid },
     { medicinedetails: machinedata.medicinedetails }
   );
-
-  return NextResponse.json({ message: "Medicne bought sucessfully" });
+  const patientid = await patient.findOne({aadharnumber:prescriptionDetails.aadharnumber});
+  return NextResponse.json({ message: "Medicne bought sucessfully", patient: patientid._id });
 }

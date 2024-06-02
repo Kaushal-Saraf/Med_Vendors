@@ -25,16 +25,16 @@ const buymedicine = ({ params }) => {
   const buymedicine = async (item) => {
     toast.dismiss();
     toast.loading("Checking availiblity and buying medicines");
-    try{
-      const result = await buyMedicine(params.id ,item.umid);
+    try {
+      const result = await buyMedicine(params.id, item.umid);
       toast.dismiss();
       toast.success(result.message);
-    }catch(e){
+      router.push(`/Patient/${result.patient}/QRs`);
+    } catch (e) {
       toast.dismiss();
       toast.error(e.response.data.message);
     }
   };
-   
 
   return (
     <div>
@@ -59,7 +59,8 @@ const buymedicine = ({ params }) => {
               onClick={() => {
                 buymedicine(item);
               }}
-              className="bg-blue-100 text-blue-400 rounded px-2">
+              className="bg-blue-100 text-blue-400 rounded px-2"
+            >
               Buy Medicine
             </button>
           </div>
