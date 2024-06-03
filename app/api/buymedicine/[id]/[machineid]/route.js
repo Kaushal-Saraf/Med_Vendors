@@ -68,6 +68,6 @@ export async function POST(req, { params }) {
     { umid: params.machineid },
     { medicinedetails: machinedata.medicinedetails }
   );
-  const patientid = await patient.findOne({aadharnumber:prescriptionDetails.aadharnumber});
+  // const patientid = await patient.findOne({aadharnumber:prescriptionDetails.aadharnumber});
   return NextResponse.json({ message: "Medicne bought sucessfully", patient: patientid._id });
 }
