@@ -50,7 +50,7 @@ export async function POST(req, { params }) {
   });
   reqarray.sort((a, b) => a - b);
   const qrarray = reqarray.map((value) => [value, 1]).flat();
-
+  console.log(machinedata);
   const d = new Date();
   const newqr = {
     uid: String(prescriptionDetails.aadharnumber) + String(d.getTime()),
