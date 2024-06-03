@@ -9,7 +9,7 @@ export async function PATCH(req, { params }) {
     slot: data.slot,
     name: data.medicinename,
     dosage: data.dosage,
-    cpsuleeachpack: data.dosage,
+    cpsuleeachpack: data.capsuleeachpack,
     expiry: data.expiry,
     price: data.price,
     sold: 0,
