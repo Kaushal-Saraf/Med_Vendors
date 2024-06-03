@@ -15,16 +15,17 @@ export async function POST(req, { params }) {
       { status: 403 }
     );
   }
-  console.log(machinedata);
-  const compare = prescriptionDetails.medicines.every((med1) =>
-    machinedata.medicinedetails.some(
-      (med2) =>
-        med2.name === med1.name &&
-        Number(med2.dosage) === med1.dosage &&
-        Number(med2.cpsuleeachpack) * Number(med2.notsold) >=
-          med1.timeperiod * med1.dailyfrequency
-    )
-  );
+  const compare = true;
+  // const compare = prescriptionDetails.medicines.every((med1) =>
+  //   machinedata.medicinedetails.some(
+  //     (med2) =>
+  //       med2.name === med1.name &&
+  //       Number(med2.dosage) === med1.dosage &&
+  //       Number(med2.cpsuleeachpack) * Number(med2.notsold) >=
+  //         med1.timeperiod * med1.dailyfrequency
+  //   )
+  // );
+  // console.log(compare)
   if (!compare) {
     return NextResponse.json(
       { message: "Medicne not available in the machine" },
@@ -70,5 +71,5 @@ export async function POST(req, { params }) {
     { medicinedetails: machinedata.medicinedetails }
   );
   // const patientid = await patient.findOne({aadharnumber:prescriptionDetails.aadharnumber});
-  return NextResponse.json({ message: "Medicne bought sucessfully", patient: patientid._id });
+  return NextResponse.json({ message: "Medicne bought sucessfully" });
 }
