@@ -15,6 +15,7 @@ export async function POST(req, { params }) {
       { status: 403 }
     );
   }
+  console.log(machinedata);
   const compare = prescriptionDetails.medicines.every((med1) =>
     machinedata.medicinedetails.some(
       (med2) =>
