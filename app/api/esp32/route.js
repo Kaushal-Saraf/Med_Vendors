@@ -20,19 +20,19 @@ export async function POST(req) {
     if (result.umid != machinename) {
       return NextResponse.json({ 4: "Wrong Machine" });
     }
-    // result.medicinedata.forEach((slot,index) => {
-    //   const matchedMedicine = machinedata.medicinedetails.find(
-    //     (medicine) => medicine.slot == slot
-    //   );
-    //   if (matchedMedicine && index%2==0) {
-    //     matchedMedicine.sold++;
-    //     matchedMedicine.soldandnotcollected--;
-    //   }
-    // });
-    // await machine.updateOne(
-    //   { umid: params.machineid },
-    //   { medicinedetails: machinedata.medicinedetails }
-    // );
+    result.medicinedata.forEach((slot,index) => {
+      const matchedMedicine = machinedata.medicinedetails.find(
+        (medicine) => medicine.slot == slot
+      );
+      if (matchedMedicine && index%2==0) {
+        matchedMedicine.sold++;
+        matchedMedicine.soldandnotcollected--;
+      }
+    });
+    await machine.updateOne(
+      { umid: params.machineid },
+      { medicinedetails: machinedata.medicinedetails }
+    );
     await qr.updateOne({ uid: qrRes.data }, { used: true });
     return NextResponse.json(result.medicinedata);
   }
