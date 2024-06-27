@@ -24,8 +24,9 @@ export async function POST(req) {
     console.log(machinedata);
     result.medicinedata.forEach((slot,index) => {
       const matchedMedicine = machinedata.medicinedetails.find(
-        (medicine) => medicine.slot == slot
+        (medicine) => medicine.slot === slot
       );
+      console.log(matchedMedicine);
       if (matchedMedicine && index%2==0) {
         matchedMedicine.sold++;
         matchedMedicine.soldandnotcollected--;
