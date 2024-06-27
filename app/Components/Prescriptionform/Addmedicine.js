@@ -6,7 +6,7 @@ const Addmedicine = ({ details, setdetails }) => {
   const [item, setitem] = useState({
     name: "",
     dailyfrequency: 3,
-    dosage: 100,
+    // dosage: 100,
     timeperiod: 1,
     direction: "After eating",
   });
@@ -34,11 +34,11 @@ const Addmedicine = ({ details, setdetails }) => {
       );
       return;
     }
-    if (item.dosage === "") {
-      toast.dismiss();
-      toast.error("Number of capsules per time cannot be empty.");
-      return;
-    }
+    // if (item.dosage === "") {
+    //   toast.dismiss();
+    //   toast.error("Number of capsules per time cannot be empty.");
+    //   return;
+    // }
     if (item.timeperiod === "") {
       toast.dismiss();
       toast.error("Number of days could not be empty.");
@@ -52,7 +52,7 @@ const Addmedicine = ({ details, setdetails }) => {
     setitem({
       name: "",
       dailyfrequency: 3,
-      dosage: 100,
+      // dosage: 100,
       timeperiod: 1,
       direction: "After eating",
     });
@@ -84,10 +84,10 @@ const Addmedicine = ({ details, setdetails }) => {
               <p className="w-[175.65px] text-left">Daily fequency:</p>
               <p className="overflow-scroll">{item.dailyfrequency}</p>
             </div>
-            <div className="w-[250px] my-4 mx-[25px] flex">
+            {/* <div className="w-[250px] my-4 mx-[25px] flex">
               <p className="w-[175.65px] text-left">Dosage (mg):</p>
               <p className="overflow-scroll">{item.dosage}</p>
-            </div>
+            </div> */}
             <div className="w-[250px] my-4 mx-[25px] flex">
               <p className="w-[175.65px] text-left">Time Period (days):</p>
               <p className="overflow-scroll">{item.timeperiod}</p>
@@ -147,7 +147,7 @@ const Addmedicine = ({ details, setdetails }) => {
               className="w-[70px] px-1 rounded border-[0.5px] border-black border-solid"
             />
           </div>
-          <div className="w-full my-4 flex">
+          {/* <div className="w-full my-4 flex">
             <label
               htmlFor="Dosage"
               className="ml-[25px] w-[175.65px] mr-1 text-left"
@@ -168,7 +168,7 @@ const Addmedicine = ({ details, setdetails }) => {
               }
               className="w-[70px] px-1 rounded border-[0.5px] border-black border-solid"
             />
-          </div>
+          </div> */}
           <div className="w-full my-4 flex">
             <label
               htmlFor="timeperiod"

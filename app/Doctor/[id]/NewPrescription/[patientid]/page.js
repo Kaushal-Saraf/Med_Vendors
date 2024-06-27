@@ -1,5 +1,8 @@
 "use client";
-import { getPrescriptionDetails, savePrescription } from "@/Services/doctorservices";
+import {
+  getPrescriptionDetails,
+  savePrescription,
+} from "@/Services/doctorservices";
 import currentdateandtime from "@/Utilites/currdateandtime";
 import findage from "@/Utilites/findage";
 import Doctorsprecriptions from "@/app/Components/Doctorsprecriptioncards";
@@ -29,7 +32,7 @@ const prescriptionform = ({ params }) => {
     injections: [],
     tests: [],
     advice: "",
-    previousprescriptions:[],
+    previousprescriptions: [],
     disabled: false,
   });
   useEffect(() => {
@@ -45,7 +48,7 @@ const prescriptionform = ({ params }) => {
         patientContact: result.patient.contact,
         age: findage(result.patient.dob),
         gender: result.patient.gender,
-        previousprescriptions:  result.prescriptions.reverse(),
+        previousprescriptions: result.prescriptions.reverse(),
       });
     };
     fetchData();
@@ -83,7 +86,7 @@ const prescriptionform = ({ params }) => {
       injections: [],
       tests: [],
       advice: "",
-      previousprescriptions:[],
+      previousprescriptions: [],
       disabled: false,
     });
     router.push(`/Doctor/${params.id}`);
@@ -127,21 +130,21 @@ const prescriptionform = ({ params }) => {
       injections: [],
       tests: [],
       advice: "",
-      previousprescriptions:[],
+      previousprescriptions: [],
       disabled: false,
     });
     toast.dismiss();
-    router.push(`/Doctor/${params.id}/NewPrescription/Findpatient`)
+    router.push(`/Doctor/${params.id}/NewPrescription/Findpatient`);
   };
-  const viewPrescription =(item)=>{
+  const viewPrescription = (item) => {
     const sessionData = {
-      "item":item,
-      "backTo":"Prescription Form",
-      "link":`Doctor/${params.id}/NewPrescription/${params.patientid}`
-    }
+      item: item,
+      backTo: "Prescription Form",
+      link: `Doctor/${params.id}/NewPrescription/${params.patientid}`,
+    };
     sessionStorage.setItem("prescriptionDetails", JSON.stringify(sessionData));
     router.push("/ViewPrescription");
-  }
+  };
 
   return (
     <div>
@@ -152,10 +155,21 @@ const prescriptionform = ({ params }) => {
         buttonclick2={clearForm}
         buttonclick3={resetPatient}
       />
-      <h1 className="text-center text-bold text-xl text-white"> Patient Hitory</h1>
-      <hr className="border-2 border-solid border-white"/>
-      {details.previousprescriptions.length?<Doctorsprecriptions prescriptions={details.previousprescriptions} viewPrescription={viewPrescription}/>:(<div className="text-center my-4 text-white">No Prescriptions Avaliable</div>)}
-      
+      <h1 className="text-center text-bold text-xl text-white">
+        {" "}
+        Patient Hitory
+      </h1>
+      <hr className="border-2 border-solid border-white" />
+      {details.previousprescriptions.length ? (
+        <Doctorsprecriptions
+          prescriptions={details.previousprescriptions}
+          viewPrescription={viewPrescription}
+        />
+      ) : (
+        <div className="text-center my-4 text-white">
+          No Prescriptions Avaliable
+        </div>
+      )}
     </div>
   );
 };

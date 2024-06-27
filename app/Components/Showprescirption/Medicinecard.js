@@ -14,10 +14,10 @@ const Medicinecard = ({ details }) => {
             <p className="w-[175.65px] text-left">Daily fequency:</p>
             <p className="overflow-scroll">{item.dailyfrequency}</p>
           </div>
-          <div className="w-[250px] my-4 mx-[25px] flex">
+          {/* <div className="w-[250px] my-4 mx-[25px] flex">
             <p className="w-[175.65px] text-left">Dosage (mg):</p>
             <p className="overflow-scroll">{item.dosage}</p>
-          </div>
+          </div> */}
           <div className="w-[250px] my-4 mx-[25px] flex">
             <p className="w-[175.65px] text-left">Time Period (days):</p>
             <p className="overflow-scroll">{item.timeperiod}</p>
