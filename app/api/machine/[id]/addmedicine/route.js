@@ -8,7 +8,7 @@ export async function PATCH(req, { params }) {
   const newmedicine = {
     slot: data.slot,
     name: data.medicinename,
-    dosage: data.dosage,
+    // dosage: data.dosage,
     cpsuleeachpack: data.capsuleeachpack,
     expiry: data.expiry,
     price: data.price,

@@ -28,7 +28,7 @@ const machineSchema = new Schema({
     },
   },
   medicinedetails: {
-    type: []
+    type: Array
     // type: [
     //   {
     //     slot: {
