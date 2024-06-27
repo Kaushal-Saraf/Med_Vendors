@@ -32,7 +32,7 @@ export async function POST(req) {
       }
     });
     await machine.updateOne(
-      { umid: params.machineid },
+      { umid: machinename },
       { medicinedetails: machinedata.medicinedetails }
     );
     // await qr.updateOne({ uid: qrRes.data }, { used: true });
