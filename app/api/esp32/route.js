@@ -20,23 +20,23 @@ export async function POST(req) {
     if (result.umid != machinename) {
       return NextResponse.json({ 4: "Wrong Machine" });
     }
-    const machinedata =  await machine.findOne({umid: machinename});
-    console.log(machinedata);
-    result.medicinedata.forEach((slot,index) => {
-      const matchedMedicine = machinedata.medicinedetails.find(
-        (medicine) => medicine.slot === slot
-      );
-      console.log(matchedMedicine);
-      if (matchedMedicine && index%2==0) {
-        matchedMedicine.sold++;
-        matchedMedicine.soldandnotcollected--;
-      }
-    });
-    await machine.updateOne(
-      { umid: machinename },
-      { medicinedetails: machinedata.medicinedetails }
-    );
-    // await qr.updateOne({ uid: qrRes.data }, { used: true });
+    // const machinedata =  await machine.findOne({umid: machinename});
+    // console.log(machinedata);
+    // result.medicinedata.forEach((slot,index) => {
+    //   const matchedMedicine = machinedata.medicinedetails.find(
+    //     (medicine) => medicine.slot === slot
+    //   );
+    //   console.log(matchedMedicine);
+    //   if (matchedMedicine && index%2==0) {
+    //     matchedMedicine.sold++;
+    //     matchedMedicine.soldandnotcollected--;
+    //   }
+    // });
+    // await machine.updateOne(
+    //   { umid: machinename },
+    //   { medicinedetails: machinedata.medicinedetails }
+    // );
+    await qr.updateOne({ uid: qrRes.data }, { used: true });
     return NextResponse.json(result.medicinedata);
   }
 }
