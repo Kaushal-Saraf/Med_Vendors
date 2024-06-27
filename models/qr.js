@@ -12,7 +12,7 @@ const qrSchema=new Schema({
         type:String,
     },
     medicinedata:{
-        type:[],
+        type:Array,
     },
     used:{
         type:Boolean,

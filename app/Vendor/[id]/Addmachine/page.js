@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 
 const addmachine = ({ params }) => {
   const router = useRouter();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,6 +24,7 @@ const addmachine = ({ params }) => {
     };
     fetchData();
   }, []);
+  
   const [details, setdetails] = useState({
     umid: "",
     address: "",
