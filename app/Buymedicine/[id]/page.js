@@ -29,7 +29,7 @@ const buymedicine = ({ params }) => {
       const result = await buyMedicine(params.id, item.umid);
       toast.dismiss();
       toast.success(result.message);
-      router.push(`/Patient/${result.patient}/QRs`);
+      router.push(`/Patient/${result.patient}/Qrs`);
     } catch (e) {
       toast.dismiss();
       toast.error(e.response.data.message);

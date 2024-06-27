@@ -6,8 +6,11 @@ import { qr } from "@/models/qr";
 import { NextResponse } from "next/server";
 
 export async function POST(req, { params }) {
+
   await connectDb();
+
   const machinedata = await machine.findOne({ umid: params.machineid });
+
   const prescriptionDetails = await prescription.findOne({ _id: params.id });
   if (prescriptionDetails.status) {
     return NextResponse.json(
@@ -15,23 +18,23 @@ export async function POST(req, { params }) {
       { status: 403 }
     );
   }
-  const compare = true;
-  // const compare = prescriptionDetails.medicines.every((med1) =>
-  //   machinedata.medicinedetails.some(
-  //     (med2) =>
-  //       med2.name === med1.name &&
-  //       Number(med2.dosage) === med1.dosage &&
-  //       Number(med2.cpsuleeachpack) * Number(med2.notsold) >=
-  //         med1.timeperiod * med1.dailyfrequency
-  //   )
-  // );
-  // console.log(compare)
+
+  const compare = prescriptionDetails.medicines.every((med1) =>
+    machinedata.medicinedetails.some(
+      (med2) =>
+        med2.name === med1.name &&
+        med2.cpsuleeachpack * med2.notsold >=
+          med1.timeperiod * med1.dailyfrequency
+    )
+  );
+
   if (!compare) {
     return NextResponse.json(
       { message: "Medicne not available in the machine" },
       { status: 403 }
     );
   }
+
   // only for unique elements in array
   const reqarray = prescriptionDetails.medicines.map((medicine) => {
     const matchedMedicine = machinedata.medicinedetails.find(
@@ -52,7 +55,6 @@ export async function POST(req, { params }) {
   });
   reqarray.sort((a, b) => a - b);
   const qrarray = reqarray.map((value) => [value, 1]).flat();
-  console.log(machinedata);
   const d = new Date();
   const newqr = {
     uid: String(prescriptionDetails.aadharnumber) + String(d.getTime()),
@@ -70,6 +72,11 @@ export async function POST(req, { params }) {
     { umid: params.machineid },
     { medicinedetails: machinedata.medicinedetails }
   );
-  const patientid = await patient.findOne({aadharnumber:prescriptionDetails.aadharnumber});
-  return NextResponse.json({ message: "Medicne bought sucessfully", patient:patientid._id});
+  const patientid = await patient.findOne({
+    aadharnumber: prescriptionDetails.aadharnumber,
+  });
+  return NextResponse.json({
+    message: "Medicne bought sucessfully",
+    patient: patientid._id,
+  });
 }
